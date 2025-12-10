@@ -1,4 +1,4 @@
-export default async () => {
+export default async (req, context) => {
     // 1. Logging for debugging
     console.log("Config requested. Environment:", process.env.SQUARE_ENVIRONMENT);
 

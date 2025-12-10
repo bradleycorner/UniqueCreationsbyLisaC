@@ -1,4 +1,4 @@
-export default async () => {
+export default async (req, context) => {
   // 1. Debug Logging (Visible in Netlify Function Logs)
   console.log("Inventory function triggered.");
   
