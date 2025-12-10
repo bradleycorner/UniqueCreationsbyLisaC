@@ -523,6 +523,21 @@
             toggleCart();
             document.getElementById('payment-modal').classList.remove('hidden');
 
+            // RETRY LOGIC: If payments didn't initialize on load, try one more time now.
+            if (!payments) {
+                console.log("Payment system missing. Retrying config fetch...");
+                await fetchConfig(); 
+                if (SQUARE_APP_ID) {
+                    try {
+                        if (!window.Square) throw new Error('Square.js failed to load');
+                        payments = window.Square.payments(SQUARE_APP_ID, LOCATION_ID);
+                        console.log("Square SDK Initialized on retry");
+                    } catch (e) {
+                        console.warn("Square SDK failed to initialize on retry:", e);
+                    }
+                }
+            }
+
             if (payments && !card) {
                 try {
                     card = await payments.card();
