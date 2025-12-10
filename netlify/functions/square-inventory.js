@@ -3,11 +3,11 @@ export default async (req, context) => {
   console.log("Inventory function triggered.");
   
   // Normalize environment variable to handle "Sandbox", "sandbox", "DEV ", etc.
-  const envVar = (process.env.SQUARE_ENVIRONMENT || '').toLowerCase().trim();
+  const envVar = (Deno.env.get("SQUARE_ENVIRONMENT") || '').toLowerCase().trim();
   console.log("Environment Configured:", envVar || "Defaulting to Production");
   
   // Mask the token for logging safety (show last 4 chars)
-  const token = process.env.SQUARE_ACCESS_TOKEN ? process.env.SQUARE_ACCESS_TOKEN.trim() : '';
+  const token = Deno.env.get("SQUARE_ACCESS_TOKEN") ? Deno.env.get("SQUARE_ACCESS_TOKEN").trim() : '';
   console.log("Token Exists:", !!token);
 
   // 2. Security Check
