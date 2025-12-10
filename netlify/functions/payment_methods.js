@@ -1,3 +1,5 @@
+/// <reference types="https://deno.land/x/netlify_functions_ts/mod.ts" />
+
 export default async (req) => {
   if (req.method !== "POST") {
     return new Response("Method Not Allowed", { status: 405 });
