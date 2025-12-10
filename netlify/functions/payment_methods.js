@@ -1,4 +1,4 @@
-export default async (req, context) => {
+export default async (req) => {
   if (req.method !== "POST") {
     return new Response("Method Not Allowed", { status: 405 });
   }
@@ -7,7 +7,7 @@ export default async (req, context) => {
     const { sourceId, amount, idempotencyKey } = await req.json();
 
     // 1. Setup Environment
-    const isSandbox = (process.env.SQUARE_ENVIRONMENT || '').toLowerCase() === 'sandbox';
+    const isSandbox = (Deno.env.get("SQUARE_ENVIRONMENT") || '').toLowerCase() === 'sandbox';
     const baseUrl = isSandbox 
       ? "https://connect.squareupsandbox.com" 
       : "https://connect.squareup.com";
@@ -20,14 +20,14 @@ export default async (req, context) => {
         amount: amount, // Amount in cents (e.g., 1000 = $10.00)
         currency: "USD"
       },
-      location_id: process.env.SQUARE_LOCATION_ID
+      location_id: Deno.env.get("SQUARE_LOCATION_ID")
     };
 
     // 3. Call Square Payments API
     const response = await fetch(`${baseUrl}/v2/payments`, {
       method: "POST",
       headers: {
-        "Authorization": `Bearer ${process.env.SQUARE_ACCESS_TOKEN}`,
+        "Authorization": `Bearer ${Deno.env.get("SQUARE_ACCESS_TOKEN")}`,
         "Content-Type": "application/json",
         "Square-Version": "2023-10-20"
       },
