@@ -573,6 +573,7 @@
 
             // 3. Fetch Inventory and Render
             await fetchCatalog();
+            console.log("Products loaded:", products); // Add this line for debugging
             renderProducts('all');
             updateCartUI();
 
