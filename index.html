@@ -679,6 +679,9 @@
             document.getElementById('payment-modal').classList.remove('hidden');
             const cardContainer = document.getElementById('card-container');
 
+            // Always clear the container first
+            cardContainer.innerHTML = '';
+
             if (!payments) {
                 console.error("Cannot open payment modal: Square SDK not initialized.");
                 cardContainer.innerHTML = `
@@ -692,15 +695,24 @@
                 return;
             }
 
+            // If card is already created, it might have been detached. Re-attaching is safe.
+            // For simplicity, we'll just re-create it if it's not there.
             if (!card) {
                 try {
-                    cardContainer.innerHTML = '<p class="text-neutral-500 text-sm">Loading secure payment form...</p>'; // Clear placeholder
+                    const loader = document.createElement('p');
+                    loader.className = 'text-neutral-500 text-sm';
+                    loader.textContent = 'Loading secure payment form...';
+                    cardContainer.appendChild(loader);
+
                     card = await payments.card();
                     await card.attach('#card-container');
                 } catch (e) {
                     console.error("Failed to attach card form:", e);
                     cardContainer.innerHTML = `<p class="text-red-500 p-4">Error loading Square Payment Form.</p>`;
                 }
+            } else {
+                 // If card object exists, just re-attach it to the container.
+                 await card.attach('#card-container');
             }
         }
 
