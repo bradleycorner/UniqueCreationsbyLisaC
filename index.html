@@ -507,10 +507,7 @@
                             <div class="mt-4">
                                 <!-- Square Payment Form Placeholder -->
                                 <div id="card-container" class="h-48 border border-neutral-200 rounded flex items-center justify-center bg-neutral-50 text-neutral-500">
-                                    <p class="p-4 text-sm">
-                                        [Square Payment Form will mount here]<br><br>
-                                        <em>If this stays empty, ensure your Netlify Environment Variables (SQUARE_APP_ID) are set correctly.</em>
-                                    </p>
+                                    <!-- This content is replaced by the error or the form -->
                                 </div>
                             </div>
                         </div>
@@ -547,30 +544,17 @@
             // 1. Fetch Configuration
             await fetchConfig();
 
-            // 2. Fetch Inventory
+            // 2. Initialize Square SDK (if App ID is present)
+            if (SQUARE_APP_ID) {
+                await initializeSquare();
+            } else {
+                console.warn("CRITICAL: SQUARE_APP_ID is not set. Payment form will not load. Check Netlify environment variables.");
+            }
+
+            // 3. Fetch Inventory and Render
             await fetchCatalog();
-            
-            // 3. Render Initial Grid
             renderProducts('all');
             updateCartUI();
-            
-            // 4. Initialize Square Payment SDK
-            if (SQUARE_APP_ID) {
-                try {
-                    await loadSquareSdk(SQUARE_APP_ID); // Load the correct script
-
-                    if (!window.Square) {
-                        throw new Error('Square.js failed to load');
-                    }
-                    // This is where the App ID/Location ID are used
-                    payments = window.Square.payments(SQUARE_APP_ID, LOCATION_ID);
-                    console.log("Square SDK Initialized");
-                } catch (e) {
-                    console.warn("Square SDK not initialized:", e);
-                }
-            } else {
-                console.log("Running in offline/preview mode (No App ID found)");
-            }
 
             // Navbar scroll effect
             window.addEventListener('scroll', () => {
@@ -586,34 +570,29 @@
         // --- THEME FUNCTIONS ---
         function setTheme(themeName) {
             document.documentElement.setAttribute('data-theme', themeName);
-            // Optional: Save to local storage
             localStorage.setItem('theme', themeName);
         }
 
-        // Load saved theme
         const savedTheme = localStorage.getItem('theme');
         if (savedTheme) {
             setTheme(savedTheme);
         }
 
-        // --- API FUNCTIONS ---
+        // --- API & SDK FUNCTIONS ---
 
         async function fetchConfig() {
             try {
-                // Calls the function created in netlify/functions/get-square-config.js
-                // Uses the new clean URL path mapped in netlify.toml
                 const response = await fetch('/api/get-square-config');
-                if (response.ok) {
-                    const config = await response.json();
-                    
-                    // SAFETY FIX: Trim whitespace and remove accidental quotes from the ID
-                    SQUARE_APP_ID = config.appId ? config.appId.replace(/["']/g, "").trim() : '';
-                    LOCATION_ID = config.locationId ? config.locationId.replace(/["']/g, "").trim() : '';
-                    
-                    console.log("Loaded Square Configuration. App ID detected:", SQUARE_APP_ID ? "Yes" : "No");
+                if (!response.ok) {
+                    console.error(`Failed to fetch config: ${response.status}`);
+                    return;
                 }
+                const config = await response.json();
+                SQUARE_APP_ID = config.appId ? config.appId.replace(/["']/g, "").trim() : '';
+                LOCATION_ID = config.locationId ? config.locationId.replace(/["']/g, "").trim() : '';
+                console.log("Loaded Square Configuration. App ID detected:", SQUARE_APP_ID ? "Yes" : "No");
             } catch (e) {
-                console.warn("Could not load Square config (likely dev mode):", e);
+                console.error("Could not load Square config:", e);
             }
         }
 
@@ -623,35 +602,43 @@
                 ? "https://sandbox.web.squarecdn.com/v1/square.js"
                 : "https://web.squarecdn.com/v1/square.js";
 
-            console.log(`Loading Square SDK from: ${scriptUrl}`);
-
             return new Promise((resolve, reject) => {
                 if (document.querySelector(`script[src="${scriptUrl}"]`)) {
-                    resolve(); // Already loaded
-                    return;
+                    return resolve();
                 }
                 const script = document.createElement('script');
                 script.src = scriptUrl;
-                script.onload = resolve;
+                script.onload = () => {
+                    console.log(`Square SDK loaded from: ${scriptUrl}`);
+                    resolve();
+                };
                 script.onerror = reject;
                 document.head.appendChild(script);
             });
         }
 
+        async function initializeSquare() {
+            try {
+                await loadSquareSdk(SQUARE_APP_ID);
+                if (!window.Square) {
+                    throw new Error('Square.js failed to load');
+                }
+                payments = window.Square.payments(SQUARE_APP_ID, LOCATION_ID);
+                console.log("Square SDK Initialized");
+            } catch (e) {
+                console.error("Square SDK initialization failed:", e);
+                payments = null;
+            }
+        }
+
         async function fetchCatalog() {
             try {
-                // Calls the function created in netlify/functions/square-inventory.js
                 const response = await fetch('/api/square-inventory');
-                
-                if (!response.ok) {
-                    throw new Error('API not available');
-                }
-
+                if (!response.ok) throw new Error('API not available');
                 const data = await response.json();
                 
                 if (data.objects) {
                     products = data.objects.map(item => {
-                        // AUTO-DETECT CATEGORY BASED ON NAME
                         let category = "all";
                         const nameLower = item.item_data.name.toLowerCase();
                         if (nameLower.includes("necklace")) category = "necklaces";
@@ -663,37 +650,19 @@
                             name: item.item_data.name,
                             price: (item.item_data.variations?.[0]?.item_variation_data?.price_money?.amount || 0) / 100, 
                             category: category, 
-                            image: item.image_url, // Use the new image_url field
+                            image: item.image_url,
                             desc: item.item_data.description || "Handcrafted with care."
                         };
                     });
                     console.log("Loaded inventory from Square API.");
                 } else {
-                    console.warn("API connected but returned no items.");
-                    throw new Error("Empty inventory");
+                    throw new Error("Empty inventory from API");
                 }
-
             } catch (e) {
                 console.log("Using Mock Data (Backend not connected or empty):", e);
-                
-                // Fallback Mock Data so the site works in preview
                 products = [
-                    {
-                        id: 1,
-                        name: "Amethyst Teardrop Pendant",
-                        price: 45.00,
-                        category: "necklaces",
-                        image: "https://images.unsplash.com/photo-1599643478518-17488fbbcd75?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80",
-                        desc: "Hand-wrapped genuine amethyst on a 18-inch sterling silver chain."
-                    },
-                    {
-                        id: 2,
-                        name: "Rose Quartz Drop Earrings",
-                        price: 28.00,
-                        category: "earrings",
-                        image: "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80",
-                        desc: "Delicate pink stones accented with gold vermeil hooks."
-                    }
+                    { id: 1, name: "Amethyst Teardrop Pendant", price: 45.00, category: "necklaces", image: "https://images.unsplash.com/photo-1599643478518-17488fbbcd75?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80", desc: "Hand-wrapped genuine amethyst." },
+                    { id: 2, name: "Rose Quartz Drop Earrings", price: 28.00, category: "earrings", image: "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80", desc: "Delicate pink stones." }
                 ];
             }
         }
@@ -708,31 +677,28 @@
             
             toggleCart();
             document.getElementById('payment-modal').classList.remove('hidden');
+            const cardContainer = document.getElementById('card-container');
 
-            // RETRY LOGIC: If payments didn't initialize on load, try one more time now.
             if (!payments) {
-                console.log("Payment system missing. Retrying config fetch...");
-                await fetchConfig(); 
-                if (SQUARE_APP_ID) {
-                    try {
-                        await loadSquareSdk(SQUARE_APP_ID);
-                        if (!window.Square) throw new Error('Square.js failed to load');
-                        payments = window.Square.payments(SQUARE_APP_ID, LOCATION_ID);
-                        console.log("Square SDK Initialized on retry");
-                    } catch (e) {
-                        console.warn("Square SDK failed to initialize on retry:", e);
-                    }
-                }
+                console.error("Cannot open payment modal: Square SDK not initialized.");
+                cardContainer.innerHTML = `
+                    <div class="p-4 text-center">
+                        <p class="font-bold text-red-600">Configuration Error</p>
+                        <p class="text-sm text-neutral-600 mt-2">
+                            The Square Application ID is missing or invalid. Please ensure the
+                            <code>SQUARE_APP_ID</code> environment variable is set correctly in your Netlify site settings.
+                        </p>
+                    </div>`;
+                return;
             }
 
-            if (payments && !card) {
+            if (!card) {
                 try {
                     card = await payments.card();
                     await card.attach('#card-container');
                 } catch (e) {
-                    console.error("Failed to attach card:", e);
-                    document.getElementById('card-container').innerHTML = 
-                        `<p class="text-red-500 p-4">Error loading Square Payment Form.<br>Please check your App ID configuration.</p>`;
+                    console.error("Failed to attach card form:", e);
+                    cardContainer.innerHTML = `<p class="text-red-500 p-4">Error loading Square Payment Form.</p>`;
                 }
             }
         }
@@ -749,90 +715,63 @@
 
             try {
                 const result = await card.tokenize();
-                
-                if (result.status === 'OK') {
-                    console.log(`Payment Token Generated: ${result.token}`);
-                    
-                    // Calculate total amount in CENTS (Square requires integers)
-                    const totalAmountCents = Math.round(cart.reduce((sum, item) => sum + (item.price * item.quantity), 0) * 100);
-
-                    // Send the token to the backend to charge the card
-                    const response = await fetch('/api/payment_methods', {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({
-                            sourceId: result.token,
-                            amount: totalAmountCents,
-                            idempotencyKey: crypto.randomUUID() // Prevents double-charging
-                        })
-                    });
-
-                    const paymentResult = await response.json();
-
-                    if (response.ok) {
-                        alert(`Payment Complete! Transaction ID: ${paymentResult.payment.id}`);
-                        closePaymentModal();
-                        cart = [];
-                        updateCartUI();
-                    } else {
-                        throw new Error(paymentResult.error || "Payment Declined");
-                    }
-                } else {
-                    alert(`Payment failed: ${result.errors[0].message}`);
+                if (result.status !== 'OK') {
+                    throw new Error(`Tokenization failed: ${result.errors?.[0]?.message || 'Unknown error'}`);
                 }
+
+                console.log(`Payment Token Generated: ${result.token}`);
+                const totalAmountCents = Math.round(cart.reduce((sum, item) => sum + (item.price * item.quantity), 0) * 100);
+
+                const response = await fetch('/api/payment_methods', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        sourceId: result.token,
+                        amount: totalAmountCents,
+                        idempotencyKey: crypto.randomUUID()
+                    })
+                });
+
+                const paymentResult = await response.json();
+                if (!response.ok) {
+                    throw new Error(paymentResult.error || "Payment was declined.");
+                }
+
+                alert(`Payment Complete! Transaction ID: ${paymentResult.payment.id}`);
+                closePaymentModal();
+                cart = [];
+                updateCartUI();
+
             } catch (e) {
-                console.error(e);
+                console.error("Payment Submission Error:", e);
                 alert("Payment Failed: " + e.message);
             }
         }
 
-        // --- NAVIGATION FUNCTIONS (SPA) ---
+        // --- NAVIGATION & UI FUNCTIONS ---
         
-        // This is the function that was missing/undefined
         function navigateToPage(pageId) {
-            // Hide all pages
             document.querySelectorAll('.page-view').forEach(el => el.classList.add('hidden'));
-            
-            // Show target page
             const target = document.getElementById(`view-${pageId}`);
-            if (target) {
-                target.classList.remove('hidden');
-            }
+            if (target) target.classList.remove('hidden');
             
-            // Update Active Nav State
             document.querySelectorAll('.nav-link').forEach(btn => {
-                if(btn.dataset.target === pageId) {
-                    btn.classList.add('text-primary-800');
-                    btn.classList.remove('text-neutral-800');
-                } else {
-                    btn.classList.remove('text-primary-800');
-                    btn.classList.add('text-neutral-800');
-                }
+                btn.classList.toggle('text-primary-800', btn.dataset.target === pageId);
+                btn.classList.toggle('text-neutral-800', btn.dataset.target !== pageId);
             });
 
             window.scrollTo(0, 0);
             document.getElementById('mobile-menu').classList.add('hidden');
         }
 
-        function scrollToSection(id) {
-            if (id === 'collections') navigateToPage('shop');
-            else if (id === 'hero') navigateToPage('home');
-            else navigateToPage(id);
-        }
-        
         function mobileNavClick(id) {
             navigateToPage(id);
         }
 
-        // --- CORE UI FUNCTIONS ---
-
         function renderProducts(category) {
             const grid = document.getElementById('product-grid');
             grid.innerHTML = '';
-            
-            const filtered = category === 'all' 
-                ? products 
-                : products.filter(p => p.category === category);
+            const filtered = category === 'all' ? products : products.filter(p => p.category === category);
 
             if (filtered.length === 0) {
                 grid.innerHTML = '<div class="col-span-full text-center py-20"><p class="text-neutral-500">No items found in this category.</p></div>';
@@ -840,10 +779,10 @@
             }
 
             filtered.forEach((product, index) => {
-                const card = document.createElement('div');
-                card.className = 'group relative fade-in bg-white rounded-lg shadow-sm hover:shadow-lg transition-shadow duration-300 overflow-hidden border border-neutral-100';
-                card.style.animationDelay = `${index * 100}ms`;
-                card.innerHTML = `
+                const cardEl = document.createElement('div');
+                cardEl.className = 'group relative fade-in bg-white rounded-lg shadow-sm hover:shadow-lg transition-shadow duration-300 overflow-hidden border border-neutral-100';
+                cardEl.style.animationDelay = `${index * 100}ms`;
+                cardEl.innerHTML = `
                     <div class="w-full h-80 bg-neutral-100 overflow-hidden relative">
                         <img src="${product.image}" alt="${product.name}" class="w-full h-full object-center object-cover transform group-hover:scale-105 transition-transform duration-700">
                         <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-10 transition-opacity duration-300"></div>
@@ -867,20 +806,17 @@
                         </button>
                     </div>
                 `;
-                grid.appendChild(card);
+                grid.appendChild(cardEl);
             });
             lucide.createIcons();
         }
 
         function filterProducts(category) {
             document.querySelectorAll('.filter-btn').forEach(btn => {
-                if (btn.dataset.category === category) {
-                    btn.classList.remove('bg-white', 'text-neutral-600', 'hover:border-primary-300');
-                    btn.classList.add('bg-neutral-900', 'text-white');
-                } else {
-                    btn.classList.add('bg-white', 'text-neutral-600', 'hover:border-primary-300');
-                    btn.classList.remove('bg-neutral-900', 'text-white');
-                }
+                btn.classList.toggle('bg-neutral-900', btn.dataset.category === category);
+                btn.classList.toggle('text-white', btn.dataset.category === category);
+                btn.classList.toggle('bg-white', btn.dataset.category !== category);
+                btn.classList.toggle('text-neutral-600', btn.dataset.category !== category);
             });
             renderProducts(category);
         }
@@ -888,13 +824,11 @@
         function addToCart(id) {
             const product = products.find(p => p.id === id);
             const existing = cart.find(item => item.id === id);
-            
             if (existing) {
-                existing.quantity += 1;
+                existing.quantity++;
             } else {
                 cart.push({ ...product, quantity: 1 });
             }
-            
             showToast(`Added ${product.name} to cart`);
             updateCartUI();
         }
@@ -908,11 +842,8 @@
             const item = cart.find(i => i.id === id);
             if (item) {
                 item.quantity += change;
-                if (item.quantity <= 0) {
-                    removeFromCart(id);
-                } else {
-                    updateCartUI();
-                }
+                if (item.quantity <= 0) removeFromCart(id);
+                else updateCartUI();
             }
         }
 
@@ -920,17 +851,11 @@
             const container = document.getElementById('cart-items-container');
             const countBadge = document.getElementById('cart-count');
             const subtotalEl = document.getElementById('cart-subtotal');
-            
             const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
             const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
 
-            if (totalItems > 0) {
-                countBadge.textContent = totalItems;
-                countBadge.classList.remove('opacity-0');
-            } else {
-                countBadge.classList.add('opacity-0');
-            }
-            
+            countBadge.textContent = totalItems;
+            countBadge.classList.toggle('opacity-0', totalItems === 0);
             subtotalEl.textContent = `$${subtotal.toFixed(2)}`;
 
             if (cart.length === 0) {
@@ -939,8 +864,7 @@
                         <i data-lucide="shopping-bag" class="w-12 h-12 mx-auto mb-3 opacity-20"></i>
                         <p>Your cart is empty.</p>
                         <button onclick="toggleCart(); navigateToPage('shop')" class="mt-4 text-primary-800 font-medium hover:underline">Start Shopping</button>
-                    </div>
-                `;
+                    </div>`;
             } else {
                 container.innerHTML = cart.map(item => `
                     <div class="flex py-6 border-b border-neutral-100 animate-fadeIn">
@@ -964,8 +888,7 @@
                                 <button onclick="removeFromCart('${item.id}')" class="font-medium text-primary-600 hover:text-primary-500 text-xs uppercase tracking-wide">Remove</button>
                             </div>
                         </div>
-                    </div>
-                `).join('');
+                    </div>`).join('');
             }
             lucide.createIcons();
         }
@@ -974,23 +897,14 @@
             const sidebar = document.getElementById('cart-sidebar');
             const overlay = document.getElementById('cart-overlay');
             const panel = document.getElementById('cart-panel');
-            
             isCartOpen = !isCartOpen;
-            
-            if (isCartOpen) {
-                sidebar.classList.remove('pointer-events-none');
-                overlay.classList.remove('opacity-0', 'pointer-events-none');
-                panel.classList.remove('translate-x-full');
-            } else {
-                sidebar.classList.add('pointer-events-none');
-                overlay.classList.add('opacity-0', 'pointer-events-none');
-                panel.classList.add('translate-x-full');
-            }
+            sidebar.classList.toggle('pointer-events-none', !isCartOpen);
+            overlay.classList.toggle('opacity-0', !isCartOpen);
+            panel.classList.toggle('translate-x-full', !isCartOpen);
         }
 
         function toggleMobileMenu() {
-            const menu = document.getElementById('mobile-menu');
-            menu.classList.toggle('hidden');
+            document.getElementById('mobile-menu').classList.toggle('hidden');
         }
 
         function handleSubscribe(e) {
@@ -1001,13 +915,9 @@
 
         function showToast(message) {
             const toast = document.getElementById('toast');
-            const msg = document.getElementById('toast-message');
-            msg.textContent = message;
-            
+            document.getElementById('toast-message').textContent = message;
             toast.classList.remove('translate-x-full');
-            setTimeout(() => {
-                toast.classList.add('translate-x-full');
-            }, 3000);
+            setTimeout(() => toast.classList.add('translate-x-full'), 3000);
         }
     </script>
 </body>
