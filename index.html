@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="blossom">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -25,28 +25,41 @@
                         sans: ['"Lato"', 'sans-serif'],
                     },
                     colors: {
-                        rose: {
-                            50: '#fff1f2',
-                            100: '#ffe4e6',
-                            300: '#fda4af',
-                            400: '#fb7185',
-                            500: '#f43f5e',
-                            800: '#9f1239', // Brand accent
-                            900: '#881337',
+                        primary: {
+                            50: 'rgb(var(--primary-50) / <alpha-value>)',
+                            100: 'rgb(var(--primary-100) / <alpha-value>)',
+                            200: 'rgb(var(--primary-200) / <alpha-value>)',
+                            300: 'rgb(var(--primary-300) / <alpha-value>)',
+                            400: 'rgb(var(--primary-400) / <alpha-value>)',
+                            500: 'rgb(var(--primary-500) / <alpha-value>)',
+                            600: 'rgb(var(--primary-600) / <alpha-value>)',
+                            700: 'rgb(var(--primary-700) / <alpha-value>)',
+                            800: 'rgb(var(--primary-800) / <alpha-value>)',
+                            900: 'rgb(var(--primary-900) / <alpha-value>)',
                         },
-                        leaf: {
-                            50: '#f0fdf4',
-                            100: '#dcfce7',
-                            500: '#22c55e',
-                            600: '#16a34a',
-                            700: '#15803d',
-                            800: '#166534',
+                        secondary: {
+                            50: 'rgb(var(--secondary-50) / <alpha-value>)',
+                            100: 'rgb(var(--secondary-100) / <alpha-value>)',
+                            200: 'rgb(var(--secondary-200) / <alpha-value>)',
+                            300: 'rgb(var(--secondary-300) / <alpha-value>)',
+                            400: 'rgb(var(--secondary-400) / <alpha-value>)',
+                            500: 'rgb(var(--secondary-500) / <alpha-value>)',
+                            600: 'rgb(var(--secondary-600) / <alpha-value>)',
+                            700: 'rgb(var(--secondary-700) / <alpha-value>)',
+                            800: 'rgb(var(--secondary-800) / <alpha-value>)',
+                            900: 'rgb(var(--secondary-900) / <alpha-value>)',
                         },
-                        stone: {
-                            50: '#fafaf9',
-                            100: '#f5f5f4',
-                            800: '#292524', // Main text
-                            900: '#1c1917',
+                        neutral: {
+                            50: 'rgb(var(--neutral-50) / <alpha-value>)',
+                            100: 'rgb(var(--neutral-100) / <alpha-value>)',
+                            200: 'rgb(var(--neutral-200) / <alpha-value>)',
+                            300: 'rgb(var(--neutral-300) / <alpha-value>)',
+                            400: 'rgb(var(--neutral-400) / <alpha-value>)',
+                            500: 'rgb(var(--neutral-500) / <alpha-value>)',
+                            600: 'rgb(var(--neutral-600) / <alpha-value>)',
+                            700: 'rgb(var(--neutral-700) / <alpha-value>)',
+                            800: 'rgb(var(--neutral-800) / <alpha-value>)',
+                            900: 'rgb(var(--neutral-900) / <alpha-value>)',
                         }
                     }
                 }
@@ -54,47 +67,163 @@
         }
     </script>
     <style>
-        .scrollbar-hide::-webkit-scrollbar { display: none; }
-        .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
         .fade-in { animation: fadeIn 0.5s ease-in-out; }
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
         }
+
+        /* --- THEME DEFINITIONS --- */
+
+        /* 1. BLOSSOM (Original) - Rose / Leaf / Stone */
+        :root[data-theme="blossom"] {
+            /* Primary (Rose) */
+            --primary-50: 255 241 242;
+            --primary-100: 255 228 230;
+            --primary-200: 254 205 211;
+            --primary-300: 253 164 175;
+            --primary-400: 251 113 133;
+            --primary-500: 244 63 94;
+            --primary-600: 225 29 72;
+            --primary-700: 190 18 60;
+            --primary-800: 159 18 57;
+            --primary-900: 136 19 55;
+
+            /* Secondary (Leaf) */
+            --secondary-50: 240 253 244;
+            --secondary-100: 220 252 231;
+            --secondary-200: 187 247 208;
+            --secondary-300: 134 239 172;
+            --secondary-400: 74 222 128;
+            --secondary-500: 34 197 94;
+            --secondary-600: 22 163 74;
+            --secondary-700: 21 128 61;
+            --secondary-800: 22 101 52;
+            --secondary-900: 20 83 45;
+
+            /* Neutral (Stone) */
+            --neutral-50: 250 250 249;
+            --neutral-100: 245 245 244;
+            --neutral-200: 231 229 228;
+            --neutral-300: 214 211 209;
+            --neutral-400: 168 162 158;
+            --neutral-500: 120 113 108;
+            --neutral-600: 87 83 78;
+            --neutral-700: 68 64 60;
+            --neutral-800: 41 37 36;
+            --neutral-900: 28 25 23;
+        }
+
+        /* 2. OCEAN - Sky / Teal / Slate */
+        :root[data-theme="ocean"] {
+            /* Primary (Sky Blue) */
+            --primary-50: 240 249 255;
+            --primary-100: 224 242 254;
+            --primary-200: 186 230 253;
+            --primary-300: 125 211 252;
+            --primary-400: 56 189 248;
+            --primary-500: 14 165 233;
+            --primary-600: 2 132 199;
+            --primary-700: 3 105 161;
+            --primary-800: 7 89 133;
+            --primary-900: 12 74 110;
+
+            /* Secondary (Teal) */
+            --secondary-50: 240 253 250;
+            --secondary-100: 204 251 241;
+            --secondary-200: 153 246 228;
+            --secondary-300: 94 234 212;
+            --secondary-400: 45 212 191;
+            --secondary-500: 20 184 166;
+            --secondary-600: 13 148 136;
+            --secondary-700: 15 118 110;
+            --secondary-800: 17 94 89;
+            --secondary-900: 19 78 74;
+
+            /* Neutral (Slate) */
+            --neutral-50: 248 250 252;
+            --neutral-100: 241 245 249;
+            --neutral-200: 226 232 240;
+            --neutral-300: 203 213 225;
+            --neutral-400: 148 163 184;
+            --neutral-500: 100 116 139;
+            --neutral-600: 71 85 105;
+            --neutral-700: 51 65 85;
+            --neutral-800: 30 41 59;
+            --neutral-900: 15 23 42;
+        }
+
+        /* 3. LUXURY - Amber / Emerald / Gray */
+        :root[data-theme="luxury"] {
+            /* Primary (Amber/Gold) */
+            --primary-50: 255 251 235;
+            --primary-100: 254 243 199;
+            --primary-200: 253 230 138;
+            --primary-300: 252 211 77;
+            --primary-400: 251 191 36;
+            --primary-500: 245 158 11;
+            --primary-600: 217 119 6;
+            --primary-700: 180 83 9;
+            --primary-800: 146 64 14;
+            --primary-900: 120 53 15;
+
+            /* Secondary (Emerald) */
+            --secondary-50: 236 253 245;
+            --secondary-100: 209 250 229;
+            --secondary-200: 167 243 208;
+            --secondary-300: 110 231 183;
+            --secondary-400: 52 211 153;
+            --secondary-500: 16 185 129;
+            --secondary-600: 5 150 105;
+            --secondary-700: 4 120 87;
+            --secondary-800: 6 95 70;
+            --secondary-900: 6 78 59;
+
+            /* Neutral (Gray) */
+            --neutral-50: 249 250 251;
+            --neutral-100: 243 244 246;
+            --neutral-200: 229 231 235;
+            --neutral-300: 209 213 219;
+            --neutral-400: 156 163 175;
+            --neutral-500: 107 114 128;
+            --neutral-600: 75 85 99;
+            --neutral-700: 55 65 81;
+            --neutral-800: 31 41 55;
+            --neutral-900: 17 24 39;
+        }
     </style>
 </head>
-<body class="font-sans text-stone-800 bg-stone-50 antialiased selection:bg-rose-100 flex flex-col min-h-screen">
+<body class="font-sans text-neutral-800 bg-neutral-50 antialiased selection:bg-primary-100 flex flex-col min-h-screen">
 
     <!-- Notification Toast -->
-    <div id="toast" class="fixed top-24 right-5 bg-stone-900 text-white px-6 py-4 rounded shadow-lg transform translate-x-full transition-transform duration-300 z-50 flex items-center gap-3">
-        <i data-lucide="check-circle" class="w-5 h-5 text-leaf-500"></i>
+    <div id="toast" class="fixed top-24 right-5 bg-neutral-900 text-white px-6 py-4 rounded shadow-lg transform translate-x-full transition-transform duration-300 z-50 flex items-center gap-3">
+        <i data-lucide="check-circle" class="w-5 h-5 text-secondary-500"></i>
         <span id="toast-message">Item added to cart</span>
     </div>
 
     <!-- Navigation -->
-    <nav class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-stone-100 transition-all duration-300 shadow-sm" id="navbar">
+    <nav class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-neutral-100 transition-all duration-300 shadow-sm" id="navbar">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-24">
                 <!-- Mobile Menu Button -->
-                <button class="md:hidden p-2 hover:bg-stone-50 rounded-full" onclick="toggleMobileMenu()">
+                <button class="md:hidden p-2 hover:bg-neutral-50 rounded-full" onclick="toggleMobileMenu()">
                     <i data-lucide="menu" class="w-6 h-6"></i>
                 </button>
 
                 <!-- Logo Center -->
                 <div class="flex-shrink-0 flex items-center cursor-pointer gap-3" onclick="navigateToPage('home')">
                     <!-- Placeholder for the actual Logo File -->
-                    <div class="h-16 w-16 relative rounded-lg overflow-hidden border border-stone-100 shadow-sm bg-white group">
+                    <div class="h-16 w-16 relative rounded-lg overflow-hidden border border-neutral-100 shadow-sm bg-white group">
                          <div class="absolute inset-0 flex items-center justify-center bg-white">
-                             <span class="font-serif text-2xl font-bold text-stone-900">UC</span>
+                             <span class="font-serif text-2xl font-bold text-neutral-900">UC</span>
                          </div>
-                         <!-- <img src="images/logo.jpg" alt="Unique Creations Logo" class="h-full w-full object-contain"> -->
                     </div>
                     
                     <div class="hidden sm:block">
-                        <span class="block font-serif text-xl font-bold tracking-tight text-stone-900 leading-none">
+                        <span class="block font-serif text-xl font-bold tracking-tight text-neutral-900 leading-none">
                             Unique Creations
                         </span>
-                        <span class="block text-sm text-rose-800 font-normal tracking-widest uppercase mt-1">
+                        <span class="block text-sm text-primary-800 font-normal tracking-widest uppercase mt-1">
                             By Lisa C.
                         </span>
                     </div>
@@ -102,29 +231,50 @@
 
                 <!-- Desktop Nav -->
                 <div class="hidden md:flex space-x-8 items-center">
-                    <button onclick="navigateToPage('home')" class="nav-link hover:text-rose-800 transition-colors font-medium text-sm uppercase tracking-wide text-rose-800" data-target="home">Home</button>
-                    <button onclick="navigateToPage('shop')" class="nav-link hover:text-rose-800 transition-colors font-medium text-sm uppercase tracking-wide" data-target="shop">Shop</button>
-                    <button onclick="navigateToPage('about')" class="nav-link hover:text-rose-800 transition-colors font-medium text-sm uppercase tracking-wide" data-target="about">About</button>
-                    <button onclick="navigateToPage('contact')" class="nav-link hover:text-rose-800 transition-colors font-medium text-sm uppercase tracking-wide" data-target="contact">Contact</button>
+                    <button onclick="navigateToPage('home')" class="nav-link hover:text-primary-800 transition-colors font-medium text-sm uppercase tracking-wide text-primary-800" data-target="home">Home</button>
+                    <button onclick="navigateToPage('shop')" class="nav-link hover:text-primary-800 transition-colors font-medium text-sm uppercase tracking-wide" data-target="shop">Shop</button>
+                    <button onclick="navigateToPage('about')" class="nav-link hover:text-primary-800 transition-colors font-medium text-sm uppercase tracking-wide" data-target="about">About</button>
+                    <button onclick="navigateToPage('contact')" class="nav-link hover:text-primary-800 transition-colors font-medium text-sm uppercase tracking-wide" data-target="contact">Contact</button>
                 </div>
 
-                <!-- Cart Icon -->
-                <div class="flex items-center">
-                    <button onclick="toggleCart()" class="relative p-2 hover:bg-stone-50 rounded-full transition-colors group">
-                        <i data-lucide="shopping-bag" class="w-6 h-6 text-stone-700 group-hover:text-rose-800 transition-colors"></i>
-                        <span id="cart-count" class="absolute top-0 right-0 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-white transform translate-x-1/4 -translate-y-1/4 bg-rose-800 rounded-full opacity-0 transition-opacity">0</span>
+                <!-- Right Side: Theme Switcher & Cart -->
+                <div class="flex items-center gap-4">
+                    <!-- Theme Dropdown -->
+                    <div class="relative group">
+                        <button class="p-2 hover:bg-neutral-50 rounded-full transition-colors flex items-center gap-2">
+                            <i data-lucide="palette" class="w-5 h-5 text-neutral-600"></i>
+                        </button>
+                        <div class="absolute right-0 mt-2 w-32 bg-white rounded-md shadow-lg py-1 hidden group-hover:block border border-neutral-100">
+                            <button onclick="setTheme('blossom')" class="block w-full text-left px-4 py-2 text-sm text-neutral-700 hover:bg-neutral-50 hover:text-primary-600">Blossom</button>
+                            <button onclick="setTheme('ocean')" class="block w-full text-left px-4 py-2 text-sm text-neutral-700 hover:bg-neutral-50 hover:text-primary-600">Ocean</button>
+                            <button onclick="setTheme('luxury')" class="block w-full text-left px-4 py-2 text-sm text-neutral-700 hover:bg-neutral-50 hover:text-primary-600">Luxury</button>
+                        </div>
+                    </div>
+
+                    <!-- Cart Icon -->
+                    <button onclick="toggleCart()" class="relative p-2 hover:bg-neutral-50 rounded-full transition-colors group">
+                        <i data-lucide="shopping-bag" class="w-6 h-6 text-neutral-700 group-hover:text-primary-800 transition-colors"></i>
+                        <span id="cart-count" class="absolute top-0 right-0 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-white transform translate-x-1/4 -translate-y-1/4 bg-primary-800 rounded-full opacity-0 transition-opacity">0</span>
                     </button>
                 </div>
             </div>
         </div>
         
         <!-- Mobile Menu (Hidden by default) -->
-        <div id="mobile-menu" class="hidden md:hidden bg-white border-b border-stone-100">
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-b border-neutral-100">
             <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-                <button onclick="mobileNavClick('home')" class="block w-full text-left px-3 py-2 rounded-md hover:bg-rose-50 hover:text-rose-800">Home</button>
-                <button onclick="mobileNavClick('shop')" class="block w-full text-left px-3 py-2 rounded-md hover:bg-rose-50 hover:text-rose-800">Shop Collections</button>
-                <button onclick="mobileNavClick('about')" class="block w-full text-left px-3 py-2 rounded-md hover:bg-rose-50 hover:text-rose-800">About Lisa</button>
-                <button onclick="mobileNavClick('contact')" class="block w-full text-left px-3 py-2 rounded-md hover:bg-rose-50 hover:text-rose-800">Contact</button>
+                <button onclick="mobileNavClick('home')" class="block w-full text-left px-3 py-2 rounded-md hover:bg-primary-50 hover:text-primary-800">Home</button>
+                <button onclick="mobileNavClick('shop')" class="block w-full text-left px-3 py-2 rounded-md hover:bg-primary-50 hover:text-primary-800">Shop Collections</button>
+                <button onclick="mobileNavClick('about')" class="block w-full text-left px-3 py-2 rounded-md hover:bg-primary-50 hover:text-primary-800">About Lisa</button>
+                <button onclick="mobileNavClick('contact')" class="block w-full text-left px-3 py-2 rounded-md hover:bg-primary-50 hover:text-primary-800">Contact</button>
+                <div class="border-t border-neutral-100 mt-2 pt-2">
+                    <p class="px-3 text-xs text-neutral-400 uppercase tracking-wide mb-1">Theme</p>
+                    <div class="flex gap-2 px-3">
+                        <button onclick="setTheme('blossom')" class="w-6 h-6 rounded-full bg-rose-500 border border-neutral-200"></button>
+                        <button onclick="setTheme('ocean')" class="w-6 h-6 rounded-full bg-sky-500 border border-neutral-200"></button>
+                        <button onclick="setTheme('luxury')" class="w-6 h-6 rounded-full bg-amber-500 border border-neutral-200"></button>
+                    </div>
+                </div>
             </div>
         </div>
     </nav>
@@ -139,21 +289,21 @@
                     <div class="relative z-10 pb-8 bg-white sm:pb-16 md:pb-20 lg:max-w-2xl lg:w-full lg:pb-28 xl:pb-32">
                         <main class="mt-10 mx-auto max-w-7xl px-4 sm:mt-12 sm:px-6 md:mt-16 lg:mt-20 lg:px-8 xl:mt-28">
                             <div class="sm:text-center lg:text-left fade-in">
-                                <h1 class="text-4xl tracking-tight font-extrabold text-stone-900 sm:text-5xl md:text-6xl font-serif">
+                                <h1 class="text-4xl tracking-tight font-extrabold text-neutral-900 sm:text-5xl md:text-6xl font-serif">
                                     <span class="block xl:inline">Handcrafted with</span>
-                                    <span class="block text-rose-800 xl:inline italic">elegance & intention.</span>
+                                    <span class="block text-primary-800 xl:inline italic">elegance & intention.</span>
                                 </h1>
-                                <p class="mt-3 text-base text-stone-500 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0">
+                                <p class="mt-3 text-base text-neutral-500 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0">
                                     At Unique Creations by Lisa C, we specialize in crafting exquisite pieces that combine traditional techniques with modern design. Our unique creations showcase the intricate artistry of chainmail, the vibrant colors of beads, and the delicate texture of scale. We use anodized aluminum for many of our designs, which is not only incredibly lightweight but also hypoallergenic and won't rust or tarnish. Discover the perfect piece to add a touch of elegance and sophistication to your wardrobe.
                                 </p>
                                 <div class="mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start gap-4">
                                     <div class="rounded-md shadow">
-                                        <button onclick="navigateToPage('shop')" class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-stone-900 hover:bg-stone-800 md:py-4 md:text-lg transition-colors">
+                                        <button onclick="navigateToPage('shop')" class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-neutral-900 hover:bg-neutral-800 md:py-4 md:text-lg transition-colors">
                                             Shop Collection
                                         </button>
                                     </div>
                                     <div class="mt-3 sm:mt-0 sm:ml-3">
-                                        <button onclick="navigateToPage('about')" class="w-full flex items-center justify-center px-8 py-3 border border-stone-200 text-base font-medium rounded-md text-stone-700 bg-white hover:bg-stone-50 hover:border-leaf-600 hover:text-leaf-800 md:py-4 md:text-lg transition-all">
+                                        <button onclick="navigateToPage('about')" class="w-full flex items-center justify-center px-8 py-3 border border-neutral-200 text-base font-medium rounded-md text-neutral-700 bg-white hover:bg-neutral-50 hover:border-secondary-600 hover:text-secondary-800 md:py-4 md:text-lg transition-all">
                                             Our Story
                                         </button>
                                     </div>
@@ -162,7 +312,7 @@
                         </main>
                     </div>
                 </div>
-                <div class="lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2 bg-stone-50">
+                <div class="lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2 bg-neutral-50">
                     <img class="h-56 w-full object-cover sm:h-72 md:h-96 lg:w-full lg:h-full opacity-90" src="https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80" alt="Floral jewelry setting">
                 </div>
             </section>
@@ -170,27 +320,27 @@
 
         <!-- PAGE: SHOP -->
         <div id="view-shop" class="page-view hidden">
-            <section class="py-16 bg-stone-50 min-h-screen">
+            <section class="py-16 bg-neutral-50 min-h-screen">
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div class="text-center mb-12">
-                        <span class="text-rose-800 font-bold tracking-widest uppercase text-xs mb-2 block">Our Catalog</span>
-                        <h2 class="text-3xl font-serif font-bold text-stone-900">Latest Collections</h2>
-                        <div class="w-24 h-1 bg-gradient-to-r from-rose-300 to-leaf-300 mx-auto mt-4 rounded-full"></div>
+                        <span class="text-primary-800 font-bold tracking-widest uppercase text-xs mb-2 block">Our Catalog</span>
+                        <h2 class="text-3xl font-serif font-bold text-neutral-900">Latest Collections</h2>
+                        <div class="w-24 h-1 bg-gradient-to-r from-primary-300 to-secondary-300 mx-auto mt-4 rounded-full"></div>
                         
                         <!-- Category Filters -->
                         <div class="mt-8 flex justify-center space-x-2 md:space-x-4 overflow-x-auto pb-2">
-                            <button onclick="filterProducts('all')" class="filter-btn active px-6 py-2 rounded-full text-sm font-medium transition-all shadow-sm bg-stone-900 text-white" data-category="all">All</button>
-                            <button onclick="filterProducts('necklaces')" class="filter-btn px-6 py-2 rounded-full text-sm font-medium text-stone-600 bg-white border border-stone-200 hover:border-rose-300 hover:text-rose-800 transition-all shadow-sm" data-category="necklaces">Necklaces</button>
-                            <button onclick="filterProducts('earrings')" class="filter-btn px-6 py-2 rounded-full text-sm font-medium text-stone-600 bg-white border border-stone-200 hover:border-rose-300 hover:text-rose-800 transition-all shadow-sm" data-category="earrings">Earrings</button>
-                            <button onclick="filterProducts('bracelets')" class="filter-btn px-6 py-2 rounded-full text-sm font-medium text-stone-600 bg-white border border-stone-200 hover:border-rose-300 hover:text-rose-800 transition-all shadow-sm" data-category="bracelets">Bracelets</button>
+                            <button onclick="filterProducts('all')" class="filter-btn active px-6 py-2 rounded-full text-sm font-medium transition-all shadow-sm bg-neutral-900 text-white" data-category="all">All</button>
+                            <button onclick="filterProducts('necklaces')" class="filter-btn px-6 py-2 rounded-full text-sm font-medium text-neutral-600 bg-white border border-neutral-200 hover:border-primary-300 hover:text-primary-800 transition-all shadow-sm" data-category="necklaces">Necklaces</button>
+                            <button onclick="filterProducts('earrings')" class="filter-btn px-6 py-2 rounded-full text-sm font-medium text-neutral-600 bg-white border border-neutral-200 hover:border-primary-300 hover:text-primary-800 transition-all shadow-sm" data-category="earrings">Earrings</button>
+                            <button onclick="filterProducts('bracelets')" class="filter-btn px-6 py-2 rounded-full text-sm font-medium text-neutral-600 bg-white border border-neutral-200 hover:border-primary-300 hover:text-primary-800 transition-all shadow-sm" data-category="bracelets">Bracelets</button>
                         </div>
                     </div>
 
                     <!-- Product Grid -->
                     <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-y-10 gap-x-6 xl:gap-x-8">
                         <div class="col-span-full text-center py-20">
-                            <i data-lucide="loader-2" class="w-8 h-8 animate-spin mx-auto text-rose-800"></i>
-                            <p class="mt-2 text-stone-500">Loading exquisite pieces...</p>
+                            <i data-lucide="loader-2" class="w-8 h-8 animate-spin mx-auto text-primary-800"></i>
+                            <p class="mt-2 text-neutral-500">Loading exquisite pieces...</p>
                         </div>
                     </div>
                 </div>
@@ -201,32 +351,32 @@
         <div id="view-about" class="page-view hidden">
             <section class="py-20 bg-white relative overflow-hidden min-h-screen">
                 <!-- Decorative bg elements -->
-                <div class="absolute top-0 right-0 -mr-20 -mt-20 w-80 h-80 bg-rose-50 rounded-full opacity-50 blur-3xl"></div>
-                <div class="absolute bottom-0 left-0 -ml-20 -mb-20 w-80 h-80 bg-leaf-50 rounded-full opacity-50 blur-3xl"></div>
+                <div class="absolute top-0 right-0 -mr-20 -mt-20 w-80 h-80 bg-primary-50 rounded-full opacity-50 blur-3xl"></div>
+                <div class="absolute bottom-0 left-0 -ml-20 -mb-20 w-80 h-80 bg-secondary-50 rounded-full opacity-50 blur-3xl"></div>
 
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                     <div class="lg:grid lg:grid-cols-2 lg:gap-16 items-center">
                         <div class="relative group">
-                            <div class="absolute -inset-4 bg-gradient-to-r from-rose-200 to-leaf-200 rounded-lg opacity-30 group-hover:opacity-50 transition duration-500 blur-lg"></div>
+                            <div class="absolute -inset-4 bg-gradient-to-r from-primary-200 to-secondary-200 rounded-lg opacity-30 group-hover:opacity-50 transition duration-500 blur-lg"></div>
                             <div class="relative aspect-w-3 aspect-h-4 rounded-lg overflow-hidden shadow-xl border-4 border-white">
                                 <img src="https://images.unsplash.com/photo-1617038260897-41a1f14a8ca0?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" alt="Jewelry making tools" class="object-cover w-full h-full">
                             </div>
                         </div>
                         <div class="mt-10 lg:mt-0">
-                            <h2 class="text-4xl font-serif font-bold text-stone-900 mb-6">Meet Lisa C.</h2>
-                            <div class="prose prose-stone text-stone-600 text-lg leading-relaxed">
+                            <h2 class="text-4xl font-serif font-bold text-neutral-900 mb-6">Meet Lisa C.</h2>
+                            <div class="prose prose-stone text-neutral-600 text-lg leading-relaxed">
                                 <p class="mb-4">
                                     Welcome to Unique Creations. My journey began with a simple love for nature's colors and textures. Just like the lilies in our logo represent rebirth and devotion, I believe every piece of jewelry allows for a reinvention of the self.
                                 </p>
                                 <p class="mb-4">
                                     What started as a hobby on a small dining table has blossomed into a passion for creating wearable art. Every bead is hand-selected, and every wire is wrapped with intention.
                                 </p>
-                                <p class="text-stone-900 font-medium italic">
+                                <p class="text-neutral-900 font-medium italic">
                                     "Jewelry shouldn't just accessorize an outfit—it should tell your story."
                                 </p>
                                 <div class="mt-8 flex items-center gap-4">
-                                    <span class="font-serif text-2xl text-rose-800">Lisa C.</span>
-                                    <div class="h-px bg-stone-300 flex-1"></div>
+                                    <span class="font-serif text-2xl text-primary-800">Lisa C.</span>
+                                    <div class="h-px bg-neutral-300 flex-1"></div>
                                 </div>
                             </div>
                         </div>
@@ -237,7 +387,7 @@
 
         <!-- PAGE: CONTACT -->
         <div id="view-contact" class="page-view hidden">
-            <section class="bg-stone-900 text-stone-300 py-16 min-h-screen">
+            <section class="bg-neutral-900 text-neutral-300 py-16 min-h-screen">
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <h2 class="text-3xl font-serif font-bold text-white mb-12 text-center">Get in Touch</h2>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
@@ -245,29 +395,29 @@
                             <h3 class="text-2xl font-serif text-white mb-4">Stay Connected</h3>
                             <p class="mb-6">Join our newsletter for early access to new collections and exclusive discounts.</p>
                             <form onsubmit="handleSubscribe(event)" class="flex gap-2">
-                                <input type="email" required placeholder="Enter your email" class="flex-1 px-4 py-2 rounded bg-stone-800 border-none focus:ring-2 focus:ring-rose-500 text-white placeholder-stone-500">
-                                <button type="submit" class="px-6 py-2 bg-leaf-700 text-white rounded hover:bg-leaf-600 transition-colors font-medium">Join</button>
+                                <input type="email" required placeholder="Enter your email" class="flex-1 px-4 py-2 rounded bg-neutral-800 border-none focus:ring-2 focus:ring-primary-500 text-white placeholder-neutral-500">
+                                <button type="submit" class="px-6 py-2 bg-secondary-700 text-white rounded hover:bg-secondary-600 transition-colors font-medium">Join</button>
                             </form>
                             <div class="mt-8 flex space-x-6">
-                                <a href="#" class="text-stone-400 hover:text-rose-400 transition-colors"><i data-lucide="instagram"></i></a>
-                                <a href="#" class="text-stone-400 hover:text-rose-400 transition-colors"><i data-lucide="facebook"></i></a>
-                                <a href="#" class="text-stone-400 hover:text-rose-400 transition-colors"><i data-lucide="twitter"></i></a>
+                                <a href="#" class="text-neutral-400 hover:text-primary-400 transition-colors"><i data-lucide="instagram"></i></a>
+                                <a href="#" class="text-neutral-400 hover:text-primary-400 transition-colors"><i data-lucide="facebook"></i></a>
+                                <a href="#" class="text-neutral-400 hover:text-primary-400 transition-colors"><i data-lucide="twitter"></i></a>
                             </div>
                         </div>
                         <div>
                             <h3 class="text-2xl font-serif text-white mb-4">Contact Information</h3>
                             <ul class="space-y-4">
                                 <li class="flex items-start">
-                                    <i data-lucide="mail" class="w-5 h-5 mr-3 mt-1 text-rose-500"></i>
+                                    <i data-lucide="mail" class="w-5 h-5 mr-3 mt-1 text-primary-500"></i>
                                     <span>sales@uniquecreationsbylisac.com</span>
                                 </li>
                                 <li class="flex items-start">
-                                    <i data-lucide="map-pin" class="w-5 h-5 mr-3 mt-1 text-rose-500"></i>
+                                    <i data-lucide="map-pin" class="w-5 h-5 mr-3 mt-1 text-primary-500"></i>
                                     <span>Studio in Jacksonville, Florida<br>Shipping Worldwide</span>
                                 </li>
                                 <li class="flex flex-col items-start">
                                     <div class="flex items-start mb-2">
-                                        <i data-lucide="scan-line" class="w-5 h-5 mr-3 mt-1 text-rose-500"></i>
+                                        <i data-lucide="scan-line" class="w-5 h-5 mr-3 mt-1 text-primary-500"></i>
                                         <span>Find us at local markets! Scan our QR code in person for easy Square payments.</span>
                                     </div>
                                     <!-- QR Code Image Container -->
@@ -288,24 +438,24 @@
     </main>
 
     <!-- Global Footer -->
-    <footer class="bg-stone-900 text-stone-300 py-8 border-t border-stone-800 text-center text-sm">
+    <footer class="bg-neutral-900 text-neutral-300 py-8 border-t border-neutral-800 text-center text-sm">
         <p>&copy; 2023 Unique Creations by Lisa C. All rights reserved.</p>
-        <p class="mt-2 text-stone-500">Payments secured by Square</p>
+        <p class="mt-2 text-neutral-500">Payments secured by Square</p>
     </footer>
 
     <!-- Cart Slide-over -->
     <div id="cart-sidebar" class="fixed inset-0 overflow-hidden z-50 pointer-events-none transition-all duration-300">
         <div class="absolute inset-0 overflow-hidden">
             <!-- Background overlay -->
-            <div id="cart-overlay" class="absolute inset-0 bg-stone-900 bg-opacity-75 transition-opacity opacity-0 pointer-events-none" onclick="toggleCart()"></div>
+            <div id="cart-overlay" class="absolute inset-0 bg-neutral-900 bg-opacity-75 transition-opacity opacity-0 pointer-events-none" onclick="toggleCart()"></div>
 
             <div class="pointer-events-none fixed inset-y-0 right-0 flex max-w-full pl-10">
                 <div id="cart-panel" class="pointer-events-auto w-screen max-w-md transform translate-x-full transition-transform duration-300 bg-white shadow-xl flex flex-col h-full">
                     
                     <!-- Cart Header -->
-                    <div class="flex items-start justify-between px-4 py-6 sm:px-6 border-b border-stone-100 bg-stone-50">
-                        <h2 class="text-lg font-medium text-stone-900 font-serif">Shopping Cart</h2>
-                        <button onclick="toggleCart()" class="text-stone-400 hover:text-stone-500">
+                    <div class="flex items-start justify-between px-4 py-6 sm:px-6 border-b border-neutral-100 bg-neutral-50">
+                        <h2 class="text-lg font-medium text-neutral-900 font-serif">Shopping Cart</h2>
+                        <button onclick="toggleCart()" class="text-neutral-400 hover:text-neutral-500">
                             <span class="sr-only">Close panel</span>
                             <i data-lucide="x" class="w-6 h-6"></i>
                         </button>
@@ -315,22 +465,22 @@
                     <div class="flex-1 overflow-y-auto py-6 px-4 sm:px-6">
                         <div id="cart-items-container" class="space-y-8">
                             <!-- Items injected here -->
-                            <div class="text-center text-stone-500 mt-10">
+                            <div class="text-center text-neutral-500 mt-10">
                                 <i data-lucide="shopping-bag" class="w-12 h-12 mx-auto mb-3 opacity-20"></i>
                                 <p>Your cart is empty.</p>
-                                <button onclick="toggleCart(); navigateToPage('shop')" class="mt-4 text-rose-800 font-medium hover:underline">Start Shopping</button>
+                                <button onclick="toggleCart(); navigateToPage('shop')" class="mt-4 text-primary-800 font-medium hover:underline">Start Shopping</button>
                             </div>
                         </div>
                     </div>
 
                     <!-- Cart Footer -->
-                    <div class="border-t border-stone-100 px-4 py-6 sm:px-6 bg-stone-50">
-                        <div class="flex justify-between text-base font-medium text-stone-900 mb-4">
+                    <div class="border-t border-neutral-100 px-4 py-6 sm:px-6 bg-neutral-50">
+                        <div class="flex justify-between text-base font-medium text-neutral-900 mb-4">
                             <p>Subtotal</p>
                             <p id="cart-subtotal">$0.00</p>
                         </div>
-                        <p class="mt-0.5 text-sm text-stone-500 mb-6">Shipping and taxes calculated at checkout.</p>
-                        <button onclick="openPaymentModal()" class="w-full flex justify-center items-center px-6 py-3 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-stone-900 hover:bg-stone-800 transition-colors">
+                        <p class="mt-0.5 text-sm text-neutral-500 mb-6">Shipping and taxes calculated at checkout.</p>
+                        <button onclick="openPaymentModal()" class="w-full flex justify-center items-center px-6 py-3 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-neutral-900 hover:bg-neutral-800 transition-colors">
                             <i data-lucide="lock" class="w-4 h-4 mr-2"></i> Checkout with Square
                         </button>
                     </div>
@@ -353,7 +503,7 @@
                             <h3 class="text-lg leading-6 font-medium text-gray-900" id="modal-title">Secure Payment</h3>
                             <div class="mt-4">
                                 <!-- Square Payment Form Placeholder -->
-                                <div id="card-container" class="h-48 border border-stone-200 rounded flex items-center justify-center bg-stone-50 text-stone-500">
+                                <div id="card-container" class="h-48 border border-neutral-200 rounded flex items-center justify-center bg-neutral-50 text-neutral-500">
                                     <p class="p-4 text-sm">
                                         [Square Payment Form will mount here]<br><br>
                                         <em>If this stays empty, ensure your Netlify Environment Variables (SQUARE_APP_ID) are set correctly.</em>
@@ -364,7 +514,7 @@
                     </div>
                 </div>
                 <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
-                    <button type="button" onclick="handlePaymentSubmission()" class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-stone-900 text-base font-medium text-white hover:bg-stone-800 focus:outline-none sm:ml-3 sm:w-auto sm:text-sm">
+                    <button type="button" onclick="handlePaymentSubmission()" class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-neutral-900 text-base font-medium text-white hover:bg-neutral-800 focus:outline-none sm:ml-3 sm:w-auto sm:text-sm">
                         Pay Now
                     </button>
                     <button type="button" onclick="closePaymentModal()" class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">
@@ -429,6 +579,19 @@
                 }
             });
         });
+
+        // --- THEME FUNCTIONS ---
+        function setTheme(themeName) {
+            document.documentElement.setAttribute('data-theme', themeName);
+            // Optional: Save to local storage
+            localStorage.setItem('theme', themeName);
+        }
+
+        // Load saved theme
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme) {
+            setTheme(savedTheme);
+        }
 
         // --- API FUNCTIONS ---
 
@@ -636,11 +799,11 @@
             // Update Active Nav State
             document.querySelectorAll('.nav-link').forEach(btn => {
                 if(btn.dataset.target === pageId) {
-                    btn.classList.add('text-rose-800');
-                    btn.classList.remove('text-stone-800');
+                    btn.classList.add('text-primary-800');
+                    btn.classList.remove('text-neutral-800');
                 } else {
-                    btn.classList.remove('text-rose-800');
-                    btn.classList.add('text-stone-800');
+                    btn.classList.remove('text-primary-800');
+                    btn.classList.add('text-neutral-800');
                 }
             });
 
@@ -669,34 +832,34 @@
                 : products.filter(p => p.category === category);
 
             if (filtered.length === 0) {
-                grid.innerHTML = '<div class="col-span-full text-center py-20"><p class="text-stone-500">No items found in this category.</p></div>';
+                grid.innerHTML = '<div class="col-span-full text-center py-20"><p class="text-neutral-500">No items found in this category.</p></div>';
                 return;
             }
 
             filtered.forEach((product, index) => {
                 const card = document.createElement('div');
-                card.className = 'group relative fade-in bg-white rounded-lg shadow-sm hover:shadow-lg transition-shadow duration-300 overflow-hidden border border-stone-100';
+                card.className = 'group relative fade-in bg-white rounded-lg shadow-sm hover:shadow-lg transition-shadow duration-300 overflow-hidden border border-neutral-100';
                 card.style.animationDelay = `${index * 100}ms`;
                 card.innerHTML = `
-                    <div class="w-full h-80 bg-stone-100 overflow-hidden relative">
+                    <div class="w-full h-80 bg-neutral-100 overflow-hidden relative">
                         <img src="${product.image}" alt="${product.name}" class="w-full h-full object-center object-cover transform group-hover:scale-105 transition-transform duration-700">
                         <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-10 transition-opacity duration-300"></div>
                     </div>
                     <div class="p-4">
                         <div class="flex justify-between items-start">
                             <div>
-                                <p class="text-xs text-rose-800 uppercase tracking-wide font-bold mb-1">${product.category}</p>
-                                <h3 class="text-lg font-serif text-stone-900 leading-tight">
+                                <p class="text-xs text-primary-800 uppercase tracking-wide font-bold mb-1">${product.category}</p>
+                                <h3 class="text-lg font-serif text-neutral-900 leading-tight">
                                     <a href="#">
                                         <span aria-hidden="true" class="absolute inset-0"></span>
                                         ${product.name}
                                     </a>
                                 </h3>
                             </div>
-                            <p class="text-lg font-medium text-stone-900">$${product.price.toFixed(2)}</p>
+                            <p class="text-lg font-medium text-neutral-900">$${product.price.toFixed(2)}</p>
                         </div>
-                        <p class="mt-2 text-sm text-stone-500 line-clamp-2">${product.desc}</p>
-                        <button onclick="addToCart('${product.id}')" class="mt-4 w-full bg-stone-900 text-white hover:bg-rose-800 py-3 px-4 rounded transition-colors text-xs font-bold uppercase tracking-widest relative z-20 flex items-center justify-center gap-2">
+                        <p class="mt-2 text-sm text-neutral-500 line-clamp-2">${product.desc}</p>
+                        <button onclick="addToCart('${product.id}')" class="mt-4 w-full bg-neutral-900 text-white hover:bg-primary-800 py-3 px-4 rounded transition-colors text-xs font-bold uppercase tracking-widest relative z-20 flex items-center justify-center gap-2">
                            <i data-lucide="plus" class="w-4 h-4"></i> Add to Cart
                         </button>
                     </div>
@@ -709,11 +872,11 @@
         function filterProducts(category) {
             document.querySelectorAll('.filter-btn').forEach(btn => {
                 if (btn.dataset.category === category) {
-                    btn.classList.remove('bg-white', 'text-stone-600', 'hover:border-rose-300');
-                    btn.classList.add('bg-stone-900', 'text-white');
+                    btn.classList.remove('bg-white', 'text-neutral-600', 'hover:border-primary-300');
+                    btn.classList.add('bg-neutral-900', 'text-white');
                 } else {
-                    btn.classList.add('bg-white', 'text-stone-600', 'hover:border-rose-300');
-                    btn.classList.remove('bg-stone-900', 'text-white');
+                    btn.classList.add('bg-white', 'text-neutral-600', 'hover:border-primary-300');
+                    btn.classList.remove('bg-neutral-900', 'text-white');
                 }
             });
             renderProducts(category);
@@ -769,33 +932,33 @@
 
             if (cart.length === 0) {
                 container.innerHTML = `
-                    <div class="text-center text-stone-500 mt-10">
+                    <div class="text-center text-neutral-500 mt-10">
                         <i data-lucide="shopping-bag" class="w-12 h-12 mx-auto mb-3 opacity-20"></i>
                         <p>Your cart is empty.</p>
-                        <button onclick="toggleCart(); navigateToPage('shop')" class="mt-4 text-rose-800 font-medium hover:underline">Start Shopping</button>
+                        <button onclick="toggleCart(); navigateToPage('shop')" class="mt-4 text-primary-800 font-medium hover:underline">Start Shopping</button>
                     </div>
                 `;
             } else {
                 container.innerHTML = cart.map(item => `
-                    <div class="flex py-6 border-b border-stone-100 animate-fadeIn">
-                        <div class="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-stone-200">
+                    <div class="flex py-6 border-b border-neutral-100 animate-fadeIn">
+                        <div class="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-neutral-200">
                             <img src="${item.image}" alt="${item.name}" class="h-full w-full object-cover object-center">
                         </div>
                         <div class="ml-4 flex flex-1 flex-col">
                             <div>
-                                <div class="flex justify-between text-base font-medium text-stone-900">
+                                <div class="flex justify-between text-base font-medium text-neutral-900">
                                     <h3 class="font-serif">${item.name}</h3>
                                     <p class="ml-4">$${(item.price * item.quantity).toFixed(2)}</p>
                                 </div>
-                                <p class="mt-1 text-xs text-stone-500 uppercase tracking-wide">${item.category}</p>
+                                <p class="mt-1 text-xs text-neutral-500 uppercase tracking-wide">${item.category}</p>
                             </div>
                             <div class="flex flex-1 items-end justify-between text-sm">
-                                <div class="flex items-center border rounded border-stone-300">
-                                    <button onclick="updateQuantity('${item.id}', -1)" class="px-2 py-1 hover:bg-stone-100 transition-colors">-</button>
-                                    <span class="px-2 text-stone-900 font-medium">${item.quantity}</span>
-                                    <button onclick="updateQuantity('${item.id}', 1)" class="px-2 py-1 hover:bg-stone-100 transition-colors">+</button>
+                                <div class="flex items-center border rounded border-neutral-300">
+                                    <button onclick="updateQuantity('${item.id}', -1)" class="px-2 py-1 hover:bg-neutral-100 transition-colors">-</button>
+                                    <span class="px-2 text-neutral-900 font-medium">${item.quantity}</span>
+                                    <button onclick="updateQuantity('${item.id}', 1)" class="px-2 py-1 hover:bg-neutral-100 transition-colors">+</button>
                                 </div>
-                                <button onclick="removeFromCart('${item.id}')" class="font-medium text-rose-600 hover:text-rose-500 text-xs uppercase tracking-wide">Remove</button>
+                                <button onclick="removeFromCart('${item.id}')" class="font-medium text-primary-600 hover:text-primary-500 text-xs uppercase tracking-wide">Remove</button>
                             </div>
                         </div>
                     </div>
