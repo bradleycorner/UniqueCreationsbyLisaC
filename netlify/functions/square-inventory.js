@@ -36,6 +36,12 @@ export default async (req, context) => {
     const data = await response.json();
     const objects = data.objects || [];
 
+    // DEBUG: Log counts
+    console.log(`Fetched ${objects.length} objects.`);
+    console.log(`Items: ${objects.filter(o => o.type === 'ITEM').length}`);
+    console.log(`Images: ${objects.filter(o => o.type === 'IMAGE').length}`);
+    console.log(`Modifier Lists: ${objects.filter(o => o.type === 'MODIFIER_LIST').length}`);
+
     // 5. Process the data into maps for easy lookup
     const imageMap = objects
       .filter(obj => obj.type === 'IMAGE')
