@@ -486,7 +486,6 @@
                 if (data.objects) {
                     products = data.objects.map(item => {
                         // AUTO-DETECT CATEGORY BASED ON NAME
-                        // This fixes the empty filter results problem.
                         let category = "all";
                         const nameLower = item.item_data.name.toLowerCase();
                         if (nameLower.includes("necklace")) category = "necklaces";
@@ -498,8 +497,7 @@
                             name: item.item_data.name,
                             price: (item.item_data.variations?.[0]?.item_variation_data?.price_money?.amount || 0) / 100, 
                             category: category, 
-                            // Placeholder image until we implement image lookup
-                            image: "https://images.unsplash.com/photo-1611591437281-460bfbe1220a?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80", 
+                            image: item.image_url, // Use the new image_url field
                             desc: item.item_data.description || "Handcrafted with care."
                         };
                     });
