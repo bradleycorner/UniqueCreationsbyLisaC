@@ -23,14 +23,18 @@ export default async (req, context) => {
     : "https://connect.squareup.com";
 
   try {
-    // 4. Call Square API
-    const response = await fetch(`${baseUrl}/v2/catalog/list?types=ITEM`, {
-      method: "GET",
+    // 4. Call Square API - Using Search to get better control and related objects
+    const response = await fetch(`${baseUrl}/v2/catalog/search`, {
+      method: "POST",
       headers: {
         "Authorization": `Bearer ${process.env.SQUARE_ACCESS_TOKEN}`,
         "Content-Type": "application/json",
         "Square-Version": "2023-10-20"
-      }
+      },
+      body: JSON.stringify({
+        object_types: ["ITEM"],
+        include_related_objects: true // CRITICAL: This pulls in the IMAGE objects
+      })
     });
 
     // 5. Handle Square API Errors (e.g., 401 Unauthorized)

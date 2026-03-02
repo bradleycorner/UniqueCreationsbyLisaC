@@ -376,6 +376,61 @@
         </div>
     </div>
 
+    <!-- Product Details Modal (Hidden by default) -->
+    <div id="product-modal" class="fixed inset-0 z-50 overflow-y-auto hidden" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+        <div class="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+            <div class="fixed inset-0 bg-stone-900 bg-opacity-75 transition-opacity" onclick="closeProductModal()"></div>
+            <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
+            
+            <div class="inline-block align-middle bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-4xl sm:w-full">
+                <div class="absolute top-4 right-4 z-10">
+                    <button onclick="closeProductModal()" class="bg-white/80 backdrop-blur p-2 rounded-full text-stone-500 hover:text-stone-700 shadow-sm transition-colors">
+                        <i data-lucide="x" class="w-6 h-6"></i>
+                    </button>
+                </div>
+
+                <div class="sm:flex">
+                    <!-- Image Gallery Section -->
+                    <div class="sm:w-1/2 bg-stone-50 p-6">
+                        <div class="aspect-square rounded-lg overflow-hidden bg-white mb-4 border border-stone-100">
+                            <img id="modal-main-image" src="" alt="Product" class="w-full h-full object-cover transition-opacity duration-300">
+                        </div>
+                        <div id="modal-thumbnails" class="flex gap-2 overflow-x-auto pb-2 scrollbar-hide">
+                            <!-- Thumbnails injected here -->
+                        </div>
+                    </div>
+
+                    <!-- Details Section -->
+                    <div class="sm:w-1/2 p-8 sm:p-12 flex flex-col">
+                        <div class="flex-grow">
+                            <span id="modal-category" class="text-xs text-rose-800 font-bold uppercase tracking-widest mb-2 block"></span>
+                            <h2 id="modal-title-text" class="text-3xl font-serif font-bold text-stone-900 mb-4 leading-tight"></h2>
+                            <p id="modal-price" class="text-2xl text-stone-900 font-medium mb-6"></p>
+                            
+                            <div class="prose prose-stone mb-8">
+                                <h4 class="text-sm font-bold text-stone-900 uppercase tracking-wide mb-2">Description</h4>
+                                <p id="modal-description" class="text-stone-600 leading-relaxed"></p>
+                            </div>
+
+                            <div id="modal-tags" class="flex flex-wrap gap-2 mb-8">
+                                <!-- Tags injected here -->
+                            </div>
+                        </div>
+
+                        <div class="mt-auto space-y-4">
+                            <button id="modal-add-btn" class="w-full bg-stone-900 text-white hover:bg-rose-800 py-4 px-8 rounded-md transition-all font-bold uppercase tracking-widest flex items-center justify-center gap-3 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 active:translate-y-0">
+                                <i data-lucide="shopping-bag" class="w-5 h-5"></i> Add to Shopping Bag
+                            </button>
+                            <p class="text-center text-xs text-stone-400">
+                                Handcrafted by Lisa C. in Jacksonville, FL
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script>
         // --- API CONFIGURATION ---
         let SQUARE_APP_ID = ''; 
@@ -458,7 +513,6 @@
         async function fetchCatalog() {
             try {
                 // Calls the function created in netlify/functions/square-inventory.js
-                // Uses the new clean URL path mapped in netlify.toml
                 const response = await fetch('/api/square-inventory');
                 
                 if (!response.ok) {
@@ -467,26 +521,48 @@
 
                 const data = await response.json();
                 
-                // Map Square API response structure to our internal product structure
-                // Assuming Square returns { objects: [ ... ] }
                 if (data.objects) {
-                    products = data.objects.map(item => ({
-                        id: item.id,
-                        name: item.item_data.name,
-                        // Price is in cents, convert to dollars. Fallback to 0 if missing.
-                        price: (item.item_data.variations?.[0]?.item_variation_data?.price_money?.amount || 0) / 100, 
-                        category: "all", 
-                        // Placeholder image until we implement image lookup
-                        image: "https://images.unsplash.com/photo-1611591437281-460bfbe1220a?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80", 
-                        desc: item.item_data.description || "Handcrafted with care."
-                    }));
-                    console.log("Loaded inventory from Square API.");
+                    // 1. Create a lookup map for images (ID -> URL)
+                    const imageMap = {};
+                    if (data.related_objects) {
+                        data.related_objects
+                            .filter(obj => obj.type === 'IMAGE')
+                            .forEach(img => {
+                                imageMap[img.id] = img.image_data.url;
+                            });
+                    }
+
+                    // 2. Map items and link their images
+                    products = data.objects.map(item => {
+                        const itemData = item.item_data;
+                        
+                        // Get all possible image IDs (from item level or variation level)
+                        const allImageIds = [
+                            ...(itemData.image_ids || []),
+                            ...(itemData.variations?.[0]?.item_variation_data?.image_ids || [])
+                        ];
+                        
+                        // Map IDs to actual URLs, filtering out any that didn't resolve
+                        const imageUrls = [...new Set(allImageIds)]
+                            .map(id => imageMap[id])
+                            .filter(url => !!url);
+
+                        return {
+                            id: item.id,
+                            name: itemData.name,
+                            price: (itemData.variations?.[0]?.item_variation_data?.price_money?.amount || 0) / 100, 
+                            category: "all", 
+                            // Primary image or fallback
+                            image: imageUrls[0] || "https://images.unsplash.com/photo-1611591437281-460bfbe1220a?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80",
+                            images: imageUrls, // Store the full gallery
+                            desc: itemData.description || "Handcrafted with care.",
+                            tags: itemData.label_color ? [itemData.label_color] : [] // Simple tag example
+                        };
+                    });
+                    console.log(`Successfully mapped ${products.length} products with images.`);
                 } else {
-                    console.warn("API connected but returned no items.");
-                    // Keep empty product array or fallback? Let's fallback for visual check
                     throw new Error("Empty inventory");
                 }
-
             } catch (e) {
                 console.log("Using Mock Data (Backend not connected or empty):", e);
                 
@@ -618,35 +694,113 @@
 
             filtered.forEach((product, index) => {
                 const card = document.createElement('div');
-                card.className = 'group relative fade-in bg-white rounded-lg shadow-sm hover:shadow-lg transition-shadow duration-300 overflow-hidden border border-stone-100';
+                card.className = 'group relative fade-in bg-white rounded-lg shadow-sm hover:shadow-lg transition-all duration-300 overflow-hidden border border-stone-100 flex flex-col';
                 card.style.animationDelay = `${index * 100}ms`;
                 card.innerHTML = `
-                    <div class="w-full h-80 bg-stone-100 overflow-hidden relative">
+                    <div class="w-full h-80 bg-stone-100 overflow-hidden relative cursor-pointer" onclick="openProductModal('${product.id}')">
                         <img src="${product.image}" alt="${product.name}" class="w-full h-full object-center object-cover transform group-hover:scale-105 transition-transform duration-700">
-                        <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-10 transition-opacity duration-300"></div>
+                        <div class="absolute inset-0 bg-stone-900/0 group-hover:bg-stone-900/10 transition-colors duration-300 flex items-center justify-center">
+                            <span class="bg-white/90 text-stone-900 px-4 py-2 rounded text-xs font-bold uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity transform translate-y-4 group-hover:translate-y-0">Quick View</span>
+                        </div>
                     </div>
-                    <div class="p-4">
-                        <div class="flex justify-between items-start">
-                            <div>
-                                <p class="text-xs text-rose-800 uppercase tracking-wide font-bold mb-1">${product.category}</p>
-                                <h3 class="text-lg font-serif text-stone-900 leading-tight">
-                                    <a href="#">
-                                        <span aria-hidden="true" class="absolute inset-0"></span>
-                                        ${product.name}
-                                    </a>
+                    <div class="p-4 flex-grow flex flex-col">
+                        <div class="flex justify-between items-start mb-2">
+                            <div class="cursor-pointer" onclick="openProductModal('${product.id}')">
+                                <p class="text-[10px] text-rose-800 uppercase tracking-widest font-bold mb-1">${product.category}</p>
+                                <h3 class="text-lg font-serif text-stone-900 leading-tight group-hover:text-rose-800 transition-colors">
+                                    ${product.name}
                                 </h3>
                             </div>
                             <p class="text-lg font-medium text-stone-900">$${product.price.toFixed(2)}</p>
                         </div>
-                        <p class="mt-2 text-sm text-stone-500 line-clamp-2">${product.desc}</p>
-                        <button onclick="addToCart(${product.id})" class="mt-4 w-full bg-stone-900 text-white hover:bg-rose-800 py-3 px-4 rounded transition-colors text-xs font-bold uppercase tracking-widest relative z-20 flex items-center justify-center gap-2">
-                           <i data-lucide="plus" class="w-4 h-4"></i> Add to Cart
-                        </button>
+                        <p class="mt-1 text-sm text-stone-500 line-clamp-2 mb-4">${product.desc}</p>
+                        <div class="mt-auto">
+                            <button onclick="addToCart('${product.id}')" class="w-full bg-stone-50 text-stone-900 hover:bg-stone-900 hover:text-white border border-stone-200 py-3 px-4 rounded transition-all text-xs font-bold uppercase tracking-widest flex items-center justify-center gap-2">
+                               <i data-lucide="plus" class="w-4 h-4"></i> Add to Cart
+                            </button>
+                        </div>
                     </div>
                 `;
                 grid.appendChild(card);
             });
             lucide.createIcons();
+        }
+
+        function openProductModal(id) {
+            const product = products.find(p => String(p.id) === String(id));
+            if (!product) return;
+
+            const modal = document.getElementById('product-modal');
+            const mainImg = document.getElementById('modal-main-image');
+            const thumbContainer = document.getElementById('modal-thumbnails');
+            const tagsContainer = document.getElementById('modal-tags');
+
+            // Set Basic Info
+            document.getElementById('modal-category').textContent = product.category;
+            document.getElementById('modal-title-text').textContent = product.name;
+            document.getElementById('modal-price').textContent = `$${product.price.toFixed(2)}`;
+            document.getElementById('modal-description').textContent = product.desc;
+            
+            // Set Main Image
+            mainImg.src = product.image;
+            mainImg.alt = product.name;
+
+            // Render Thumbnails if more than 1 image
+            thumbContainer.innerHTML = '';
+            if (product.images && product.images.length > 1) {
+                product.images.forEach(imgUrl => {
+                    const thumb = document.createElement('button');
+                    thumb.className = `flex-shrink-0 w-20 h-20 rounded border-2 transition-all ${imgUrl === product.image ? 'border-rose-800' : 'border-transparent hover:border-stone-200'}`;
+                    thumb.innerHTML = `<img src="${imgUrl}" class="w-full h-full object-cover rounded-sm">`;
+                    thumb.onclick = () => updateModalImage(imgUrl, thumb);
+                    thumbContainer.appendChild(thumb);
+                });
+            }
+
+            // Render Tags
+            tagsContainer.innerHTML = '';
+            if (product.tags) {
+                product.tags.forEach(tag => {
+                    const tagEl = document.createElement('span');
+                    tagEl.className = 'px-3 py-1 bg-stone-100 text-stone-600 text-xs rounded-full uppercase tracking-wider font-medium';
+                    tagEl.textContent = tag;
+                    tagsContainer.appendChild(tagEl);
+                });
+            }
+
+            // Update Add Button
+            document.getElementById('modal-add-btn').onclick = () => {
+                addToCart(product.id);
+                closeProductModal();
+            };
+
+            // Show Modal
+            modal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden'; // Prevent scroll
+            lucide.createIcons();
+        }
+
+        function closeProductModal() {
+            document.getElementById('product-modal').classList.add('hidden');
+            document.body.style.overflow = ''; // Restore scroll
+        }
+
+        function updateModalImage(url, thumbBtn) {
+            const mainImg = document.getElementById('modal-main-image');
+            mainImg.style.opacity = '0';
+            
+            setTimeout(() => {
+                mainImg.src = url;
+                mainImg.style.opacity = '1';
+                
+                // Update active thumbnail border
+                document.querySelectorAll('#modal-thumbnails button').forEach(btn => {
+                    btn.classList.remove('border-rose-800');
+                    btn.classList.add('border-transparent');
+                });
+                thumbBtn.classList.add('border-rose-800');
+                thumbBtn.classList.remove('border-transparent');
+            }, 150);
         }
 
         function filterProducts(category) {
@@ -664,8 +818,8 @@
         }
 
         function addToCart(id) {
-            const product = products.find(p => p.id === id);
-            const existing = cart.find(item => item.id === id);
+            const product = products.find(p => String(p.id) === String(id));
+            const existing = cart.find(item => String(item.id) === String(id));
             
             if (existing) {
                 existing.quantity += 1;
@@ -678,12 +832,12 @@
         }
 
         function removeFromCart(id) {
-            cart = cart.filter(item => item.id !== id);
+            cart = cart.filter(item => String(item.id) !== String(id));
             updateCartUI();
         }
 
         function updateQuantity(id, change) {
-            const item = cart.find(i => i.id === id);
+            const item = cart.find(i => String(i.id) === String(id));
             if (item) {
                 item.quantity += change;
                 if (item.quantity <= 0) {
