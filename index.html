@@ -13,9 +13,9 @@
                 extend: {
                     fontFamily: { serif: ['"Playfair Display"', 'serif'], sans: ['"Lato"', 'sans-serif'] },
                     colors: {
-                        primary: { 50: 'rgb(var(--primary-50) / <alpha-value>)', 100: 'rgb(var(--primary-100) / <alpha-value>)', 200: 'rgb(var(--primary-200) / <alpha-value>)', 300: 'rgb(var(--primary-300) / <alpha-value>)', 400: 'rgb(var(--primary-400) / <alpha-value>)', 500: 'rgb(var(--primary-500) / <alpha-value>)', 600: 'rgb(var(--primary-600) / <alpha-value>)', 700: 'rgb(var(--primary-700) / <alpha-value>)', 800: 'rgb(var(--primary-800) / <alpha-value>)', 900: 'rgb(var(--primary-900) / <alpha-value>)' },
-                        secondary: { 50: 'rgb(var(--secondary-50) / <alpha-value>)', 100: 'rgb(var(--secondary-100) / <alpha-value>)', 200: 'rgb(var(--secondary-200) / <alpha-value>)', 300: 'rgb(var(--secondary-300) / <alpha-value>)', 400: 'rgb(var(--secondary-400) / <alpha-value>)', 500: 'rgb(var(--secondary-500) / <alpha-value>)', 600: 'rgb(var(--secondary-600) / <alpha-value>)', 700: 'rgb(var(--secondary-700) / <alpha-value>)', 800: 'rgb(var(--secondary-800) / <alpha-value>)', 900: 'rgb(var(--secondary-900) / <alpha-value>)' },
-                        neutral: { 50: 'rgb(var(--neutral-50) / <alpha-value>)', 100: 'rgb(var(--neutral-100) / <alpha-value>)', 200: 'rgb(var(--neutral-200) / <alpha-value>)', 300: 'rgb(var(--neutral-300) / <alpha-value>)', 400: 'rgb(var(--neutral-400) / <alpha-value>)', 500: 'rgb(var(--neutral-500) / <alpha-value>)', 600: 'rgb(var(--neutral-600) / <alpha-value>)', 700: 'rgb(var(--neutral-700) / <alpha-value>)', 800: 'rgb(var(--neutral-800) / <alpha-value>)', 900: 'rgb(var(--neutral-900) / <alpha-value>)' }
+                        primary: { 50: '255 241 242', 100: '255 228 230', 200: '254 205 211', 300: '253 164 175', 400: '251 113 133', 500: '244 63 94', 600: '225 29 72', 700: '190 18 60', 800: '159 18 57', 900: '136 19 55' },
+                        secondary: { 50: '240 253 244', 100: '220 252 231', 200: '187 247 208', 300: '134 239 172', 400: '74 222 128', 500: '34 197 94', 600: '22 163 74', 700: '21 128 61', 800: '22 101 52', 900: '20 83 45' },
+                        neutral: { 50: '250 250 249', 100: '245 245 244', 200: '231 229 228', 300: '214 211 209', 400: '168 162 158', 500: '120 113 108', 600: '87 83 78', 700: '68 64 60', 800: '41 37 36', 900: '28 25 23' }
                     }
                 }
             }
@@ -26,112 +26,115 @@
         .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
         .fade-in { animation: fadeIn 0.5s ease-in-out; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-        :root[data-theme="blossom"] {
-            --primary-50: 255 241 242; --primary-100: 255 228 230; --primary-200: 254 205 211; --primary-300: 253 164 175; --primary-400: 251 113 133; --primary-500: 244 63 94; --primary-600: 225 29 72; --primary-700: 190 18 60; --primary-800: 159 18 57; --primary-900: 136 19 55;
-            --secondary-50: 240 253 244; --secondary-100: 220 252 231; --secondary-200: 187 247 208; --secondary-300: 134 239 172; --secondary-400: 74 222 128; --secondary-500: 34 197 94; --secondary-600: 22 163 74; --secondary-700: 21 128 61; --secondary-800: 22 101 52; --secondary-900: 20 83 45;
-            --neutral-50: 250 250 249; --neutral-100: 245 245 244; --neutral-200: 231 229 228; --neutral-300: 214 211 209; --neutral-400: 168 162 158; --neutral-500: 120 113 108; --neutral-600: 87 83 78; --neutral-700: 68 64 60; --neutral-800: 41 37 36; --neutral-900: 28 25 23;
-        }
-        :root[data-theme="ocean"] {
-            --primary-50: 240 249 255; --primary-100: 224 242 254; --primary-200: 186 230 253; --primary-300: 125 211 252; --primary-400: 56 189 248; --primary-500: 14 165 233; --primary-600: 2 132 199; --primary-700: 3 105 161; --primary-800: 7 89 133; --primary-900: 12 74 110;
-            --secondary-50: 240 253 250; --secondary-100: 204 251 241; --secondary-200: 153 246 228; --secondary-300: 94 234 212; --secondary-400: 45 212 191; --secondary-500: 20 184 166; --secondary-600: 13 148 136; --secondary-700: 15 118 110; --secondary-800: 17 94 89; --secondary-900: 19 78 74;
-            --neutral-50: 248 250 252; --neutral-100: 241 245 249; --neutral-200: 226 232 240; --neutral-300: 203 213 225; --neutral-400: 148 163 184; --neutral-500: 100 116 139; --neutral-600: 71 85 105; --neutral-700: 51 65 85; --neutral-800: 30 41 59; --neutral-900: 15 23 42;
-        }
-        :root[data-theme="luxury"] {
-            --primary-50: 255 251 235; --primary-100: 254 243 199; --primary-200: 253 230 138; --primary-300: 252 211 77; --primary-400: 251 191 36; --primary-500: 245 158 11; --primary-600: 217 119 6; --primary-700: 180 83 9; --primary-800: 146 64 14; --primary-900: 120 53 15;
-            --secondary-50: 236 253 245; --secondary-100: 209 250 229; --secondary-200: 167 243 208; --secondary-300: 110 231 183; --secondary-400: 52 211 153; --secondary-500: 16 185 129; --secondary-600: 5 150 105; --secondary-700: 4 120 87; --secondary-800: 6 95 70; --secondary-900: 6 78 59;
-            --neutral-50: 249 250 251; --neutral-100: 243 244 246; --neutral-200: 229 231 235; --neutral-300: 209 213 219; --neutral-400: 156 163 175; --neutral-500: 107 114 128; --neutral-600: 75 85 99; --neutral-700: 55 65 81; --neutral-800: 31 41 55; --neutral-900: 17 24 39;
-        }
+        :root[data-theme="blossom"] { --primary: 159 18 57; }
+        :root[data-theme="ocean"] { --primary: 2 132 199; }
+        :root[data-theme="luxury"] { --primary: 180 83 9; }
     </style>
 </head>
-<body class="font-sans text-neutral-800 bg-neutral-50 antialiased flex flex-col min-h-screen">
-    <div id="toast" class="fixed top-24 right-5 bg-neutral-900 text-white px-6 py-4 rounded shadow-lg transform translate-x-full transition-transform duration-300 z-50 flex items-center gap-3">
+<body class="font-sans text-stone-800 bg-stone-50 antialiased flex flex-col min-h-screen">
+    <div id="toast" class="fixed top-24 right-5 bg-stone-900 text-white px-6 py-4 rounded shadow-lg transform translate-x-full transition-transform duration-300 z-50 flex items-center gap-3">
         <span id="toast-icon-container"><i data-lucide="check-circle" class="w-5 h-5 text-secondary-500"></i></span>
         <span id="toast-message"></span>
     </div>
 
-    <nav class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-neutral-100 shadow-sm h-24 flex items-center">
-        <div class="max-w-7xl mx-auto px-4 w-full flex justify-between items-center">
+    <nav class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-stone-100 shadow-sm h-24 flex items-center px-4">
+        <div class="max-w-7xl mx-auto w-full flex justify-between items-center">
             <div class="flex items-center cursor-pointer gap-3" onclick="navigateToPage('home')">
-                <div class="h-16 w-16 rounded-lg border flex items-center justify-center bg-white font-serif text-2xl font-bold">UC</div>
-                <div class="hidden sm:block leading-none"><span class="block font-serif text-xl font-bold">Unique Creations</span><span class="block text-sm text-primary-800 tracking-widest uppercase mt-1">By Lisa C.</span></div>
+                <div class="h-14 w-14 rounded-lg border border-stone-100 flex items-center justify-center bg-white font-serif text-xl font-bold">UC</div>
+                <div class="hidden sm:block leading-none"><span class="block font-serif text-lg font-bold">Unique Creations</span><span class="block text-[10px] text-rose-800 tracking-widest uppercase mt-1">By Lisa C.</span></div>
             </div>
-            <div class="hidden md:flex space-x-8">
-                <button onclick="navigateToPage('home')" class="hover:text-primary-800 font-medium uppercase text-sm">Home</button>
-                <button onclick="navigateToPage('shop')" class="hover:text-primary-800 font-medium uppercase text-sm">Shop</button>
-                <button onclick="navigateToPage('about')" class="hover:text-primary-800 font-medium uppercase text-sm">About</button>
-                <button onclick="navigateToPage('contact')" class="hover:text-primary-800 font-medium uppercase text-sm">Contact</button>
+            <div class="hidden md:flex space-x-8 text-sm font-bold uppercase tracking-widest">
+                <button onclick="navigateToPage('home')" class="hover:text-rose-800">Home</button>
+                <button onclick="navigateToPage('shop')" class="hover:text-rose-800">Shop</button>
+                <button onclick="navigateToPage('about')" class="hover:text-rose-800">About</button>
+                <button onclick="navigateToPage('contact')" class="hover:text-rose-800">Contact</button>
             </div>
-            <div class="flex items-center gap-4">
-                <button onclick="toggleCart()" class="relative p-2 hover:bg-neutral-50 rounded-full">
-                    <i data-lucide="shopping-bag" class="w-6 h-6"></i>
-                    <span id="cart-count" class="absolute top-0 right-0 bg-primary-800 text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full opacity-0">0</span>
-                </button>
-            </div>
+            <button onclick="toggleCart()" class="relative p-2 hover:bg-stone-50 rounded-full"><i data-lucide="shopping-bag" class="w-6 h-6"></i><span id="cart-count" class="absolute top-0 right-0 bg-rose-800 text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full opacity-0">0</span></button>
         </div>
     </nav>
 
     <main class="flex-grow">
         <div id="view-home" class="page-view py-20 px-4 max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-12">
             <div class="md:w-1/2">
-                <h1 class="text-5xl font-serif font-bold text-neutral-900 mb-6">Handcrafted with <span class="text-primary-800 italic">elegance & intention.</span></h1>
-                <p class="text-lg text-neutral-600 mb-8">Specializing in intricate chainmail and beadwork that tells your story.</p>
-                <button onclick="navigateToPage('shop')" class="px-8 py-3 bg-neutral-900 text-white rounded font-medium">Shop Now</button>
+                <h1 class="text-6xl font-serif font-bold text-stone-900 mb-6 leading-tight">Handcrafted with <span class="text-rose-800 italic">intention.</span></h1>
+                <p class="text-lg text-stone-600 mb-8 max-w-md">Exquisite chainmail and artisan jewelry designed for elegance and durability.</p>
+                <button onclick="navigateToPage('shop')" class="px-10 py-4 bg-stone-900 text-white rounded-md font-bold uppercase tracking-widest hover:bg-rose-800 transition-colors">Enter Shop</button>
             </div>
-            <div class="md:w-1/2"><img src="https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=800&q=80" class="rounded-lg shadow-xl h-96 w-full object-cover"></div>
+            <div class="md:w-1/2 relative"><div class="absolute -inset-4 bg-rose-50 rounded-full blur-3xl opacity-50"></div><img src="https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=800&q=80" class="relative rounded-lg shadow-2xl h-[500px] w-full object-cover"></div>
         </div>
 
         <div id="view-shop" class="page-view hidden py-16 px-4">
             <div class="max-w-7xl mx-auto">
-                <h2 class="text-3xl font-serif font-bold text-center mb-12 uppercase tracking-widest text-neutral-900">Collections</h2>
-                <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"></div>
+                <div class="flex flex-col items-center mb-16">
+                    <span class="text-rose-800 font-bold uppercase text-[10px] tracking-[0.3em] mb-2">The Collection</span>
+                    <h2 class="text-4xl font-serif font-bold text-stone-900">Latest Creations</h2>
+                    <div class="w-20 h-1 bg-rose-800 mt-4"></div>
+                </div>
+                <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
+                    <div class="col-span-full text-center py-20"><i data-lucide="loader-2" class="w-8 h-8 animate-spin mx-auto text-rose-800"></i><p class="mt-2 text-stone-500">Loading catalog...</p></div>
+                </div>
             </div>
+        </div>
+
+        <div id="view-about" class="page-view hidden py-20 px-4 text-center max-w-3xl mx-auto">
+            <h2 class="text-4xl font-serif font-bold mb-6">Meet Lisa C.</h2>
+            <p class="text-lg text-stone-600">Handcrafting elegance since 2023.</p>
+        </div>
+        <div id="view-contact" class="page-view hidden py-20 px-4 text-center max-w-3xl mx-auto">
+            <h2 class="text-4xl font-serif font-bold mb-6">Get in Touch</h2>
+            <p class="text-lg text-stone-600">Email us at: <a href="mailto:sales@uniquecreationsbylisac.com" class="text-rose-800 font-bold">sales@uniquecreationsbylisac.com</a></p>
         </div>
     </main>
 
     <div id="cart-sidebar" class="fixed inset-0 z-50 pointer-events-none transition-all">
-        <div id="cart-overlay" class="absolute inset-0 bg-neutral-900/75 opacity-0 transition-opacity" onclick="toggleCart()"></div>
-        <div id="cart-panel" class="absolute inset-y-0 right-0 w-full max-w-md bg-white shadow-xl transform translate-x-full transition-transform flex flex-col pointer-events-auto">
-            <div class="p-6 border-b flex justify-between items-center"><h2 class="text-xl font-serif font-bold">Shopping Bag</h2><button onclick="toggleCart()"><i data-lucide="x" class="w-6 h-6"></i></button></div>
-            <div id="cart-items-container" class="flex-1 overflow-y-auto p-6"></div>
-            <div class="p-6 bg-neutral-50 border-t space-y-4">
-                <div class="flex justify-between font-bold text-xl"><span>Total</span><span id="cart-total">$0.00</span></div>
-                <button class="w-full py-4 bg-neutral-900 text-white rounded font-bold uppercase tracking-widest">Checkout</button>
+        <div id="cart-overlay" class="absolute inset-0 bg-stone-900/60 opacity-0 transition-opacity" onclick="toggleCart()"></div>
+        <div id="cart-panel" class="absolute inset-y-0 right-0 w-full max-w-md bg-white shadow-2xl transform translate-x-full transition-transform flex flex-col pointer-events-auto">
+            <div class="p-8 border-b flex justify-between items-center"><h2 class="text-2xl font-serif font-bold">Your Bag</h2><button onclick="toggleCart()"><i data-lucide="x" class="w-6 h-6"></i></button></div>
+            <div id="cart-items-container" class="flex-1 overflow-y-auto p-8 space-y-8"></div>
+            <div class="p-8 bg-stone-50 border-t space-y-6">
+                <div class="flex justify-between font-bold text-xl font-serif"><span>Subtotal</span><span id="cart-total">$0.00</span></div>
+                <button class="w-full py-5 bg-stone-900 text-white rounded-md font-bold uppercase tracking-widest hover:bg-rose-800 transition-colors">Checkout</button>
             </div>
         </div>
     </div>
 
     <div id="product-modal" class="fixed inset-0 z-50 overflow-y-auto hidden">
         <div class="flex items-center justify-center min-h-screen p-4">
-            <div class="fixed inset-0 bg-neutral-900/80 transition-opacity" onclick="closeProductModal()"></div>
-            <div class="relative bg-white rounded-lg shadow-2xl max-w-5xl w-full overflow-hidden flex flex-col md:flex-row">
-                <button onclick="closeProductModal()" class="absolute top-4 right-4 z-10 p-2 hover:bg-neutral-100 rounded-full"><i data-lucide="x" class="w-6 h-6"></i></button>
-                <div class="md:w-1/2 p-6 bg-stone-50 flex flex-col">
-                    <img id="modal-main-image" src="" class="w-full aspect-square object-cover rounded shadow-md">
-                    <div id="modal-thumbnails" class="flex gap-2 mt-4 overflow-x-auto pb-2 scrollbar-hide"></div>
+            <div class="fixed inset-0 bg-stone-900/90 transition-opacity" onclick="closeProductModal()"></div>
+            <div class="relative bg-white rounded-lg shadow-2xl max-w-6xl w-full overflow-hidden flex flex-col md:flex-row min-h-[600px]">
+                <button onclick="closeProductModal()" class="absolute top-6 right-6 z-10 p-2 hover:bg-stone-100 rounded-full"><i data-lucide="x" class="w-6 h-6 text-stone-400"></i></button>
+                <div class="md:w-3/5 p-8 bg-stone-100 flex flex-col">
+                    <div class="flex-grow flex items-center justify-center">
+                        <img id="modal-main-image" src="" class="max-w-full max-h-[500px] object-contain rounded shadow-lg">
+                    </div>
+                    <div id="modal-thumbnails" class="flex gap-3 mt-8 overflow-x-auto pb-4 scrollbar-hide justify-center"></div>
                 </div>
-                <div class="md:w-1/2 p-8 flex flex-col bg-white">
+                <div class="md:w-2/5 p-10 flex flex-col bg-white">
                     <div class="flex-grow">
-                        <h2 id="modal-title-text" class="text-3xl font-serif font-bold text-neutral-900 mb-2"></h2>
-                        <p id="modal-price" class="text-2xl font-medium text-neutral-900 mb-8"></p>
-                        <div id="modal-options-container" class="space-y-6 mb-8"></div>
-                        <div class="prose prose-neutral">
-                            <h4 class="text-[10px] font-bold uppercase text-neutral-400 tracking-widest mb-2 border-b pb-1">Product Details</h4>
-                            <p id="modal-description" class="text-neutral-600 text-sm whitespace-pre-line leading-relaxed h-48 overflow-y-auto pr-2 scrollbar-hide"></p>
+                        <span id="modal-category" class="text-[10px] font-bold text-rose-800 uppercase tracking-[0.2em] mb-2 block"></span>
+                        <h2 id="modal-title-text" class="text-4xl font-serif font-bold text-stone-900 mb-2 leading-tight"></h2>
+                        <p id="modal-price" class="text-2xl text-stone-900 mb-8"></p>
+                        
+                        <div id="modal-options-container" class="space-y-8 mb-10"></div>
+                        
+                        <div class="border-t border-stone-100 pt-8 mt-auto">
+                            <h4 class="text-[10px] font-bold uppercase text-stone-400 tracking-widest mb-4">Product Details</h4>
+                            <div id="modal-description" class="text-stone-600 text-sm whitespace-pre-wrap leading-relaxed max-h-64 overflow-y-auto pr-4 scrollbar-hide"></div>
                         </div>
                     </div>
-                    <button id="modal-add-btn" class="w-full py-4 bg-neutral-900 text-white font-bold uppercase tracking-widest rounded-md mt-8">Add to Bag</button>
+                    <button id="modal-add-btn" class="w-full py-5 bg-stone-900 text-white font-bold uppercase tracking-[0.2em] rounded-md mt-10 hover:bg-rose-800 shadow-xl transition-all active:scale-95">Add to Shopping Bag</button>
                 </div>
             </div>
         </div>
     </div>
 
     <script>
-        let products = []; let cart = []; let isCartOpen = false;
+        let products = []; let cart = [];
 
         document.addEventListener('DOMContentLoaded', async () => {
             lucide.createIcons();
             await fetchCatalog();
-            renderProducts('all');
+            renderProducts();
             updateCartUI();
         });
 
@@ -140,28 +143,30 @@
                 const response = await fetch('/api/square-inventory');
                 const data = await response.json();
                 if (data.objects) {
-                    const imageMap = {};
-                    const optionMap = {};
-                    
-                    if (data.related_objects) {
-                        data.related_objects.forEach(o => {
-                            if (o.type === 'IMAGE') imageMap[o.id] = o.image_data.url;
-                            if (o.type === 'ITEM_OPTION') optionMap[o.id] = o.item_option_data;
-                        });
-                    }
+                    const imgMap = {}; const optMap = {}; const modMap = {};
+                    (data.related_objects || []).forEach(o => {
+                        if (o.type === 'IMAGE') imgMap[o.id] = o.image_data.url;
+                        if (o.type === 'ITEM_OPTION') optMap[o.id] = o.item_option_data;
+                        if (o.type === 'MODIFIER_LIST') modMap[o.id] = o.modifier_list_data;
+                    });
 
                     products = data.objects.filter(o => o.type === 'ITEM').map(item => {
                         const d = item.item_data;
-                        const allImg = [...(d.image_ids || [])];
-                        d.variations.forEach(v => { if (v.item_variation_data.image_ids) allImg.push(...v.item_variation_data.image_ids); });
+                        const allImgIds = [...(d.image_ids || [])];
+                        d.variations.forEach(v => { if (v.item_variation_data.image_ids) allImgIds.push(...v.item_variation_data.image_ids); });
                         
+                        const modifiers = (d.modifier_list_info || []).map(m => {
+                            const detail = modMap[m.modifier_list_id];
+                            return detail ? { ...detail, id: m.modifier_list_id } : null;
+                        }).filter(Boolean);
+
                         return {
-                            id: item.id, name: d.name, variations: d.variations, 
-                            modifiers: d.modifier_lists || [], 
-                            options: (d.item_options || []).map(o => ({ id: o.item_option_id, ...optionMap[o.item_option_id] })),
-                            image: imageMap[allImg[0]] || "https://images.unsplash.com/photo-1611591437281-460bfbe1220a?auto=format&fit=crop&w=500&q=80",
-                            images: [...new Set(allImg)].map(id => imageMap[id]).filter(Boolean),
-                            desc: d.description || "Handcrafted with intention."
+                            id: item.id, name: d.name, variations: d.variations, modifiers, 
+                            image: imgMap[allImgIds[0]] || "https://images.unsplash.com/photo-1611591437281-460bfbe1220a?auto=format&fit=crop&w=500&q=80",
+                            images: [...new Set(allImgIds)].map(id => imgMap[id]).filter(Boolean),
+                            imgLookup: d.variations.reduce((acc, v) => { if (v.item_variation_data.image_ids) acc[v.id] = imgMap[v.item_variation_data.image_ids[0]]; return acc; }, {}),
+                            desc: d.description || "Handcrafted with elegance and intention.",
+                            category: d.name.toLowerCase().includes("necklace") ? "necklaces" : d.name.toLowerCase().includes("earring") ? "earrings" : "bracelets"
                         };
                     });
                 }
@@ -172,13 +177,12 @@
             const grid = document.getElementById('product-grid'); grid.innerHTML = '';
             products.forEach(p => {
                 const div = document.createElement('div');
-                div.className = 'group bg-white rounded-lg border border-neutral-100 overflow-hidden flex flex-col shadow-sm hover:shadow-xl transition-all cursor-pointer';
+                div.className = 'group bg-white rounded-lg border border-stone-100 overflow-hidden flex flex-col shadow-sm hover:shadow-2xl transition-all cursor-pointer';
                 div.onclick = () => openProductModal(p.id);
-                div.innerHTML = `<div class="h-80 relative overflow-hidden"><img src="${p.image}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"></div>
-                    <div class="p-6">
-                        <h3 class="font-serif text-lg text-neutral-900">${p.name}</h3>
-                        <p class="font-medium text-neutral-900">$${(p.variations[0].item_variation_data.price_money.amount/100).toFixed(2)}</p>
-                    </div>`;
+                div.innerHTML = `<div class="h-[400px] overflow-hidden"><img src="${p.image}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-[1.5s]"></div>
+                    <div class="p-8"><span class="text-[9px] font-bold text-rose-800 uppercase tracking-[0.3em] mb-2 block">${p.category}</span>
+                    <h3 class="font-serif text-xl text-stone-900 mb-1">${p.name}</h3>
+                    <p class="font-medium text-stone-500">$${(p.variations[0].item_variation_data.price_money.amount/100).toFixed(2)}</p></div>`;
                 grid.appendChild(div);
             });
             lucide.createIcons();
@@ -187,47 +191,40 @@
         function openProductModal(id) {
             const p = products.find(prod => prod.id === id); if (!p) return;
             document.getElementById('modal-title-text').textContent = p.name;
+            document.getElementById('modal-category').textContent = p.category;
             document.getElementById('modal-description').textContent = p.desc;
             document.getElementById('modal-main-image').src = p.image;
             
-            const opt = document.getElementById('modal-options-container'); opt.innerHTML = '';
+            const container = document.getElementById('modal-options-container'); container.innerHTML = '';
             
-            // 1. SIZE/VARIATION
             if (p.variations.length > 1) {
                 const div = document.createElement('div');
-                div.innerHTML = `<label class="text-[10px] font-bold text-neutral-400 uppercase tracking-widest block mb-2">Size / Style <span class="text-primary-800">*</span></label>
-                    <select id="modal-var-select" onchange="updateModalPrice('${id}')" class="w-full p-3 border rounded-md text-sm bg-white outline-none">
+                div.innerHTML = `<label class="text-[10px] font-bold text-stone-400 uppercase tracking-widest block mb-3">Select Size <span class="text-rose-800">*</span></label>
+                    <select id="modal-var-select" onchange="updateModalPrice('${id}')" class="w-full p-4 border border-stone-200 rounded text-sm bg-white outline-none focus:border-rose-800">
                         ${p.variations.map(v => `<option value="${v.id}">${v.item_variation_data.name} - $${(v.item_variation_data.price_money.amount/100).toFixed(2)}</option>`).join('')}
                     </select>`;
-                opt.appendChild(div);
+                container.appendChild(div);
             }
 
-            // 2. ITEM OPTIONS (The Colors!)
-            p.options.forEach(o => {
-                const div = document.createElement('div');
-                div.innerHTML = `<label class="text-[10px] font-bold text-neutral-400 uppercase tracking-widest block mb-2">${o.display_name} <span class="text-primary-800">*</span></label>
-                    <select class="modal-opt-select w-full p-3 border rounded-md text-sm bg-white outline-none">
-                        <option value="">Select ${o.name}...</option>
-                        ${o.values.map(val => `<option value="${val.id}">${val.item_option_value_data.name}</option>`).join('')}
-                    </select>`;
-                opt.appendChild(div);
-            });
-
-            // 3. MODIFIERS
             p.modifiers.forEach(m => {
                 const div = document.createElement('div');
-                div.innerHTML = `<label class="text-[10px] font-bold text-neutral-400 uppercase tracking-widest block mb-2">${m.modifier_list_data.name} <span class="text-primary-800">*</span></label>
-                    <select class="modal-mod-select w-full p-3 border rounded-md text-sm bg-white outline-none">
-                        <option value="">Select custom...</option>
-                        ${m.modifier_list_data.modifiers.map(mod => `<option value="${mod.id}">${mod.modifier_data.name}</option>`).join('')}
-                    </select>`;
-                opt.appendChild(div);
+                const isMulti = m.selection_type === 'MULTIPLE' || (m.max_selected_slots && m.max_selected_slots > 1);
+                div.innerHTML = `<label class="text-[10px] font-bold text-stone-400 uppercase tracking-widest block mb-3">${m.name} ${isMulti ? '(Select up to ' + (m.max_selected_slots || 2) + ')' : ''} <span class="text-rose-800">*</span></label>
+                    <div class="grid grid-cols-2 gap-2 max-h-48 overflow-y-auto pr-2 scrollbar-hide">
+                        ${m.modifiers.map(mod => `
+                            <label class="flex items-center gap-3 p-3 border border-stone-100 rounded hover:bg-stone-50 cursor-pointer transition-colors">
+                                <input type="${isMulti ? 'checkbox' : 'radio'}" name="mod-${m.id}" value="${mod.id}" data-name="${mod.name}" data-max="${m.max_selected_slots || 99}" class="modal-mod-input rounded text-rose-800 focus:ring-rose-800" onchange="handleModifierLimit(this)">
+                                <span class="text-xs text-stone-600 font-medium">${mod.name}</span>
+                            </label>
+                        `).join('')}
+                    </div>`;
+                container.appendChild(div);
             });
 
             const thumbs = document.getElementById('modal-thumbnails'); thumbs.innerHTML = '';
             p.images.forEach(url => {
-                const b = document.createElement('button'); b.className = "w-20 h-20 rounded border flex-shrink-0";
-                b.innerHTML = `<img src="${url}" class="w-full h-full object-cover rounded">`;
+                const b = document.createElement('button'); b.className = "w-20 h-20 rounded border-2 border-transparent hover:border-rose-800 flex-shrink-0 transition-all overflow-hidden";
+                b.innerHTML = `<img src="${url}" class="w-full h-full object-cover">`;
                 b.onclick = () => { document.getElementById('modal-main-image').src = url; };
                 thumbs.appendChild(b);
             });
@@ -239,11 +236,22 @@
             lucide.createIcons();
         }
 
+        function handleModifierLimit(input) {
+            const name = input.name;
+            const max = parseInt(input.dataset.max);
+            const checked = document.querySelectorAll(`input[name="${name}"]:checked`);
+            if (checked.length > max) {
+                input.checked = false;
+                showToast(`You can only select up to ${max} colors`, true);
+            }
+        }
+
         function updateModalPrice(id) {
             const p = products.find(prod => prod.id === id);
             const vid = document.getElementById('modal-var-select')?.value || p.variations[0].id;
             const v = p.variations.find(v => v.id === vid);
             document.getElementById('modal-price').textContent = `$${(v.item_variation_data.price_money.amount/100).toFixed(2)}`;
+            if (p.imgLookup[vid]) document.getElementById('modal-main-image').src = p.imgLookup[vid];
         }
 
         function addToBag(id) {
@@ -251,38 +259,37 @@
             const vid = document.getElementById('modal-var-select')?.value || p.variations[0].id;
             const v = p.variations.find(varObj => varObj.id === vid);
             
-            const selects = [...document.querySelectorAll('.modal-opt-select'), ...document.querySelectorAll('.modal-mod-select')];
-            for (let s of selects) { if (!s.value) { showToast("Please select required options", true); return; } }
+            const selectedMods = Array.from(document.querySelectorAll('.modal-mod-input:checked')).map(i => i.dataset.name);
+            if (p.modifiers.length > 0 && selectedMods.length === 0) { showToast("Please select your color(s)", true); return; }
             
-            const opts = selects.map(s => s.options[s.selectedIndex].text);
-            const cid = `${id}-${vid}-${opts.join('-')}`;
-            const ex = cart.find(i => i.cid === cid);
-            if (ex) { ex.qty++; } else {
-                cart.push({ cid, id, name: p.name, vname: v.item_variation_data.name, price: v.item_variation_data.price_money.amount/100, image: p.image, qty: 1, opts });
+            const cid = `${id}-${vid}-${selectedMods.sort().join('-')}`;
+            const existing = cart.find(i => i.cid === cid);
+            if (existing) { existing.qty++; } else {
+                cart.push({ cid, id, name: p.name, vname: v.item_variation_data.name, price: v.item_variation_data.price_money.amount/100, image: p.imgLookup[vid] || p.image, qty: 1, mods: selectedMods });
             }
             showToast(`Added ${p.name} to bag`);
             updateCartUI(); closeProductModal();
         }
 
         function updateCartUI() {
-            const sub = cart.reduce((s, i) => s + (i.price * i.qty), 0);
-            document.getElementById('cart-total').textContent = `$${sub.toFixed(2)}`;
-            const count = cart.reduce((s, i) => s + i.qty, 0);
-            document.getElementById('cart-count').textContent = count;
-            document.getElementById('cart-count').classList.toggle('opacity-0', count === 0);
+            const total = cart.reduce((s, i) => s + (i.price * i.qty), 0);
+            document.getElementById('cart-total').textContent = `$${total.toFixed(2)}`;
+            document.getElementById('cart-count').textContent = cart.reduce((s, i) => s + i.qty, 0);
+            document.getElementById('cart-count').classList.toggle('opacity-0', cart.length === 0);
             const cont = document.getElementById('cart-items-container');
-            if (cart.length === 0) { cont.innerHTML = '<p class="text-center text-neutral-400 py-10">Empty.</p>'; }
+            if (cart.length === 0) { cont.innerHTML = '<p class="text-center text-stone-400 py-10 font-serif italic">Your bag is empty.</p>'; }
             else {
-                cont.innerHTML = cart.map(i => `<div class="flex gap-4 py-4 border-b">
-                    <img src="${i.image}" class="h-16 w-16 object-cover rounded">
-                    <div class="flex-1"><p class="font-bold text-sm">${i.name}</p><p class="text-[10px] text-neutral-500">${i.vname} ${i.opts.length ? '· ' + i.opts.join(', ') : ''}</p><div class="flex justify-between items-center mt-2"><span class="text-sm">$${i.price.toFixed(2)}</span><button onclick="removeFromCart('${i.cid}')" class="text-xs text-primary-800 font-bold">Remove</button></div></div>
+                cont.innerHTML = cart.map(i => `<div class="flex gap-6 py-4 border-b border-stone-50">
+                    <img src="${i.image}" class="h-20 w-20 object-cover rounded shadow-sm">
+                    <div class="flex-1"><p class="font-bold text-sm text-stone-900">${i.name}</p><p class="text-[10px] text-stone-400 uppercase tracking-widest mt-1">${i.vname} ${i.mods.length ? '· ' + i.mods.join(', ') : ''}</p>
+                    <div class="flex justify-between items-center mt-4"><span class="text-sm font-bold">$${i.price.toFixed(2)}</span><button onclick="removeFromCart('${i.cid}')" class="text-[10px] font-bold uppercase text-rose-800 underline">Remove</button></div></div>
                 </div>`).join('');
             }
         }
 
         function removeFromCart(cid) { cart = cart.filter(i => i.cid !== cid); updateCartUI(); }
         function toggleCart() { const s = document.getElementById('cart-sidebar'); const o = document.getElementById('cart-overlay'); const p = document.getElementById('cart-panel'); isCartOpen = !isCartOpen; s.classList.toggle('pointer-events-none', !isCartOpen); o.classList.toggle('opacity-0', !isCartOpen); p.classList.toggle('translate-x-full', !isCartOpen); }
-        function navigateToPage(id) { document.querySelectorAll('.page-view').forEach(v => v.classList.add('hidden')); document.getElementById(`view-${id}`).classList.remove('hidden'); window.scrollTo(0,0); }
+        function navigateToPage(id) { document.querySelectorAll('.page-view').forEach(v => v.classList.add('hidden')); const t = document.getElementById(`view-${id}`); if (t) t.classList.remove('hidden'); window.scrollTo(0,0); }
         function closeProductModal() { document.getElementById('product-modal').classList.add('hidden'); document.body.style.overflow = ''; }
         function showToast(m, isErr = false) { const t = document.getElementById('toast'); document.getElementById('toast-message').textContent = m; document.getElementById('toast-icon-container').innerHTML = isErr ? '<i data-lucide="alert-circle" class="w-5 h-5 text-red-500"></i>' : '<i data-lucide="check-circle" class="w-5 h-5 text-secondary-500"></i>'; lucide.createIcons(); t.classList.remove('translate-x-full'); setTimeout(() => t.classList.add('translate-x-full'), 3000); }
         function setTheme(t) { document.documentElement.setAttribute('data-theme', t); localStorage.setItem('theme', t); }

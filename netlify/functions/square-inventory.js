@@ -6,14 +6,18 @@ export default async (req, context) => {
   const baseUrl = isSandbox ? "https://connect.squareupsandbox.com" : "https://connect.squareup.com";
 
   try {
-    // 1. Fetch Items, Images, Modifiers, Options, and Categories
-    const response = await fetch(`${baseUrl}/v2/catalog/list?types=ITEM,IMAGE,MODIFIER_LIST,ITEM_OPTION,CATEGORY`, {
-      method: "GET",
+    // 1. Use the Advanced Search API (Postman Pattern)
+    const response = await fetch(`${baseUrl}/v2/catalog/search`, {
+      method: "POST",
       headers: {
         "Authorization": `Bearer ${token}`,
         "Content-Type": "application/json",
         "Square-Version": "2023-10-20"
-      }
+      },
+      body: JSON.stringify({
+        object_types: ["ITEM"],
+        include_related_objects: true // This grabs ALL linked images, options, and modifiers
+      })
     });
 
     if (!response.ok) {
@@ -23,7 +27,7 @@ export default async (req, context) => {
 
     const data = await response.json();
 
-    // 2. Return the full payload for the frontend mapper
+    // 2. Return the full relational payload
     return new Response(JSON.stringify(data), {
       status: 200,
       headers: { 
@@ -32,7 +36,7 @@ export default async (req, context) => {
       }
     });
   } catch (error) {
-    console.error("Inventory Fetch Error:", error);
+    console.error("Advanced Search Fetch Error:", error);
     return new Response(JSON.stringify({ error: error.message }), { status: 500 });
   }
 };
