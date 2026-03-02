@@ -76,7 +76,7 @@
         </div>
     </main>
 
-    <div id="cart-sidebar" class="fixed inset-0 z-50 pointer-events-none transition-all">
+    <div id="cart-sidebar" class="fixed inset-0 z-50 pointer-events-none transition-all h-full">
         <div id="cart-overlay" class="absolute inset-0 bg-stone-900/60 opacity-0 transition-opacity" onclick="toggleCart()"></div>
         <div id="cart-panel" class="absolute inset-y-0 right-0 w-full max-w-md bg-white shadow-2xl transform translate-x-full transition-transform flex flex-col pointer-events-auto h-full">
             <div class="p-8 border-b flex justify-between items-center"><h2 class="text-2xl font-serif font-bold">Your Bag</h2><button onclick="toggleCart()"><i data-lucide="x" class="w-6 h-6"></i></button></div>
@@ -137,7 +137,17 @@
                     (data.related_objects || []).forEach(o => {
                         if (o.type === 'IMAGE') imgMap[o.id] = o.image_data.url;
                         if (o.type === 'ITEM_OPTION') optMap[o.id] = { id: o.id, ...o.item_option_data };
-                        if (o.type === 'MODIFIER_LIST') { modMap[o.id] = o.modifier_list_data; allModLists.push({ id: o.id, ...o.modifier_list_data }); }
+                        if (o.type === 'MODIFIER_LIST') { 
+                            // Add images to individual modifiers if they exist
+                            const detail = o.modifier_list_data;
+                            if (detail.modifiers) {
+                                detail.modifiers.forEach(m => {
+                                    if (m.modifier_data.image_id) m.modifier_data.image_url = imgMap[m.modifier_data.image_id];
+                                });
+                            }
+                            modMap[o.id] = detail; 
+                            allModLists.push({ id: o.id, ...detail }); 
+                        }
                     });
 
                     products = data.objects.filter(o => o.type === 'ITEM').map(item => {
@@ -150,8 +160,9 @@
                             return detail ? { ...detail, id: m.modifier_list_id } : null;
                         }).filter(Boolean);
 
-                        if (modifiers.length === 0 && d.name.includes("Full Persian")) {
-                            const colorList = allModLists.find(ml => ml.name && (ml.name.includes("Color") || ml.name.includes("Mardi")));
+                        // Global Search Fallback
+                        if (modifiers.length === 0 && d.name.toLowerCase().includes("full persian")) {
+                            const colorList = allModLists.find(ml => ml.name && (ml.name.toLowerCase().includes("color") || ml.name.toLowerCase().includes("custom")));
                             if (colorList) modifiers.push(colorList);
                         }
 
@@ -167,12 +178,12 @@
                         };
                     });
                 }
-            } catch (e) { console.error(e); }
+            } catch (e) { console.error("Mapper Error:", e); }
         }
 
         function renderProducts() {
             const grid = document.getElementById('product-grid'); grid.innerHTML = '';
-            if (products.length === 0) { grid.innerHTML = '<div class="col-span-full py-20 text-center font-serif italic text-stone-400">Syncing with Square...</div>'; return; }
+            if (products.length === 0) { grid.innerHTML = '<div class="col-span-full py-20 text-center font-serif italic text-stone-400">Syncing catalog...</div>'; return; }
             products.forEach(p => {
                 const div = document.createElement('div');
                 div.className = 'group bg-white rounded-lg border border-stone-100 overflow-hidden flex flex-col shadow-sm hover:shadow-2xl transition-all cursor-pointer';
@@ -195,37 +206,29 @@
             
             const container = document.getElementById('modal-options-container'); container.innerHTML = '';
             
-            // 1. Variations (Size / Style)
+            // 1. Variations (Size)
             if (p.variations.length > 1) {
                 const div = document.createElement('div');
-                div.innerHTML = `<label class="text-[10px] font-bold text-stone-400 uppercase tracking-widest block mb-3">Select Size <span class="text-rose-800">*</span></label>
-                    <select id="modal-var-select" onchange="updateModalState('${id}')" class="w-full p-4 border border-stone-200 rounded text-sm bg-white outline-none focus:border-rose-800">
+                div.innerHTML = `<label class="text-[10px] font-bold text-stone-400 uppercase tracking-widest block mb-3">Size <span class="text-rose-800">* Required</span></label>
+                    <select id="modal-var-select" onchange="updateModalState('${id}')" class="w-full p-4 border border-stone-200 rounded text-sm bg-white outline-none focus:border-rose-800 appearance-none">
                         ${p.variations.map(v => `<option value="${v.id}">${v.item_variation_data.name} - $${(v.item_variation_data.price_money.amount/100).toFixed(2)}</option>`).join('')}
                     </select>`;
                 container.appendChild(div);
             }
 
-            // 2. Formal Options (e.g. "Color" attribute)
-            p.options.forEach(o => {
-                const div = document.createElement('div');
-                div.innerHTML = `<label class="text-[10px] font-bold text-stone-400 uppercase tracking-widest block mb-3">${o.display_name} <span class="text-rose-800">*</span></label>
-                    <select class="modal-opt-select w-full p-4 border border-stone-200 rounded text-sm bg-white outline-none focus:border-rose-800">
-                        <option value="">Choose ${o.display_name}...</option>
-                        ${o.values.map(val => `<option value="${val.id}">${val.item_option_value_data.name}</option>`).join('')}
-                    </select>`;
-                container.appendChild(div);
-            });
-
-            // 3. Modifiers (Mardi Gras Love - Grid Mode)
+            // 2. Modifiers (Color Grid - Matching SquareUp Style)
             p.modifiers.forEach(m => {
                 const div = document.createElement('div');
                 const max = m.max_selected_slots || 2;
-                div.innerHTML = `<label class="text-[10px] font-bold text-stone-400 uppercase tracking-widest block mb-3">${m.name} (Pick up to ${max}) <span class="text-rose-800">*</span></label>
-                    <div class="grid grid-cols-2 gap-2">
+                div.innerHTML = `<div class="flex justify-between items-end mb-4 border-b pb-2"><label class="text-[10px] font-bold text-stone-900 uppercase tracking-widest">Select your custom colors</label><span class="text-[9px] text-rose-800 font-bold uppercase tracking-widest">Select up to ${max}</span></div>
+                    <div class="space-y-3">
                         ${m.modifiers.map(mod => `
-                            <label class="flex items-center gap-3 p-3 border border-stone-100 rounded hover:border-rose-200 cursor-pointer bg-stone-50/50">
-                                <input type="checkbox" name="mod-${m.id}" value="${mod.id}" data-name="${mod.modifier_data.name}" data-max="${max}" class="modal-mod-input rounded text-rose-800 focus:ring-rose-800" onchange="handleModifierLimit(this)">
-                                <span class="text-[11px] text-stone-600 font-bold uppercase tracking-tight">${mod.modifier_data.name}</span>
+                            <label class="flex items-center justify-between p-4 border border-stone-100 rounded-lg hover:border-rose-200 cursor-pointer bg-stone-50/30 transition-all group">
+                                <div class="flex items-center gap-4">
+                                    <input type="checkbox" name="mod-${m.id}" value="${mod.id}" data-name="${mod.modifier_data.name}" data-max="${max}" class="modal-mod-input w-5 h-5 rounded border-stone-300 text-stone-900 focus:ring-stone-900" onchange="handleModifierLimit(this)">
+                                    <span class="text-sm text-stone-700 font-medium group-hover:text-stone-900">${mod.modifier_data.name}</span>
+                                </div>
+                                ${mod.modifier_data.image_url ? `<img src="${mod.modifier_data.image_url}" class="w-12 h-12 object-cover rounded shadow-sm">` : ''}
                             </label>
                         `).join('')}
                     </div>`;
@@ -249,7 +252,7 @@
 
         function handleModifierLimit(input) {
             const checked = document.querySelectorAll(`input[name="${input.name}"]:checked`);
-            if (checked.length > parseInt(input.dataset.max)) { input.checked = false; showToast(`Limit reached`, true); }
+            if (checked.length > parseInt(input.dataset.max)) { input.checked = false; showToast(`You can only select up to ${input.dataset.max} colors`, true); }
         }
 
         function updateModalState(id) {
@@ -264,13 +267,9 @@
             const p = products.find(prod => prod.id === id);
             const vid = document.getElementById('modal-var-select')?.value || p.variations[0].id;
             const v = p.variations.find(varObj => varObj.id === vid);
-            
             const selectedMods = Array.from(document.querySelectorAll('.modal-mod-input:checked')).map(i => i.dataset.name);
-            const optSelects = document.querySelectorAll('.modal-opt-select');
-            for (let s of optSelects) { if (!s.value) { showToast("Please select required options", true); return; } }
             if (p.modifiers.length > 0 && selectedMods.length === 0) { showToast("Please select your color(s)", true); return; }
-            
-            const opts = [...Array.from(optSelects).map(s => s.options[s.selectedIndex].text), ...selectedMods];
+            const opts = [...selectedMods];
             const cid = `${id}-${vid}-${opts.sort().join('-')}`;
             const ex = cart.find(i => i.cid === cid);
             if (ex) { ex.qty++; } else {
