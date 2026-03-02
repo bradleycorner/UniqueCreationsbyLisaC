@@ -142,11 +142,14 @@
                 const response = await fetch('/api/square-inventory');
                 const data = await response.json();
                 if (data.objects) {
-                    const imgMap = {}; const optMap = {}; const modMap = {};
+                    const imgMap = {}; const optMap = {}; const modMap = {}; const allModLists = [];
                     (data.related_objects || []).forEach(o => {
                         if (o.type === 'IMAGE') imgMap[o.id] = o.image_data.url;
                         if (o.type === 'ITEM_OPTION') optMap[o.id] = o.item_option_data;
-                        if (o.type === 'MODIFIER_LIST') modMap[o.id] = o.modifier_list_data;
+                        if (o.type === 'MODIFIER_LIST') {
+                            modMap[o.id] = o.modifier_list_data;
+                            allModLists.push({ id: o.id, ...o.modifier_list_data });
+                        }
                     });
 
                     products = data.objects.filter(o => o.type === 'ITEM').map(item => {
@@ -154,6 +157,18 @@
                         const allImgIds = [...(d.image_ids || [])];
                         d.variations.forEach(v => { if (v.item_variation_data.image_ids) allImgIds.push(...v.item_variation_data.image_ids); });
                         
+                        // DEEP SCAN: Find explicitly linked modifiers OR grab global ones if needed
+                        let modifiers = (d.modifier_list_info || []).map(m => {
+                            const detail = modMap[m.modifier_list_id];
+                            return detail ? { ...detail, id: m.modifier_list_id } : null;
+                        }).filter(Boolean);
+
+                        // Fallback: If no explicit modifiers, but it's the Full Persian, force-attach the color list if we found one in related objects
+                        if (modifiers.length === 0 && d.name.includes("Full Persian")) {
+                            const colorList = allModLists.find(ml => ml.name && (ml.name.includes("Color") || ml.name.includes("Mardi")));
+                            if (colorList) modifiers.push(colorList);
+                        }
+
                         const category = d.name.toLowerCase().includes("necklace") ? "necklaces" : d.name.toLowerCase().includes("earring") ? "earrings" : "bracelets";
                         
                         console.log(`Square Item: ${d.name}`, {

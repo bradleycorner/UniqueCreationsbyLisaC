@@ -7,7 +7,7 @@ export default async (req, context) => {
 
   try {
     // Reverting to the stable GET request that we know returns data
-    const response = await fetch(`${baseUrl}/v2/catalog/list?types=ITEM,IMAGE,MODIFIER_LIST,ITEM_OPTION,CATEGORY`, {
+    const response = await fetch(`${baseUrl}/v2/catalog/list?types=ITEM,IMAGE,MODIFIER_LIST,MODIFIER,ITEM_OPTION,ITEM_OPTION_VAL,CATEGORY`, {
       method: "GET",
       headers: {
         "Authorization": `Bearer ${token}`,
