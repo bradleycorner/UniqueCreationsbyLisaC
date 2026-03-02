@@ -6,18 +6,14 @@ export default async (req, context) => {
   const baseUrl = isSandbox ? "https://connect.squareupsandbox.com" : "https://connect.squareup.com";
 
   try {
-    // 1. Use the Advanced Search API (Postman Pattern)
-    const response = await fetch(`${baseUrl}/v2/catalog/search`, {
-      method: "POST",
+    // Reverting to the stable GET request that we know returns data
+    const response = await fetch(`${baseUrl}/v2/catalog/list?types=ITEM,IMAGE,MODIFIER_LIST,ITEM_OPTION,CATEGORY`, {
+      method: "GET",
       headers: {
         "Authorization": `Bearer ${token}`,
         "Content-Type": "application/json",
         "Square-Version": "2023-10-20"
-      },
-      body: JSON.stringify({
-        object_types: ["ITEM"],
-        include_related_objects: true // This grabs ALL linked images, options, and modifiers
-      })
+      }
     });
 
     if (!response.ok) {
@@ -27,7 +23,6 @@ export default async (req, context) => {
 
     const data = await response.json();
 
-    // 2. Return the full relational payload
     return new Response(JSON.stringify(data), {
       status: 200,
       headers: { 
@@ -36,7 +31,7 @@ export default async (req, context) => {
       }
     });
   } catch (error) {
-    console.error("Advanced Search Fetch Error:", error);
+    console.error("Inventory Fetch Error:", error);
     return new Response(JSON.stringify({ error: error.message }), { status: 500 });
   }
 };
