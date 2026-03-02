@@ -1,5 +1,7 @@
 # Unique Creations by Lisa C. Website
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/35d10f2b-c3c1-46c1-89ee-754acc6dfc76/deploy-status)](https://app.netlify.com/projects/willowy-jelly-c76339/deploys)
+
 This is the custom storefront for [Unique Creations by Lisa C.](https://uniquecreationsbylisac.com), designed to replace the standard Square Online template with a bespoke, artisan aesthetic.
 
 ## 🛠 Project Structure
@@ -11,7 +13,6 @@ This is the custom storefront for [Unique Creations by Lisa C.](https://uniquecr
 ## 🚀 Deployment (Netlify)
 
 This site is designed to be hosted statically on Netlify.
-[![Netlify Status](https://api.netlify.com/api/v1/badges/35d10f2b-c3c1-46c1-89ee-754acc6dfc76/deploy-status?branch=main)](https://app.netlify.com/projects/willowy-jelly-c76339/deploys)
 
 1. Connect this GitHub repository to Netlify.
 
