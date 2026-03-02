@@ -13,8 +13,6 @@
     
     <!-- Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
-    
-    <!-- Square Web Payments SDK will be loaded dynamically based on environment -->
 
     <script>
         tailwind.config = {
@@ -75,189 +73,70 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* --- THEME DEFINITIONS --- */
-
         :root[data-theme="blossom"] {
-            --primary-50: 255 241 242;
-            --primary-100: 255 228 230;
-            --primary-200: 254 205 211;
-            --primary-300: 253 164 175;
-            --primary-400: 251 113 133;
-            --primary-500: 244 63 94;
-            --primary-600: 225 29 72;
-            --primary-700: 190 18 60;
-            --primary-800: 159 18 57;
-            --primary-900: 136 19 55;
-            --secondary-50: 240 253 244;
-            --secondary-100: 220 252 231;
-            --secondary-200: 187 247 208;
-            --secondary-300: 134 239 172;
-            --secondary-400: 74 222 128;
-            --secondary-500: 34 197 94;
-            --secondary-600: 22 163 74;
-            --secondary-700: 21 128 61;
-            --secondary-800: 22 101 52;
-            --secondary-900: 20 83 45;
-            --neutral-50: 250 250 249;
-            --neutral-100: 245 245 244;
-            --neutral-200: 231 229 228;
-            --neutral-300: 214 211 209;
-            --neutral-400: 168 162 158;
-            --neutral-500: 120 113 108;
-            --neutral-600: 87 83 78;
-            --neutral-700: 68 64 60;
-            --neutral-800: 41 37 36;
-            --neutral-900: 28 25 23;
+            --primary-50: 255 241 242; --primary-100: 255 228 230; --primary-200: 254 205 211; --primary-300: 253 164 175; --primary-400: 251 113 133; --primary-500: 244 63 94; --primary-600: 225 29 72; --primary-700: 190 18 60; --primary-800: 159 18 57; --primary-900: 136 19 55;
+            --secondary-50: 240 253 244; --secondary-100: 220 252 231; --secondary-200: 187 247 208; --secondary-300: 134 239 172; --secondary-400: 74 222 128; --secondary-500: 34 197 94; --secondary-600: 22 163 74; --secondary-700: 21 128 61; --secondary-800: 22 101 52; --secondary-900: 20 83 45;
+            --neutral-50: 250 250 249; --neutral-100: 245 245 244; --neutral-200: 231 229 228; --neutral-300: 214 211 209; --neutral-400: 168 162 158; --neutral-500: 120 113 108; --neutral-600: 87 83 78; --neutral-700: 68 64 60; --neutral-800: 41 37 36; --neutral-900: 28 25 23;
         }
-
         :root[data-theme="ocean"] {
-            --primary-50: 240 249 255;
-            --primary-100: 224 242 254;
-            --primary-200: 186 230 253;
-            --primary-300: 125 211 252;
-            --primary-400: 56 189 248;
-            --primary-500: 14 165 233;
-            --primary-600: 2 132 199;
-            --primary-700: 3 105 161;
-            --primary-800: 7 89 133;
-            --primary-900: 12 74 110;
-            --secondary-50: 240 253 250;
-            --secondary-100: 204 251 241;
-            --secondary-200: 153 246 228;
-            --secondary-300: 94 234 212;
-            --secondary-400: 45 212 191;
-            --secondary-500: 20 184 166;
-            --secondary-600: 13 148 136;
-            --secondary-700: 15 118 110;
-            --secondary-800: 17 94 89;
-            --secondary-900: 19 78 74;
-            --neutral-50: 248 250 252;
-            --neutral-100: 241 245 249;
-            --neutral-200: 226 232 240;
-            --neutral-300: 203 213 225;
-            --neutral-400: 148 163 184;
-            --neutral-500: 100 116 139;
-            --neutral-600: 71 85 105;
-            --neutral-700: 51 65 85;
-            --neutral-800: 30 41 59;
-            --neutral-900: 15 23 42;
+            --primary-50: 240 249 255; --primary-100: 224 242 254; --primary-200: 186 230 253; --primary-300: 125 211 252; --primary-400: 56 189 248; --primary-500: 14 165 233; --primary-600: 2 132 199; --primary-700: 3 105 161; --primary-800: 7 89 133; --primary-900: 12 74 110;
+            --secondary-50: 240 253 250; --secondary-100: 204 251 241; --secondary-200: 153 246 228; --secondary-300: 94 234 212; --secondary-400: 45 212 191; --secondary-500: 20 184 166; --secondary-600: 13 148 136; --secondary-700: 15 118 110; --secondary-800: 17 94 89; --secondary-900: 19 78 74;
+            --neutral-50: 248 250 252; --neutral-100: 241 245 249; --neutral-200: 226 232 240; --neutral-300: 203 213 225; --neutral-400: 148 163 184; --neutral-500: 100 116 139; --neutral-600: 71 85 105; --neutral-700: 51 65 85; --neutral-800: 30 41 59; --neutral-900: 15 23 42;
         }
-
         :root[data-theme="luxury"] {
-            --primary-50: 255 251 235;
-            --primary-100: 254 243 199;
-            --primary-200: 253 230 138;
-            --primary-300: 252 211 77;
-            --primary-400: 251 191 36;
-            --primary-500: 245 158 11;
-            --primary-600: 217 119 6;
-            --primary-700: 180 83 9;
-            --primary-800: 146 64 14;
-            --primary-900: 120 53 15;
-            --secondary-50: 236 253 245;
-            --secondary-100: 209 250 229;
-            --secondary-200: 167 243 208;
-            --secondary-300: 110 231 183;
-            --secondary-400: 52 211 153;
-            --secondary-500: 16 185 129;
-            --secondary-600: 5 150 105;
-            --secondary-700: 4 120 87;
-            --secondary-800: 6 95 70;
-            --secondary-900: 6 78 59;
-            --neutral-50: 249 250 251;
-            --neutral-100: 243 244 246;
-            --neutral-200: 229 231 235;
-            --neutral-300: 209 213 219;
-            --neutral-400: 156 163 175;
-            --neutral-500: 107 114 128;
-            --neutral-600: 75 85 99;
-            --neutral-700: 55 65 81;
-            --neutral-800: 31 41 55;
-            --neutral-900: 17 24 39;
+            --primary-50: 255 251 235; --primary-100: 254 243 199; --primary-200: 253 230 138; --primary-300: 252 211 77; --primary-400: 251 191 36; --primary-500: 245 158 11; --primary-600: 217 119 6; --primary-700: 180 83 9; --primary-800: 146 64 14; --primary-900: 120 53 15;
+            --secondary-50: 236 253 245; --secondary-100: 209 250 229; --secondary-200: 167 243 208; --secondary-300: 110 231 183; --secondary-400: 52 211 153; --secondary-500: 16 185 129; --secondary-600: 5 150 105; --secondary-700: 4 120 87; --secondary-800: 6 95 70; --secondary-900: 6 78 59;
+            --neutral-50: 249 250 251; --neutral-100: 243 244 246; --neutral-200: 229 231 235; --neutral-300: 209 213 219; --neutral-400: 156 163 175; --neutral-500: 107 114 128; --neutral-600: 75 85 99; --neutral-700: 55 65 81; --neutral-800: 31 41 55; --neutral-900: 17 24 39;
         }
     </style>
 </head>
 <body class="font-sans text-neutral-800 bg-neutral-50 antialiased selection:bg-primary-100 flex flex-col min-h-screen">
 
-    <!-- Notification Toast -->
     <div id="toast" class="fixed top-24 right-5 bg-neutral-900 text-white px-6 py-4 rounded shadow-lg transform translate-x-full transition-transform duration-300 z-50 flex items-center gap-3">
-        <span id="toast-icon-container">
-            <i data-lucide="check-circle" class="w-5 h-5 text-secondary-500"></i>
-        </span>
+        <span id="toast-icon-container"><i data-lucide="check-circle" class="w-5 h-5 text-secondary-500"></i></span>
         <span id="toast-message">Item added to cart</span>
     </div>
 
-    <!-- Navigation -->
     <nav class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-neutral-100 transition-all duration-300 shadow-sm" id="navbar">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-24">
-                <button class="md:hidden p-2 hover:bg-neutral-50 rounded-full" onclick="toggleMobileMenu()">
-                    <i data-lucide="menu" class="w-6 h-6"></i>
-                </button>
-
+                <button class="md:hidden p-2 hover:bg-neutral-50 rounded-full" onclick="toggleMobileMenu()"><i data-lucide="menu" class="w-6 h-6"></i></button>
                 <div class="flex-shrink-0 flex items-center cursor-pointer gap-3" onclick="navigateToPage('home')">
-                    <div class="h-16 w-16 relative rounded-lg overflow-hidden border border-neutral-100 shadow-sm bg-white group">
-                         <div class="absolute inset-0 flex items-center justify-center bg-white">
-                             <span class="font-serif text-2xl font-bold text-neutral-900">UC</span>
-                         </div>
+                    <div class="h-16 w-16 relative rounded-lg overflow-hidden border border-neutral-100 shadow-sm bg-white flex items-center justify-center">
+                         <span class="font-serif text-2xl font-bold text-neutral-900">UC</span>
                     </div>
-                    
                     <div class="hidden sm:block">
                         <span class="block font-serif text-xl font-bold tracking-tight text-neutral-900 leading-none">Unique Creations</span>
                         <span class="block text-sm text-primary-800 font-normal tracking-widest uppercase mt-1">By Lisa C.</span>
                     </div>
                 </div>
-
                 <div class="hidden md:flex space-x-8 items-center">
-                    <button onclick="navigateToPage('home')" class="nav-link hover:text-primary-800 transition-colors font-medium text-sm uppercase tracking-wide text-primary-800" data-target="home">Home</button>
-                    <button onclick="navigateToPage('shop')" class="nav-link hover:text-primary-800 transition-colors font-medium text-sm uppercase tracking-wide" data-target="shop">Shop</button>
-                    <button onclick="navigateToPage('about')" class="nav-link hover:text-primary-800 transition-colors font-medium text-sm uppercase tracking-wide" data-target="about">About</button>
-                    <button onclick="navigateToPage('contact')" class="nav-link hover:text-primary-800 transition-colors font-medium text-sm uppercase tracking-wide" data-target="contact">Contact</button>
+                    <button onclick="navigateToPage('home')" class="nav-link hover:text-primary-800 transition-colors font-medium text-sm uppercase tracking-wide">Home</button>
+                    <button onclick="navigateToPage('shop')" class="nav-link hover:text-primary-800 transition-colors font-medium text-sm uppercase tracking-wide">Shop</button>
+                    <button onclick="navigateToPage('about')" class="nav-link hover:text-primary-800 transition-colors font-medium text-sm uppercase tracking-wide">About</button>
+                    <button onclick="navigateToPage('contact')" class="nav-link hover:text-primary-800 transition-colors font-medium text-sm uppercase tracking-wide">Contact</button>
                 </div>
-
                 <div class="flex items-center gap-4">
                     <div class="relative group">
-                        <button class="p-2 hover:bg-neutral-50 rounded-full transition-colors flex items-center gap-2">
-                            <i data-lucide="palette" class="w-5 h-5 text-neutral-600"></i>
-                        </button>
+                        <button class="p-2 hover:bg-neutral-50 rounded-full transition-colors"><i data-lucide="palette" class="w-5 h-5 text-neutral-600"></i></button>
                         <div class="absolute right-0 top-full pt-2 hidden group-hover:block">
                             <div class="w-32 bg-white rounded-md shadow-lg py-1 border border-neutral-100">
-                                <button onclick="setTheme('blossom')" class="block w-full text-left px-4 py-2 text-sm text-neutral-700 hover:bg-neutral-50 hover:text-primary-600">Blossom</button>
-                                <button onclick="setTheme('ocean')" class="block w-full text-left px-4 py-2 text-sm text-neutral-700 hover:bg-neutral-50 hover:text-primary-600">Ocean</button>
-                                <button onclick="setTheme('luxury')" class="block w-full text-left px-4 py-2 text-sm text-neutral-700 hover:bg-neutral-50 hover:text-primary-600">Luxury</button>
+                                <button onclick="setTheme('blossom')" class="block w-full text-left px-4 py-2 text-sm text-neutral-700 hover:bg-neutral-50">Blossom</button>
+                                <button onclick="setTheme('ocean')" class="block w-full text-left px-4 py-2 text-sm text-neutral-700 hover:bg-neutral-50">Ocean</button>
+                                <button onclick="setTheme('luxury')" class="block w-full text-left px-4 py-2 text-sm text-neutral-700 hover:bg-neutral-50">Luxury</button>
                             </div>
                         </div>
                     </div>
-
                     <button onclick="toggleCart()" class="relative p-2 hover:bg-neutral-50 rounded-full transition-colors group">
-                        <i data-lucide="shopping-bag" class="w-6 h-6 text-neutral-700 group-hover:text-primary-800 transition-colors"></i>
+                        <i data-lucide="shopping-bag" class="w-6 h-6 text-neutral-700 group-hover:text-primary-800"></i>
                         <span id="cart-count" class="absolute top-0 right-0 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-white transform translate-x-1/4 -translate-y-1/4 bg-primary-800 rounded-full opacity-0 transition-opacity">0</span>
                     </button>
-                </div>
-            </div>
-        </div>
-        
-        <div id="mobile-menu" class="hidden md:hidden bg-white border-b border-neutral-100">
-            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-                <button onclick="mobileNavClick('home')" class="block w-full text-left px-3 py-2 rounded-md hover:bg-primary-50 hover:text-primary-800">Home</button>
-                <button onclick="mobileNavClick('shop')" class="block w-full text-left px-3 py-2 rounded-md hover:bg-primary-50 hover:text-primary-800">Shop Collections</button>
-                <button onclick="mobileNavClick('about')" class="block w-full text-left px-3 py-2 rounded-md hover:bg-primary-50 hover:text-primary-800">About Lisa</button>
-                <button onclick="mobileNavClick('contact')" class="block w-full text-left px-3 py-2 rounded-md hover:bg-primary-50 hover:text-primary-800">Contact</button>
-                <div class="border-t border-neutral-100 mt-2 pt-2">
-                    <p class="px-3 text-xs text-neutral-400 uppercase tracking-wide mb-1">Theme</p>
-                    <div class="flex gap-2 px-3">
-                        <button onclick="setTheme('blossom')" class="w-6 h-6 rounded-full bg-rose-500 border border-neutral-200"></button>
-                        <button onclick="setTheme('ocean')" class="w-6 h-6 rounded-full bg-sky-500 border border-neutral-200"></button>
-                        <button onclick="setTheme('luxury')" class="w-6 h-6 rounded-full bg-amber-500 border border-neutral-200"></button>
-                    </div>
                 </div>
             </div>
         </div>
     </nav>
 
     <main class="flex-grow">
-        
-        <!-- PAGE: HOME -->
         <div id="view-home" class="page-view">
             <section class="relative bg-white overflow-hidden">
                 <div class="max-w-7xl mx-auto">
@@ -268,9 +147,7 @@
                                     <span class="block xl:inline">Handcrafted with</span>
                                     <span class="block text-primary-800 xl:inline italic">elegance & intention.</span>
                                 </h1>
-                                <p class="mt-3 text-base text-neutral-500 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0">
-                                    At Unique Creations by Lisa C, we specialize in crafting exquisite pieces that combine traditional techniques with modern design. Our unique creations showcase the intricate artistry of chainmail, the vibrant colors of beads, and the delicate texture of scale.
-                                </p>
+                                <p class="mt-3 text-base text-neutral-500 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0">At Unique Creations by Lisa C, we specialize in crafting exquisite pieces that combine traditional techniques with modern design.</p>
                                 <div class="mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start gap-4">
                                     <button onclick="navigateToPage('shop')" class="px-8 py-3 rounded-md text-white bg-neutral-900 hover:bg-neutral-800 font-medium">Shop Collection</button>
                                     <button onclick="navigateToPage('about')" class="px-8 py-3 rounded-md border border-neutral-200 bg-white hover:bg-neutral-50 font-medium">Our Story</button>
@@ -280,12 +157,11 @@
                     </div>
                 </div>
                 <div class="lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2 bg-neutral-50">
-                    <img class="h-56 w-full object-cover sm:h-72 md:h-96 lg:w-full lg:h-full opacity-90" src="https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80" alt="Floral jewelry setting">
+                    <img class="h-56 w-full object-cover sm:h-72 md:h-96 lg:w-full lg:h-full opacity-90" src="https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80" alt="Jewelry">
                 </div>
             </section>
         </div>
 
-        <!-- PAGE: SHOP -->
         <div id="view-shop" class="page-view hidden">
             <section class="py-16 bg-neutral-50 min-h-screen">
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -293,15 +169,13 @@
                         <span class="text-primary-800 font-bold tracking-widest uppercase text-xs mb-2 block">Our Catalog</span>
                         <h2 class="text-3xl font-serif font-bold text-neutral-900">Latest Collections</h2>
                         <div class="w-24 h-1 bg-gradient-to-r from-primary-300 to-secondary-300 mx-auto mt-4 rounded-full"></div>
-                        
                         <div class="mt-8 flex justify-center space-x-2 md:space-x-4 overflow-x-auto pb-2">
                             <button onclick="filterProducts('all')" class="filter-btn active px-6 py-2 rounded-full text-sm font-medium transition-all shadow-sm bg-neutral-900 text-white" data-category="all">All</button>
-                            <button onclick="filterProducts('necklaces')" class="filter-btn px-6 py-2 rounded-full text-sm font-medium text-neutral-600 bg-white border border-neutral-200 hover:border-primary-300 hover:text-primary-800 transition-all shadow-sm" data-category="necklaces">Necklaces</button>
-                            <button onclick="filterProducts('earrings')" class="filter-btn px-6 py-2 rounded-full text-sm font-medium text-neutral-600 bg-white border border-neutral-200 hover:border-primary-300 hover:text-primary-800 transition-all shadow-sm" data-category="earrings">Earrings</button>
-                            <button onclick="filterProducts('bracelets')" class="filter-btn px-6 py-2 rounded-full text-sm font-medium text-neutral-600 bg-white border border-neutral-200 hover:border-primary-300 hover:text-primary-800 transition-all shadow-sm" data-category="bracelets">Bracelets</button>
+                            <button onclick="filterProducts('necklaces')" class="filter-btn px-6 py-2 rounded-full text-sm font-medium text-neutral-600 bg-white border border-neutral-200" data-category="necklaces">Necklaces</button>
+                            <button onclick="filterProducts('earrings')" class="filter-btn px-6 py-2 rounded-full text-sm font-medium text-neutral-600 bg-white border border-neutral-200" data-category="earrings">Earrings</button>
+                            <button onclick="filterProducts('bracelets')" class="filter-btn px-6 py-2 rounded-full text-sm font-medium text-neutral-600 bg-white border border-neutral-200" data-category="bracelets">Bracelets</button>
                         </div>
                     </div>
-
                     <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-y-10 gap-x-6 xl:gap-x-8">
                         <div class="col-span-full text-center py-20">
                             <i data-lucide="loader-2" class="w-8 h-8 animate-spin mx-auto text-primary-800"></i>
@@ -312,155 +186,65 @@
             </section>
         </div>
 
-        <!-- OTHER PAGES (Simplified for brevity in the merge, assume same structure as above) -->
-        <div id="view-about" class="page-view hidden">...</div>
-        <div id="view-contact" class="page-view hidden">...</div>
+        <div id="view-about" class="page-view hidden">
+            <section class="py-20 bg-white text-center"><h2 class="text-3xl font-serif font-bold">Meet Lisa C.</h2><p class="mt-4 text-neutral-600">Handcrafting elegance since 2023.</p></section>
+        </div>
+        <div id="view-contact" class="page-view hidden">
+            <section class="py-20 bg-neutral-900 text-white text-center"><h2 class="text-3xl font-serif font-bold">Contact Us</h2><p class="mt-4">sales@uniquecreationsbylisac.com</p></section>
+        </div>
     </main>
 
-    <footer class="bg-neutral-900 text-neutral-300 py-8 border-t border-neutral-800 text-center text-sm">
-        <p>&copy; 2023 Unique Creations by Lisa C. All rights reserved.</p>
-        <p class="mt-2 text-neutral-500">Payments secured by Square</p>
-    </footer>
-
-    <!-- Cart Slide-over -->
     <div id="cart-sidebar" class="fixed inset-0 overflow-hidden z-50 pointer-events-none transition-all duration-300">
         <div class="absolute inset-0 overflow-hidden">
             <div id="cart-overlay" class="absolute inset-0 bg-neutral-900 bg-opacity-75 transition-opacity opacity-0 pointer-events-none" onclick="toggleCart()"></div>
-            <div class="pointer-events-none fixed inset-y-0 right-0 flex max-w-full pl-10">
-                <div id="cart-panel" class="pointer-events-auto w-screen max-w-md transform translate-x-full transition-transform duration-300 bg-white shadow-xl flex flex-col h-full">
-                    <div class="flex items-start justify-between px-4 py-6 sm:px-6 border-b border-neutral-100 bg-neutral-50">
-                        <h2 class="text-lg font-medium text-neutral-900 font-serif">Shopping Cart</h2>
-                        <button onclick="toggleCart()" class="text-neutral-400 hover:text-neutral-500"><i data-lucide="x" class="w-6 h-6"></i></button>
-                    </div>
-                    <div class="flex-1 overflow-y-auto py-6 px-4 sm:px-6">
-                        <div id="cart-items-container" class="space-y-8"></div>
-                    </div>
-                    <div class="border-t border-neutral-100 px-4 py-6 sm:px-6 bg-neutral-50">
-                        <div class="flex justify-between text-base font-medium text-neutral-900"><p>Subtotal</p><p id="cart-subtotal">$0.00</p></div>
-                        <div id="shipping-section" class="mt-4">
-                            <p class="text-sm text-neutral-500">Shipping</p>
-                            <div class="mt-2 space-y-2">
-                                <div class="flex items-center">
-                                    <input type="radio" id="shipping-standard" name="shipping" value="5" onchange="updateCartUI()" class="h-4 w-4 text-primary-600 border-neutral-300" checked>
-                                    <label for="shipping-standard" class="ml-3 text-sm font-medium text-neutral-700">Standard ($5.00)</label>
-                                </div>
-                                <div class="flex items-center">
-                                    <input type="radio" id="shipping-local" name="shipping" value="0" onchange="updateCartUI()" class="h-4 w-4 text-primary-600 border-neutral-300">
-                                    <label for="shipping-local" class="ml-3 text-sm font-medium text-neutral-700">Local Delivery (Free)</label>
-                                </div>
-                            </div>
-                            <p id="shipping-message" class="mt-2 text-sm text-secondary-700 font-medium"></p>
+            <div class="fixed inset-y-0 right-0 flex max-w-full pl-10">
+                <div id="cart-panel" class="w-screen max-w-md transform translate-x-full transition-transform duration-300 bg-white shadow-xl flex flex-col pointer-events-auto">
+                    <div class="px-4 py-6 flex justify-between border-b"><h2 class="text-lg font-medium font-serif">Shopping Cart</h2><button onclick="toggleCart()"><i data-lucide="x" class="w-6 h-6"></i></button></div>
+                    <div id="cart-items-container" class="flex-1 overflow-y-auto p-4 space-y-4"></div>
+                    <div class="p-6 bg-neutral-50 border-t space-y-4">
+                        <div class="flex justify-between font-medium"><p>Subtotal</p><p id="cart-subtotal">$0.00</p></div>
+                        <div class="space-y-2">
+                            <div class="flex items-center"><input type="radio" name="shipping" value="5" onchange="updateCartUI()" checked> <label class="ml-2 text-sm">Standard Shipping ($5.00)</label></div>
+                            <div class="flex items-center"><input type="radio" name="shipping" value="0" onchange="updateCartUI()"> <label class="ml-2 text-sm">Local Delivery (Free)</label></div>
                         </div>
-                        <div class="flex justify-between text-base font-medium text-neutral-900 mt-4 border-t border-neutral-200 pt-4"><p>Total</p><p id="cart-total">$0.00</p></div>
-                        <button onclick="openPaymentModal()" class="mt-6 w-full py-3 bg-neutral-900 text-white rounded-md font-medium">Checkout with Square</button>
+                        <div class="flex justify-between font-bold border-t pt-4"><p>Total</p><p id="cart-total">$0.00</p></div>
+                        <button onclick="openPaymentModal()" class="w-full py-3 bg-neutral-900 text-white rounded">Checkout</button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Payment Modal -->
-    <div id="payment-modal" class="fixed inset-0 z-50 overflow-y-auto hidden">
-        <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
-            <div class="fixed inset-0 bg-gray-500 bg-opacity-75" onclick="closePaymentModal()"></div>
-            <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
-                <div class="bg-white px-4 pt-5 pb-4 sm:p-6">
-                    <h3 class="text-lg leading-6 font-medium text-gray-900">Secure Payment</h3>
-                    <div id="card-container" class="mt-4 h-48 border border-neutral-200 rounded flex items-center justify-center bg-neutral-50 text-neutral-500"></div>
-                </div>
-                <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
-                    <button onclick="handlePaymentSubmission()" class="w-full sm:ml-3 sm:w-auto px-4 py-2 bg-neutral-900 text-white rounded">Pay Now</button>
-                    <button onclick="closePaymentModal()" class="mt-3 sm:mt-0 w-full sm:w-auto px-4 py-2 border rounded bg-white">Cancel</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Product Details Modal -->
     <div id="product-modal" class="fixed inset-0 z-50 overflow-y-auto hidden">
-        <div class="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+        <div class="flex items-center justify-center min-h-screen p-4">
             <div class="fixed inset-0 bg-stone-900 bg-opacity-75" onclick="closeProductModal()"></div>
-            <span class="hidden sm:inline-block sm:align-middle sm:h-screen">&#8203;</span>
-            <div class="inline-block align-middle bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:max-w-4xl sm:w-full">
-                <div class="absolute top-4 right-4 z-10">
-                    <button onclick="closeProductModal()" class="bg-white/80 p-2 rounded-full shadow-sm"><i data-lucide="x" class="w-6 h-6"></i></button>
+            <div class="relative bg-white rounded-lg shadow-xl max-w-4xl w-full overflow-hidden sm:flex">
+                <button onclick="closeProductModal()" class="absolute top-4 right-4 z-10 p-2"><i data-lucide="x" class="w-6 h-6"></i></button>
+                <div class="sm:w-1/2 p-6 bg-stone-50">
+                    <img id="modal-main-image" src="" class="w-full aspect-square object-cover rounded shadow-sm">
+                    <div id="modal-thumbnails" class="flex gap-2 mt-4 overflow-x-auto pb-2"></div>
                 </div>
-                <div class="sm:flex">
-                    <div class="sm:w-1/2 bg-stone-50 p-6">
-                        <div class="aspect-square rounded-lg overflow-hidden bg-white mb-4 border border-stone-100">
-                            <img id="modal-main-image" src="" class="w-full h-full object-cover">
-                        </div>
-                        <div id="modal-thumbnails" class="flex gap-2 overflow-x-auto pb-2 scrollbar-hide"></div>
-                    </div>
-                    <div class="sm:w-1/2 p-8 sm:p-12 flex flex-col">
-                        <div class="flex-grow">
-                            <span id="modal-category" class="text-xs text-primary-800 font-bold uppercase tracking-widest mb-2 block"></span>
-                            <h2 id="modal-title-text" class="text-3xl font-serif font-bold text-neutral-900 mb-4 leading-tight"></h2>
-                            <p id="modal-price" class="text-2xl text-neutral-900 font-medium mb-6"></p>
-                            
-                            <div id="modal-options-container" class="mb-8 space-y-4">
-                                <!-- Options like Variants and Modifiers injected here -->
-                            </div>
-
-                            <div class="prose prose-stone mb-8">
-                                <h4 class="text-sm font-bold text-neutral-900 uppercase tracking-wide mb-2">Description</h4>
-                                <p id="modal-description" class="text-neutral-600 leading-relaxed"></p>
-                            </div>
-                        </div>
-                        <div class="mt-auto">
-                            <button id="modal-add-btn" class="w-full bg-neutral-900 text-white py-4 px-8 rounded-md font-bold uppercase tracking-widest flex items-center justify-center gap-3">
-                                <i data-lucide="shopping-bag" class="w-5 h-5"></i> Add to Shopping Bag
-                            </button>
-                        </div>
-                    </div>
+                <div class="sm:w-1/2 p-8 flex flex-col">
+                    <span id="modal-category" class="text-xs font-bold text-primary-800 uppercase tracking-widest mb-1"></span>
+                    <h2 id="modal-title-text" class="text-2xl font-serif font-bold text-neutral-900 mb-2"></h2>
+                    <p id="modal-price" class="text-xl font-medium mb-6"></p>
+                    <div id="modal-options-container" class="space-y-4 mb-8"></div>
+                    <p id="modal-description" class="text-neutral-600 text-sm leading-relaxed mb-8 flex-grow"></p>
+                    <button id="modal-add-btn" class="w-full py-4 bg-neutral-900 text-white font-bold uppercase tracking-widest rounded transition-colors hover:bg-neutral-800">Add to Bag</button>
                 </div>
             </div>
         </div>
     </div>
 
     <script>
-        let SQUARE_APP_ID = ''; 
-        let LOCATION_ID = '';
-        let cart = [];
-        let isCartOpen = false;
-        let products = [];
-        let payments = null;
-        let card = null;
+        let products = []; let cart = []; let isCartOpen = false;
 
         document.addEventListener('DOMContentLoaded', async () => {
             lucide.createIcons();
-            await fetchConfig();
-            if (SQUARE_APP_ID) await initializeSquare();
             await fetchCatalog();
             renderProducts('all');
             updateCartUI();
         });
-
-        function setTheme(themeName) {
-            document.documentElement.setAttribute('data-theme', themeName);
-            localStorage.setItem('theme', themeName);
-        }
-        const savedTheme = localStorage.getItem('theme');
-        if (savedTheme) setTheme(savedTheme);
-
-        async function fetchConfig() {
-            try {
-                const response = await fetch('/api/get-square-config');
-                const config = await response.json();
-                SQUARE_APP_ID = config.appId ? config.appId.replace(/["']/g, "").trim() : '';
-                LOCATION_ID = config.locationId ? config.locationId.replace(/["']/g, "").trim() : '';
-            } catch (e) { console.error("Could not load config", e); }
-        }
-
-        async function initializeSquare() {
-            try {
-                const isSandbox = SQUARE_APP_ID.startsWith('sandbox-');
-                const script = document.createElement('script');
-                script.src = isSandbox ? "https://sandbox.web.squarecdn.com/v1/square.js" : "https://web.squarecdn.com/v1/square.js";
-                document.head.appendChild(script);
-                script.onload = () => { payments = window.Square.payments(SQUARE_APP_ID, LOCATION_ID); };
-            } catch (e) { console.error("Square failed", e); }
-        }
 
         async function fetchCatalog() {
             try {
@@ -474,168 +258,133 @@
                     products = data.objects.map(item => {
                         const allImageIds = [...(item.item_data.image_ids || []), ...(item.item_data.variations?.[0]?.item_variation_data?.image_ids || [])];
                         const imageUrls = [...new Set(allImageIds)].map(id => imageMap[id]).filter(url => !!url);
-                        
-                        let category = "all";
-                        const nameLower = item.item_data.name.toLowerCase();
-                        if (nameLower.includes("necklace")) category = "necklaces";
-                        else if (nameLower.includes("earring")) category = "earrings";
-                        else if (nameLower.includes("bracelet")) category = "bracelets";
-
+                        let cat = "all";
+                        const n = item.item_data.name.toLowerCase();
+                        if (n.includes("necklace")) cat = "necklaces"; else if (n.includes("earring")) cat = "earrings"; else if (n.includes("bracelet")) cat = "bracelets";
                         return {
-                            id: item.id,
-                            name: item.item_data.name,
-                            variations: item.item_data.variations,
-                            modifier_lists: item.item_data.modifier_lists,
-                            category: category,
+                            id: item.id, name: item.item_data.name, variations: item.item_data.variations, 
+                            modifier_lists: item.item_data.modifier_lists, category: cat,
                             image: imageUrls[0] || "https://images.unsplash.com/photo-1611591437281-460bfbe1220a?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80",
-                            images: imageUrls,
-                            desc: item.item_data.description || "Handcrafted with care."
+                            images: imageUrls, desc: item.item_data.description || "Handcrafted with care."
                         };
                     });
                 }
-            } catch (e) { console.log("Mocking data", e); }
+            } catch (e) { console.error("Catalog fetch failed", e); }
         }
 
         function renderProducts(category) {
             const grid = document.getElementById('product-grid');
             grid.innerHTML = '';
             const filtered = category === 'all' ? products : products.filter(p => p.category === category);
-
-            filtered.forEach((product, index) => {
-                const cardEl = document.createElement('div');
-                cardEl.className = 'group relative fade-in bg-white rounded-lg shadow-sm hover:shadow-lg transition-all border border-neutral-100 flex flex-col overflow-hidden';
-                cardEl.innerHTML = `
-                    <div class="w-full h-80 bg-neutral-100 relative cursor-pointer" onclick="openProductModal('${product.id}')">
-                        <img src="${product.image}" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700">
-                        <div class="absolute inset-0 bg-neutral-900/0 group-hover:bg-neutral-900/10 flex items-center justify-center transition-colors">
-                            <span class="bg-white/90 text-neutral-900 px-4 py-2 rounded text-xs font-bold opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all">Quick View</span>
+            if (filtered.length === 0) { grid.innerHTML = '<div class="col-span-full text-center py-20 text-neutral-500">No pieces found.</div>'; return; }
+            filtered.forEach(p => {
+                const div = document.createElement('div');
+                div.className = 'group bg-white rounded-lg border border-neutral-100 overflow-hidden flex flex-col shadow-sm hover:shadow-md transition-all';
+                const price = ((p.variations[0].item_variation_data.price_money.amount || 0) / 100).toFixed(2);
+                div.innerHTML = `
+                    <div class="h-80 bg-neutral-100 relative cursor-pointer" onclick="openProductModal('${p.id}')">
+                        <img src="${p.image}" class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-neutral-900/0 group-hover:bg-neutral-900/10 flex items-center justify-center transition-all">
+                            <span class="bg-white/90 text-neutral-900 px-4 py-2 rounded text-xs font-bold opacity-0 group-hover:opacity-100 transform translate-y-2 group-hover:translate-y-0 transition-all uppercase">Quick View</span>
                         </div>
                     </div>
-                    <div class="p-4 flex flex-col flex-grow">
-                        <h3 class="text-lg font-serif text-neutral-900 mb-1">${product.name}</h3>
-                        <p class="text-lg font-medium text-neutral-900">$${((product.variations[0].item_variation_data.price_money.amount || 0) / 100).toFixed(2)}</p>
-                        <button onclick="openProductModal('${product.id}')" class="mt-4 w-full border border-neutral-200 py-2 rounded text-xs font-bold uppercase tracking-widest hover:bg-neutral-900 hover:text-white transition-all">Select Options</button>
-                    </div>
-                `;
-                grid.appendChild(cardEl);
+                    <div class="p-4 flex-grow flex flex-col">
+                        <h3 class="font-serif text-lg text-neutral-900">${p.name}</h3>
+                        <p class="font-medium text-neutral-900">$${price}</p>
+                        <button onclick="openProductModal('${p.id}')" class="mt-4 w-full py-2 border border-neutral-200 rounded text-xs font-bold uppercase hover:bg-neutral-900 hover:text-white transition-all">Options</button>
+                    </div>`;
+                grid.appendChild(div);
             });
             lucide.createIcons();
         }
 
         function openProductModal(id) {
-            const product = products.find(p => String(p.id) === String(id));
-            if (!product) return;
-
-            document.getElementById('modal-category').textContent = product.category;
-            document.getElementById('modal-title-text').textContent = product.name;
-            document.getElementById('modal-description').textContent = product.desc;
-            document.getElementById('modal-main-image').src = product.image;
-
-            const optionsContainer = document.getElementById('modal-options-container');
-            optionsContainer.innerHTML = '';
-
-            // Variations
-            if (product.variations.length > 1) {
-                const varDiv = document.createElement('div');
-                varDiv.innerHTML = `<label class="text-xs font-bold text-neutral-500 uppercase">Option</label>
-                    <select id="modal-var-select" onchange="updateModalPrice('${product.id}')" class="w-full mt-1 border-neutral-300 rounded-md">
-                        ${product.variations.map(v => `<option value="${v.id}">${v.item_variation_data.name} - $${(v.item_variation_data.price_money.amount / 100).toFixed(2)}</option>`).join('')}
-                    </select>`;
-                optionsContainer.appendChild(varDiv);
+            const p = products.find(prod => prod.id === id); if (!p) return;
+            document.getElementById('modal-category').textContent = p.category;
+            document.getElementById('modal-title-text').textContent = p.name;
+            document.getElementById('modal-description').textContent = p.desc;
+            document.getElementById('modal-main-image').src = p.image;
+            const opt = document.getElementById('modal-options-container'); opt.innerHTML = '';
+            if (p.variations.length > 1) {
+                const sel = document.createElement('select'); sel.id = "modal-var-select"; sel.className = "w-full rounded border-neutral-300";
+                sel.onchange = () => updateModalPrice(id);
+                sel.innerHTML = p.variations.map(v => `<option value="${v.id}">${v.item_variation_data.name} - $${(v.item_variation_data.price_money.amount/100).toFixed(2)}</option>`).join('');
+                opt.appendChild(sel);
             }
-
-            // Modifiers
-            if (product.modifier_lists) {
-                product.modifier_lists.forEach(modList => {
-                    const modDiv = document.createElement('div');
-                    modDiv.innerHTML = `<label class="text-xs font-bold text-neutral-500 uppercase">${modList.modifier_list_data.name}</label>
-                        <select data-modifier-list-id="${modList.id}" class="w-full mt-1 border-neutral-300 rounded-md modal-modifier-select">
-                            <option value="">None</option>
-                            ${modList.modifier_list_data.modifiers.map(mod => `<option value="${mod.id}">${mod.modifier_data.name}</option>`).join('')}
-                        </select>`;
-                    optionsContainer.appendChild(modDiv);
+            if (p.modifier_lists) {
+                p.modifier_lists.forEach(m => {
+                    const sel = document.createElement('select'); sel.className = "w-full rounded border-neutral-300 modal-mod-select";
+                    sel.innerHTML = `<option value="">Select ${m.modifier_list_data.name}</option>` + m.modifier_list_data.modifiers.map(mod => `<option value="${mod.id}">${mod.modifier_data.name}</option>`).join('');
+                    opt.appendChild(sel);
                 });
             }
-
-            // Thumbnails
-            const thumbContainer = document.getElementById('modal-thumbnails');
-            thumbContainer.innerHTML = '';
-            product.images.forEach(imgUrl => {
-                const thumb = document.createElement('button');
-                thumb.className = `w-16 h-16 rounded border-2 ${imgUrl === product.image ? 'border-primary-800' : 'border-transparent'}`;
-                thumb.innerHTML = `<img src="${imgUrl}" class="w-full h-full object-cover">`;
-                thumb.onclick = () => { document.getElementById('modal-main-image').src = imgUrl; };
-                thumbContainer.appendChild(thumb);
+            const thumbs = document.getElementById('modal-thumbnails'); thumbs.innerHTML = '';
+            p.images.forEach(url => {
+                const b = document.createElement('button'); b.className = "w-16 h-16 rounded border-2 overflow-hidden";
+                b.innerHTML = `<img src="${url}" class="w-full h-full object-cover">`;
+                b.onclick = () => { document.getElementById('modal-main-image').src = url; };
+                thumbs.appendChild(b);
             });
-
-            updateModalPrice(product.id);
-            document.getElementById('modal-add-btn').onclick = () => { addToCartFromModal(product.id); closeProductModal(); };
+            updateModalPrice(id);
+            document.getElementById('modal-add-btn').onclick = () => { addToCartFromModal(id); closeProductModal(); };
             document.getElementById('product-modal').classList.remove('hidden');
             document.body.style.overflow = 'hidden';
             lucide.createIcons();
         }
 
-        function updateModalPrice(productId) {
-            const product = products.find(p => p.id === productId);
-            const varSelect = document.getElementById('modal-var-select');
-            const variationId = varSelect ? varSelect.value : product.variations[0].id;
-            const variation = product.variations.find(v => v.id === variationId);
-            document.getElementById('modal-price').textContent = `$${(variation.item_variation_data.price_money.amount / 100).toFixed(2)}`;
+        function updateModalPrice(id) {
+            const p = products.find(prod => prod.id === id);
+            const vs = document.getElementById('modal-var-select');
+            const vid = vs ? vs.value : p.variations[0].id;
+            const v = p.variations.find(v => v.id === vid);
+            document.getElementById('modal-price').textContent = `$${(v.item_variation_data.price_money.amount/100).toFixed(2)}`;
         }
 
-        function addToCartFromModal(productId) {
-            const product = products.find(p => p.id === productId);
-            const varSelect = document.getElementById('modal-var-select');
-            const variationId = varSelect ? varSelect.value : product.variations[0].id;
-            const variation = product.variations.find(v => v.id === variationId);
-
-            const selectedModifiers = [];
-            document.querySelectorAll('.modal-modifier-select').forEach(select => {
-                if (select.value) selectedModifiers.push({ id: select.value, name: select.options[select.selectedIndex].text });
-            });
-
-            const cartId = `${productId}-${variationId}-${selectedModifiers.map(m => m.id).join('-')}`;
-            const existing = cart.find(i => i.cartId === cartId);
-            if (existing) { existing.quantity++; }
-            else {
-                cart.push({
-                    cartId, id: product.id, name: product.name, variationName: variation.item_variation_data.name,
-                    price: (variation.item_variation_data.price_money.amount / 100), image: product.image,
-                    quantity: 1, modifiers: selectedModifiers
-                });
+        function addToCartFromModal(id) {
+            const p = products.find(prod => prod.id === id);
+            const vs = document.getElementById('modal-var-select');
+            const vid = vs ? vs.value : p.variations[0].id;
+            const v = p.variations.find(varObj => varObj.id === vid);
+            const mods = Array.from(document.querySelectorAll('.modal-mod-select')).map(s => s.options[s.selectedIndex].text).filter(t => !t.startsWith('Select '));
+            const cid = `${id}-${vid}-${mods.join('-')}`;
+            const ex = cart.find(i => i.cid === cid);
+            if (ex) { ex.qty++; } else {
+                cart.push({ cid, id, name: p.name, vname: v.item_variation_data.name, price: v.item_variation_data.price_money.amount/100, image: p.image, qty: 1, mods });
             }
-            showToast(`Added ${product.name} to cart`);
+            showToast(`Added ${p.name} to cart`);
             updateCartUI();
         }
 
         function updateCartUI() {
-            const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-            document.getElementById('cart-subtotal').textContent = `$${subtotal.toFixed(2)}`;
-            const shipping = (subtotal >= 100 || document.querySelector('input[name="shipping"]:checked').value === '0') ? 0 : 5;
-            document.getElementById('cart-total').textContent = `$${(subtotal + shipping).toFixed(2)}`;
-            document.getElementById('cart-count').textContent = cart.reduce((s, i) => s + i.quantity, 0);
-            document.getElementById('cart-count').classList.toggle('opacity-0', cart.length === 0);
-            
-            const container = document.getElementById('cart-items-container');
-            container.innerHTML = cart.map(item => `<div class="flex py-4 border-b">
-                <img src="${item.image}" class="h-16 w-16 object-cover rounded">
+            const sub = cart.reduce((s, i) => s + (i.price * i.qty), 0);
+            const count = cart.reduce((s, i) => s + i.qty, 0);
+            document.getElementById('cart-subtotal').textContent = `$${sub.toFixed(2)}`;
+            const ship = (sub >= 100 || document.querySelector('input[name="shipping"]:checked').value === '0') ? 0 : 5;
+            document.getElementById('cart-total').textContent = `$${(sub + ship).toFixed(2)}`;
+            document.getElementById('cart-count').textContent = count;
+            document.getElementById('cart-count').classList.toggle('opacity-0', count === 0);
+            const cont = document.getElementById('cart-items-container');
+            cont.innerHTML = cart.map(i => `<div class="flex py-4 border-b">
+                <img src="${i.image}" class="h-16 w-16 object-cover rounded">
                 <div class="ml-4 flex-1">
-                    <p class="font-bold">${item.name}</p>
-                    <p class="text-xs text-neutral-500">${item.variationName}</p>
+                    <p class="font-bold text-sm">${i.name}</p>
+                    <p class="text-xs text-neutral-500">${i.vname} ${i.mods.length ? '- ' + i.mods.join(', ') : ''}</p>
                     <div class="flex justify-between items-center mt-2">
-                        <span class="text-sm font-medium">${item.quantity} x $${item.price.toFixed(2)}</span>
-                        <button onclick="removeFromCart('${item.cartId}')" class="text-xs text-red-500">Remove</button>
+                        <span class="text-xs font-medium">${i.qty} x $${i.price.toFixed(2)}</span>
+                        <button onclick="removeFromCart('${i.cid}')" class="text-xs text-red-500">Remove</button>
                     </div>
                 </div>
             </div>`).join('');
             lucide.createIcons();
         }
 
-        function removeFromCart(cartId) { cart = cart.filter(i => i.cartId !== cartId); updateCartUI(); }
-        function toggleCart() { document.getElementById('cart-sidebar').classList.toggle('pointer-events-none'); document.getElementById('cart-overlay').classList.toggle('opacity-0'); document.getElementById('cart-panel').classList.toggle('translate-x-full'); }
-        function closeProductModal() { document.getElementById('product-modal').classList.add('hidden'); document.body.style.overflow = ''; }
+        function removeFromCart(cid) { cart = cart.filter(i => i.cid !== cid); updateCartUI(); }
+        function toggleCart() { const s = document.getElementById('cart-sidebar'); const o = document.getElementById('cart-overlay'); const p = document.getElementById('cart-panel'); isCartOpen = !isCartOpen; s.classList.toggle('pointer-events-none', !isCartOpen); o.classList.toggle('opacity-0', !isCartOpen); p.classList.toggle('translate-x-full', !isCartOpen); }
         function navigateToPage(id) { document.querySelectorAll('.page-view').forEach(v => v.classList.add('hidden')); document.getElementById(`view-${id}`).classList.remove('hidden'); window.scrollTo(0,0); }
+        function closeProductModal() { document.getElementById('product-modal').classList.add('hidden'); document.body.style.overflow = ''; }
         function showToast(m) { const t = document.getElementById('toast'); document.getElementById('toast-message').textContent = m; t.classList.remove('translate-x-full'); setTimeout(() => t.classList.add('translate-x-full'), 3000); }
+        function setTheme(t) { document.documentElement.setAttribute('data-theme', t); localStorage.setItem('theme', t); }
+        const saved = localStorage.getItem('theme'); if (saved) setTheme(saved);
     </script>
 </body>
 </html>
