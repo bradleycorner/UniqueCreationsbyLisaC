@@ -38,10 +38,7 @@
             <div class="flex items-center cursor-pointer gap-3" onclick="navigateToPage('home')">
                 <div class="h-14 w-14 rounded-lg border border-stone-100 flex items-center justify-center bg-white font-serif text-xl font-bold">UC</div>
                 <div class="hidden sm:flex items-center gap-2 leading-none">
-                    <div>
-                        <span class="block font-serif text-xl font-bold">Unique Creations</span>
-                        <span class="block text-[10px] text-rose-800 tracking-widest uppercase mt-1">By Lisa C.</span>
-                    </div>
+                    <div><span class="block font-serif text-lg font-bold">Unique Creations</span><span class="block text-[10px] text-rose-800 tracking-widest uppercase mt-1">By Lisa C.</span></div>
                     <span class="bg-rose-100 text-rose-800 text-[9px] font-bold px-2 py-0.5 rounded uppercase tracking-wider ml-2 border border-rose-200 shadow-sm">Beta Sandbox</span>
                 </div>
             </div>
@@ -81,7 +78,7 @@
 
     <div id="cart-sidebar" class="fixed inset-0 z-50 pointer-events-none transition-all">
         <div id="cart-overlay" class="absolute inset-0 bg-stone-900/60 opacity-0 transition-opacity" onclick="toggleCart()"></div>
-        <div id="cart-panel" class="absolute inset-y-0 right-0 w-full max-w-md bg-white shadow-2xl transform translate-x-full transition-transform flex flex-col pointer-events-auto">
+        <div id="cart-panel" class="absolute inset-y-0 right-0 w-full max-w-md bg-white shadow-2xl transform translate-x-full transition-transform flex flex-col pointer-events-auto h-full">
             <div class="p-8 border-b flex justify-between items-center"><h2 class="text-2xl font-serif font-bold">Your Bag</h2><button onclick="toggleCart()"><i data-lucide="x" class="w-6 h-6"></i></button></div>
             <div id="cart-items-container" class="flex-1 overflow-y-auto p-8 space-y-8 scrollbar-hide"></div>
             <div class="p-8 bg-stone-50 border-t space-y-6">
@@ -107,22 +104,20 @@
                         <span id="modal-category" class="text-[10px] font-bold text-rose-800 uppercase tracking-[0.2em] mb-2 block"></span>
                         <h2 id="modal-title-text" class="text-4xl font-serif font-bold text-stone-900 mb-2 leading-tight"></h2>
                         <p id="modal-price" class="text-2xl text-stone-900 mb-8"></p>
-                        
                         <div id="modal-options-container" class="space-y-10 mb-10"></div>
-                        
                         <div class="border-t border-stone-100 pt-8">
                             <h4 class="text-[10px] font-bold uppercase text-stone-400 tracking-widest mb-4">Product Details</h4>
                             <div id="modal-description" class="text-stone-600 text-[13px] leading-relaxed"></div>
                         </div>
                     </div>
-                    <button id="modal-add-btn" class="w-full py-5 bg-stone-900 text-white font-bold uppercase tracking-[0.2em] rounded-md mt-10 hover:bg-rose-800 transition-all shadow-xl active:scale-95">Add to Shopping Bag</button>
+                    <button id="modal-add-btn" class="w-full py-5 bg-stone-900 text-white font-bold uppercase tracking-[0.2em] rounded-md mt-10 hover:bg-rose-800 shadow-xl active:scale-95 transition-all">Add to Shopping Bag</button>
                 </div>
             </div>
         </div>
     </div>
 
     <script>
-        let products = []; let cart = [];
+        let products = []; let cart = []; let isCartOpen = false;
 
         document.addEventListener('DOMContentLoaded', async () => {
             lucide.createIcons();
@@ -131,11 +126,7 @@
             updateCartUI();
         });
 
-        const formatText = (txt) => {
-            if (!txt) return "";
-            // Replace literal \n or actual newline characters with <br>
-            return txt.replace(/\\n/g, '<br>').replace(/\n/g, '<br>');
-        };
+        const formatText = (txt) => { if (!txt) return ""; return txt.replace(/\\n/g, '<br>').replace(/\n/g, '<br>'); };
 
         async function fetchCatalog() {
             try {
@@ -145,11 +136,8 @@
                     const imgMap = {}; const optMap = {}; const modMap = {}; const allModLists = [];
                     (data.related_objects || []).forEach(o => {
                         if (o.type === 'IMAGE') imgMap[o.id] = o.image_data.url;
-                        if (o.type === 'ITEM_OPTION') optMap[o.id] = o.item_option_data;
-                        if (o.type === 'MODIFIER_LIST') {
-                            modMap[o.id] = o.modifier_list_data;
-                            allModLists.push({ id: o.id, ...o.modifier_list_data });
-                        }
+                        if (o.type === 'ITEM_OPTION') optMap[o.id] = { id: o.id, ...o.item_option_data };
+                        if (o.type === 'MODIFIER_LIST') { modMap[o.id] = o.modifier_list_data; allModLists.push({ id: o.id, ...o.modifier_list_data }); }
                     });
 
                     products = data.objects.filter(o => o.type === 'ITEM').map(item => {
@@ -157,28 +145,20 @@
                         const allImgIds = [...(d.image_ids || [])];
                         d.variations.forEach(v => { if (v.item_variation_data.image_ids) allImgIds.push(...v.item_variation_data.image_ids); });
                         
-                        // DEEP SCAN: Find explicitly linked modifiers OR grab global ones if needed
                         let modifiers = (d.modifier_list_info || []).map(m => {
                             const detail = modMap[m.modifier_list_id];
                             return detail ? { ...detail, id: m.modifier_list_id } : null;
                         }).filter(Boolean);
 
-                        // Fallback: If no explicit modifiers, but it's the Full Persian, force-attach the color list if we found one in related objects
                         if (modifiers.length === 0 && d.name.includes("Full Persian")) {
                             const colorList = allModLists.find(ml => ml.name && (ml.name.includes("Color") || ml.name.includes("Mardi")));
                             if (colorList) modifiers.push(colorList);
                         }
 
-                        const category = d.name.toLowerCase().includes("necklace") ? "necklaces" : d.name.toLowerCase().includes("earring") ? "earrings" : "bracelets";
-                        
-                        console.log(`Square Item: ${d.name}`, {
-                            variations: d.variations,
-                            modifiers: d.modifier_list_info,
-                            options: d.item_options
-                        });
+                        const options = (d.item_options || []).map(o => optMap[o.item_option_id]).filter(Boolean);
 
                         return {
-                            id: item.id, name: d.name, variations: d.variations, modifiers, 
+                            id: item.id, name: d.name, variations: d.variations, modifiers, options,
                             image: imgMap[allImgIds[0]] || "https://images.unsplash.com/photo-1611591437281-460bfbe1220a?auto=format&fit=crop&w=500&q=80",
                             images: [...new Set(allImgIds)].map(id => imgMap[id]).filter(Boolean),
                             imgLookup: d.variations.reduce((acc, v) => { if (v.item_variation_data.image_ids) acc[v.id] = imgMap[v.item_variation_data.image_ids[0]]; return acc; }, {}),
@@ -187,12 +167,12 @@
                         };
                     });
                 }
-            } catch (e) { console.error("Mapper Error:", e); }
+            } catch (e) { console.error(e); }
         }
 
         function renderProducts() {
             const grid = document.getElementById('product-grid'); grid.innerHTML = '';
-            if (products.length === 0) { grid.innerHTML = '<div class="col-span-full py-20 text-center font-serif italic text-stone-400">Connection to Square active, catalog empty.</div>'; return; }
+            if (products.length === 0) { grid.innerHTML = '<div class="col-span-full py-20 text-center font-serif italic text-stone-400">Syncing with Square...</div>'; return; }
             products.forEach(p => {
                 const div = document.createElement('div');
                 div.className = 'group bg-white rounded-lg border border-stone-100 overflow-hidden flex flex-col shadow-sm hover:shadow-2xl transition-all cursor-pointer';
@@ -215,28 +195,37 @@
             
             const container = document.getElementById('modal-options-container'); container.innerHTML = '';
             
-            // 1. SIZE DROPDOWN
+            // 1. Variations (Size / Style)
             if (p.variations.length > 1) {
                 const div = document.createElement('div');
-                div.innerHTML = `<label class="text-[10px] font-bold text-stone-400 uppercase tracking-widest block mb-3">Select Size <span class="text-rose-800">* Required</span></label>
-                    <select id="modal-var-select" onchange="updateModalState('${id}')" class="w-full p-4 border border-stone-200 rounded text-sm bg-white outline-none focus:border-rose-800 appearance-none">
+                div.innerHTML = `<label class="text-[10px] font-bold text-stone-400 uppercase tracking-widest block mb-3">Select Size <span class="text-rose-800">*</span></label>
+                    <select id="modal-var-select" onchange="updateModalState('${id}')" class="w-full p-4 border border-stone-200 rounded text-sm bg-white outline-none focus:border-rose-800">
                         ${p.variations.map(v => `<option value="${v.id}">${v.item_variation_data.name} - $${(v.item_variation_data.price_money.amount/100).toFixed(2)}</option>`).join('')}
                     </select>`;
                 container.appendChild(div);
             }
 
-            // 2. COLOR CHECKBOXES
-            // 2. Modifiers (Colors - with Multi-Selection Support)
+            // 2. Formal Options (e.g. "Color" attribute)
+            p.options.forEach(o => {
+                const div = document.createElement('div');
+                div.innerHTML = `<label class="text-[10px] font-bold text-stone-400 uppercase tracking-widest block mb-3">${o.display_name} <span class="text-rose-800">*</span></label>
+                    <select class="modal-opt-select w-full p-4 border border-stone-200 rounded text-sm bg-white outline-none focus:border-rose-800">
+                        <option value="">Choose ${o.display_name}...</option>
+                        ${o.values.map(val => `<option value="${val.id}">${val.item_option_value_data.name}</option>`).join('')}
+                    </select>`;
+                container.appendChild(div);
+            });
+
+            // 3. Modifiers (Mardi Gras Love - Grid Mode)
             p.modifiers.forEach(m => {
                 const div = document.createElement('div');
-                const isMulti = true; // For Mardi Gras Love, always allow multi
-                const max = 2; // Fixed limit for your specific weave
-                div.innerHTML = `<label class="text-[10px] font-bold text-stone-400 uppercase tracking-widest block mb-3">Select Custom Colors (Choose up to ${max}) <span class="text-rose-800">* Required</span></label>
+                const max = m.max_selected_slots || 2;
+                div.innerHTML = `<label class="text-[10px] font-bold text-stone-400 uppercase tracking-widest block mb-3">${m.name} (Pick up to ${max}) <span class="text-rose-800">*</span></label>
                     <div class="grid grid-cols-2 gap-2">
                         ${m.modifiers.map(mod => `
-                            <label class="flex items-center gap-3 p-3 border border-stone-100 rounded hover:border-rose-200 cursor-pointer transition-colors bg-stone-50/50">
-                                <input type="checkbox" name="mod-${m.id}" value="${mod.id}" data-name="${mod.name}" data-max="${max}" class="modal-mod-input rounded text-rose-800 focus:ring-rose-800" onchange="handleModifierLimit(this)">
-                                <span class="text-[11px] text-stone-600 font-bold uppercase tracking-tight">${mod.name}</span>
+                            <label class="flex items-center gap-3 p-3 border border-stone-100 rounded hover:border-rose-200 cursor-pointer bg-stone-50/50">
+                                <input type="checkbox" name="mod-${m.id}" value="${mod.id}" data-name="${mod.modifier_data.name}" data-max="${max}" class="modal-mod-input rounded text-rose-800 focus:ring-rose-800" onchange="handleModifierLimit(this)">
+                                <span class="text-[11px] text-stone-600 font-bold uppercase tracking-tight">${mod.modifier_data.name}</span>
                             </label>
                         `).join('')}
                     </div>`;
@@ -260,10 +249,7 @@
 
         function handleModifierLimit(input) {
             const checked = document.querySelectorAll(`input[name="${input.name}"]:checked`);
-            if (checked.length > parseInt(input.dataset.max)) {
-                input.checked = false;
-                showToast(`Maximum selection reached`, true);
-            }
+            if (checked.length > parseInt(input.dataset.max)) { input.checked = false; showToast(`Limit reached`, true); }
         }
 
         function updateModalState(id) {
@@ -280,12 +266,15 @@
             const v = p.variations.find(varObj => varObj.id === vid);
             
             const selectedMods = Array.from(document.querySelectorAll('.modal-mod-input:checked')).map(i => i.dataset.name);
+            const optSelects = document.querySelectorAll('.modal-opt-select');
+            for (let s of optSelects) { if (!s.value) { showToast("Please select required options", true); return; } }
             if (p.modifiers.length > 0 && selectedMods.length === 0) { showToast("Please select your color(s)", true); return; }
             
-            const cid = `${id}-${vid}-${selectedMods.sort().join('-')}`;
+            const opts = [...Array.from(optSelects).map(s => s.options[s.selectedIndex].text), ...selectedMods];
+            const cid = `${id}-${vid}-${opts.sort().join('-')}`;
             const ex = cart.find(i => i.cid === cid);
             if (ex) { ex.qty++; } else {
-                cart.push({ cid, id, name: p.name, vname: v.item_variation_data.name, price: v.item_variation_data.price_money.amount/100, image: p.imgLookup[vid] || p.image, qty: 1, mods: selectedMods });
+                cart.push({ cid, id, name: p.name, vname: v.item_variation_data.name, price: v.item_variation_data.price_money.amount/100, image: p.imgLookup[vid] || p.image, qty: 1, opts });
             }
             showToast(`Added to your bag`);
             updateCartUI(); closeProductModal();
@@ -301,7 +290,7 @@
             else {
                 cont.innerHTML = cart.map(i => `<div class="flex gap-6 py-4 border-b border-stone-50">
                     <img src="${i.image}" class="h-20 w-20 object-cover rounded shadow-sm">
-                    <div class="flex-1"><p class="font-bold text-sm text-stone-900">${i.name}</p><p class="text-[10px] text-stone-400 uppercase tracking-widest mt-1">${i.vname} ${i.mods.length ? '· ' + i.mods.join(', ') : ''}</p>
+                    <div class="flex-1"><p class="font-bold text-sm text-stone-900">${i.name}</p><p class="text-[10px] text-stone-400 uppercase tracking-widest mt-1">${i.vname} ${i.opts.length ? '· ' + i.opts.join(', ') : ''}</p>
                     <div class="flex justify-between items-center mt-4"><span class="text-sm font-bold">$${i.price.toFixed(2)}</span><button onclick="removeFromCart('${i.cid}')" class="text-[10px] font-bold uppercase text-rose-800 underline">Remove</button></div></div>
                 </div>`).join('');
             }
