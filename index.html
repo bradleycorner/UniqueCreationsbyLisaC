@@ -150,7 +150,7 @@
                         <h2 id="modal-title-text" class="text-3xl font-serif font-bold text-neutral-900 mb-2 leading-tight"></h2>
                         <p id="modal-price" class="text-2xl font-medium text-neutral-900 mb-8"></p>
                         <div id="modal-options-container" class="space-y-6 mb-8"></div>
-                        <div class="prose prose-neutral"><h4 class="text-xs font-bold uppercase text-neutral-400 mb-2">The Story</h4><p id="modal-description" class="text-neutral-600 leading-relaxed"></p></div>
+                        <div class="prose prose-neutral"><h4 class="text-xs font-bold uppercase text-neutral-400 mb-2">The Story</h4><p id="modal-description" class="text-neutral-600 text-sm whitespace-pre-line leading-relaxed mb-8 flex-grow"></p></div>
                     </div>
                     <button id="modal-add-btn" class="w-full py-4 bg-neutral-900 text-white font-bold uppercase tracking-widest rounded-md mt-8 hover:bg-primary-800 transition-colors">Add to Shopping Bag</button>
                 </div>
@@ -239,7 +239,7 @@
             const opt = document.getElementById('modal-options-container'); opt.innerHTML = '';
             if (p.variations.length > 1) {
                 const container = document.createElement('div');
-                container.innerHTML = `<label class="text-[10px] font-bold text-neutral-400 uppercase tracking-widest block mb-2">Select Style / Size</label>
+                container.innerHTML = `<label class="text-[10px] font-bold text-neutral-400 uppercase tracking-widest block mb-2">Size <span class="text-primary-800">*Required</span></label>
                     <select id="modal-var-select" onchange="updateModalState('${id}')" class="w-full p-3 border rounded-md text-sm bg-white focus:ring-2 focus:ring-primary-500 outline-none">
                         ${p.variations.map(v => `<option value="${v.id}">${v.item_variation_data.name} - $${(v.item_variation_data.price_money.amount/100).toFixed(2)}</option>`).join('')}
                     </select>`;
@@ -248,9 +248,9 @@
             if (p.modifier_lists) {
                 p.modifier_lists.forEach(m => {
                     const container = document.createElement('div');
-                    container.innerHTML = `<label class="text-[10px] font-bold text-neutral-400 uppercase tracking-widest block mb-2">${m.modifier_list_data.name}</label>
+                    container.innerHTML = `<label class="text-[10px] font-bold text-neutral-400 uppercase tracking-widest block mb-2">${m.modifier_list_data.name} <span class="text-primary-800">*Required</span></label>
                         <select class="modal-mod-select w-full p-3 border rounded-md text-sm bg-white outline-none">
-                            <option value="">Choose ${m.modifier_list_data.name}...</option>
+                            <option value="">Select your custom colors...</option>
                             ${m.modifier_list_data.modifiers.map(mod => `<option value="${mod.id}">${mod.modifier_data.name}</option>`).join('')}
                         </select>`;
                     opt.appendChild(container);
@@ -281,7 +281,6 @@
             
             document.getElementById('modal-price').textContent = `$${(v.item_variation_data.price_money.amount/100).toFixed(2)}`;
             
-            // AUTOMATIC IMAGE SWAP: If this variation has a specific image, show it!
             if (p.imageLookup[vid]) {
                 const mainImg = document.getElementById('modal-main-image');
                 mainImg.style.opacity = '0';
@@ -294,13 +293,20 @@
             const vs = document.getElementById('modal-var-select');
             const vid = vs ? vs.value : p.variations[0].id;
             const v = p.variations.find(v => v.id === vid);
-            const mods = Array.from(document.querySelectorAll('.modal-mod-select')).map(s => s.options[s.selectedIndex].text).filter(t => !t.startsWith('Choose '));
+            
+            // Validate modifiers
+            const modSelects = document.querySelectorAll('.modal-mod-select');
+            for (let s of modSelects) {
+                if (!s.value) { showToast("Please select required options", true); return; }
+            }
+
+            const mods = Array.from(modSelects).map(s => s.options[s.selectedIndex].text).filter(t => !t.startsWith('Select '));
             const cid = `${id}-${vid}-${mods.join('-')}`;
             const existing = cart.find(i => i.cid === cid);
             if (existing) { existing.qty++; } else {
                 cart.push({ cid, id, name: p.name, vname: v.item_variation_data.name, price: v.item_variation_data.price_money.amount/100, image: p.imageLookup[vid] || p.image, qty: 1, mods });
             }
-            showToast(`Added ${p.name} to cart`);
+            showToast(`Added ${p.name} to bag`);
             updateCartUI();
         }
 
@@ -331,7 +337,7 @@
         function toggleCart() { const s = document.getElementById('cart-sidebar'); const o = document.getElementById('cart-overlay'); const p = document.getElementById('cart-panel'); isCartOpen = !isCartOpen; s.classList.toggle('pointer-events-none', !isCartOpen); o.classList.toggle('opacity-0', !isCartOpen); p.classList.toggle('translate-x-full', !isCartOpen); }
         function navigateToPage(id) { document.querySelectorAll('.page-view').forEach(v => v.classList.add('hidden')); const target = document.getElementById(`view-${id}`); if (target) target.classList.remove('hidden'); window.scrollTo(0,0); }
         function closeProductModal() { document.getElementById('product-modal').classList.add('hidden'); document.body.style.overflow = ''; }
-        function showToast(m) { const t = document.getElementById('toast'); document.getElementById('toast-message').textContent = m; t.classList.remove('translate-x-full'); setTimeout(() => t.classList.add('translate-x-full'), 3000); }
+        function showToast(m, isErr = false) { const t = document.getElementById('toast'); document.getElementById('toast-message').textContent = m; document.getElementById('toast-icon-container').innerHTML = isErr ? '<i data-lucide="alert-circle" class="w-5 h-5 text-red-500"></i>' : '<i data-lucide="check-circle" class="w-5 h-5 text-secondary-500"></i>'; lucide.createIcons(); t.classList.remove('translate-x-full'); setTimeout(() => t.classList.add('translate-x-full'), 3000); }
         function setTheme(t) { document.documentElement.setAttribute('data-theme', t); localStorage.setItem('theme', t); }
         function filterProducts(cat) { document.querySelectorAll('.filter-btn').forEach(b => b.classList.toggle('bg-neutral-900', b.getAttribute('onclick').includes(cat))); renderProducts(cat); }
         const saved = localStorage.getItem('theme'); if (saved) setTheme(saved);
