@@ -4,61 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Unique Creations by Lisa C. | Handmade Jewelry</title>
-    
-    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
-    
-    <!-- Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
-
     <script>
         tailwind.config = {
             theme: {
                 extend: {
-                    fontFamily: {
-                        serif: ['"Playfair Display"', 'serif'],
-                        sans: ['"Lato"', 'sans-serif'],
-                    },
+                    fontFamily: { serif: ['"Playfair Display"', 'serif'], sans: ['"Lato"', 'sans-serif'] },
                     colors: {
-                        primary: {
-                            50: 'rgb(var(--primary-50) / <alpha-value>)',
-                            100: 'rgb(var(--primary-100) / <alpha-value>)',
-                            200: 'rgb(var(--primary-200) / <alpha-value>)',
-                            300: 'rgb(var(--primary-300) / <alpha-value>)',
-                            400: 'rgb(var(--primary-400) / <alpha-value>)',
-                            500: 'rgb(var(--primary-500) / <alpha-value>)',
-                            600: 'rgb(var(--primary-600) / <alpha-value>)',
-                            700: 'rgb(var(--primary-700) / <alpha-value>)',
-                            800: 'rgb(var(--primary-800) / <alpha-value>)',
-                            900: 'rgb(var(--primary-900) / <alpha-value>)',
-                        },
-                        secondary: {
-                            50: 'rgb(var(--secondary-50) / <alpha-value>)',
-                            100: 'rgb(var(--secondary-100) / <alpha-value>)',
-                            200: 'rgb(var(--secondary-200) / <alpha-value>)',
-                            300: 'rgb(var(--secondary-300) / <alpha-value>)',
-                            400: 'rgb(var(--secondary-400) / <alpha-value>)',
-                            500: 'rgb(var(--secondary-500) / <alpha-value>)',
-                            600: 'rgb(var(--secondary-600) / <alpha-value>)',
-                            700: 'rgb(var(--secondary-700) / <alpha-value>)',
-                            800: 'rgb(var(--secondary-800) / <alpha-value>)',
-                            900: 'rgb(var(--secondary-900) / <alpha-value>)',
-                        },
-                        neutral: {
-                            50: 'rgb(var(--neutral-50) / <alpha-value>)',
-                            100: 'rgb(var(--neutral-100) / <alpha-value>)',
-                            200: 'rgb(var(--neutral-200) / <alpha-value>)',
-                            300: 'rgb(var(--neutral-300) / <alpha-value>)',
-                            400: 'rgb(var(--neutral-400) / <alpha-value>)',
-                            500: 'rgb(var(--neutral-500) / <alpha-value>)',
-                            600: 'rgb(var(--neutral-600) / <alpha-value>)',
-                            700: 'rgb(var(--neutral-700) / <alpha-value>)',
-                            800: 'rgb(var(--neutral-800) / <alpha-value>)',
-                            900: 'rgb(var(--neutral-900) / <alpha-value>)',
-                        }
+                        primary: { 50: 'rgb(var(--primary-50) / <alpha-value>)', 100: 'rgb(var(--primary-100) / <alpha-value>)', 200: 'rgb(var(--primary-200) / <alpha-value>)', 300: 'rgb(var(--primary-300) / <alpha-value>)', 400: 'rgb(var(--primary-400) / <alpha-value>)', 500: 'rgb(var(--primary-500) / <alpha-value>)', 600: 'rgb(var(--primary-600) / <alpha-value>)', 700: 'rgb(var(--primary-700) / <alpha-value>)', 800: 'rgb(var(--primary-800) / <alpha-value>)', 900: 'rgb(var(--primary-900) / <alpha-value>)' },
+                        secondary: { 50: 'rgb(var(--secondary-50) / <alpha-value>)', 100: 'rgb(var(--secondary-100) / <alpha-value>)', 200: 'rgb(var(--secondary-200) / <alpha-value>)', 300: 'rgb(var(--secondary-300) / <alpha-value>)', 400: 'rgb(var(--secondary-400) / <alpha-value>)', 500: 'rgb(var(--secondary-500) / <alpha-value>)', 600: 'rgb(var(--secondary-600) / <alpha-value>)', 700: 'rgb(var(--secondary-700) / <alpha-value>)', 800: 'rgb(var(--secondary-800) / <alpha-value>)', 900: 'rgb(var(--secondary-900) / <alpha-value>)' },
+                        neutral: { 50: 'rgb(var(--neutral-50) / <alpha-value>)', 100: 'rgb(var(--neutral-100) / <alpha-value>)', 200: 'rgb(var(--neutral-200) / <alpha-value>)', 300: 'rgb(var(--neutral-300) / <alpha-value>)', 400: 'rgb(var(--neutral-400) / <alpha-value>)', 500: 'rgb(var(--neutral-500) / <alpha-value>)', 600: 'rgb(var(--neutral-600) / <alpha-value>)', 700: 'rgb(var(--neutral-700) / <alpha-value>)', 800: 'rgb(var(--neutral-800) / <alpha-value>)', 900: 'rgb(var(--neutral-900) / <alpha-value>)' }
                     }
                 }
             }
@@ -68,11 +25,7 @@
         .scrollbar-hide::-webkit-scrollbar { display: none; }
         .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
         .fade-in { animation: fadeIn 0.5s ease-in-out; }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
         :root[data-theme="blossom"] {
             --primary-50: 255 241 242; --primary-100: 255 228 230; --primary-200: 254 205 211; --primary-300: 253 164 175; --primary-400: 251 113 133; --primary-500: 244 63 94; --primary-600: 225 29 72; --primary-700: 190 18 60; --primary-800: 159 18 57; --primary-900: 136 19 55;
             --secondary-50: 240 253 244; --secondary-100: 220 252 231; --secondary-200: 187 247 208; --secondary-300: 134 239 172; --secondary-400: 74 222 128; --secondary-500: 34 197 94; --secondary-600: 22 163 74; --secondary-700: 21 128 61; --secondary-800: 22 101 52; --secondary-900: 20 83 45;
@@ -90,147 +43,116 @@
         }
     </style>
 </head>
-<body class="font-sans text-neutral-800 bg-neutral-50 antialiased selection:bg-primary-100 flex flex-col min-h-screen">
-
+<body class="font-sans text-neutral-800 bg-neutral-50 antialiased flex flex-col min-h-screen">
     <div id="toast" class="fixed top-24 right-5 bg-neutral-900 text-white px-6 py-4 rounded shadow-lg transform translate-x-full transition-transform duration-300 z-50 flex items-center gap-3">
         <span id="toast-icon-container"><i data-lucide="check-circle" class="w-5 h-5 text-secondary-500"></i></span>
-        <span id="toast-message">Item added to cart</span>
+        <span id="toast-message"></span>
     </div>
 
-    <nav class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-neutral-100 transition-all duration-300 shadow-sm" id="navbar">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-24">
-                <button class="md:hidden p-2 hover:bg-neutral-50 rounded-full" onclick="toggleMobileMenu()"><i data-lucide="menu" class="w-6 h-6"></i></button>
-                <div class="flex-shrink-0 flex items-center cursor-pointer gap-3" onclick="navigateToPage('home')">
-                    <div class="h-16 w-16 relative rounded-lg overflow-hidden border border-neutral-100 shadow-sm bg-white flex items-center justify-center">
-                         <span class="font-serif text-2xl font-bold text-neutral-900">UC</span>
-                    </div>
-                    <div class="hidden sm:block">
-                        <span class="block font-serif text-xl font-bold tracking-tight text-neutral-900 leading-none">Unique Creations</span>
-                        <span class="block text-sm text-primary-800 font-normal tracking-widest uppercase mt-1">By Lisa C.</span>
+    <nav class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-neutral-100 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 h-24 flex justify-between items-center">
+            <div class="flex items-center cursor-pointer gap-3" onclick="navigateToPage('home')">
+                <div class="h-16 w-16 rounded-lg border border-neutral-100 flex items-center justify-center bg-white font-serif text-2xl font-bold">UC</div>
+                <div class="hidden sm:block"><span class="block font-serif text-xl font-bold leading-none">Unique Creations</span><span class="block text-sm text-primary-800 font-normal tracking-widest uppercase mt-1">By Lisa C.</span></div>
+            </div>
+            <div class="hidden md:flex space-x-8">
+                <button onclick="navigateToPage('home')" class="hover:text-primary-800 font-medium uppercase text-sm tracking-wide">Home</button>
+                <button onclick="navigateToPage('shop')" class="hover:text-primary-800 font-medium uppercase text-sm tracking-wide">Shop</button>
+                <button onclick="navigateToPage('about')" class="hover:text-primary-800 font-medium uppercase text-sm tracking-wide">About</button>
+                <button onclick="navigateToPage('contact')" class="hover:text-primary-800 font-medium uppercase text-sm tracking-wide">Contact</button>
+            </div>
+            <div class="flex items-center gap-4">
+                <div class="relative group">
+                    <button class="p-2 hover:bg-neutral-50 rounded-full"><i data-lucide="palette" class="w-5 h-5 text-neutral-600"></i></button>
+                    <div class="absolute right-0 top-full pt-2 hidden group-hover:block w-32 bg-white rounded shadow-lg border py-1">
+                        <button onclick="setTheme('blossom')" class="block w-full text-left px-4 py-2 text-sm hover:bg-neutral-50">Blossom</button>
+                        <button onclick="setTheme('ocean')" class="block w-full text-left px-4 py-2 text-sm hover:bg-neutral-50">Ocean</button>
+                        <button onclick="setTheme('luxury')" class="block w-full text-left px-4 py-2 text-sm hover:bg-neutral-50">Luxury</button>
                     </div>
                 </div>
-                <div class="hidden md:flex space-x-8 items-center">
-                    <button onclick="navigateToPage('home')" class="nav-link hover:text-primary-800 transition-colors font-medium text-sm uppercase tracking-wide">Home</button>
-                    <button onclick="navigateToPage('shop')" class="nav-link hover:text-primary-800 transition-colors font-medium text-sm uppercase tracking-wide">Shop</button>
-                    <button onclick="navigateToPage('about')" class="nav-link hover:text-primary-800 transition-colors font-medium text-sm uppercase tracking-wide">About</button>
-                    <button onclick="navigateToPage('contact')" class="nav-link hover:text-primary-800 transition-colors font-medium text-sm uppercase tracking-wide">Contact</button>
-                </div>
-                <div class="flex items-center gap-4">
-                    <div class="relative group">
-                        <button class="p-2 hover:bg-neutral-50 rounded-full transition-colors"><i data-lucide="palette" class="w-5 h-5 text-neutral-600"></i></button>
-                        <div class="absolute right-0 top-full pt-2 hidden group-hover:block">
-                            <div class="w-32 bg-white rounded-md shadow-lg py-1 border border-neutral-100">
-                                <button onclick="setTheme('blossom')" class="block w-full text-left px-4 py-2 text-sm text-neutral-700 hover:bg-neutral-50">Blossom</button>
-                                <button onclick="setTheme('ocean')" class="block w-full text-left px-4 py-2 text-sm text-neutral-700 hover:bg-neutral-50">Ocean</button>
-                                <button onclick="setTheme('luxury')" class="block w-full text-left px-4 py-2 text-sm text-neutral-700 hover:bg-neutral-50">Luxury</button>
-                            </div>
-                        </div>
-                    </div>
-                    <button onclick="toggleCart()" class="relative p-2 hover:bg-neutral-50 rounded-full transition-colors group">
-                        <i data-lucide="shopping-bag" class="w-6 h-6 text-neutral-700 group-hover:text-primary-800"></i>
-                        <span id="cart-count" class="absolute top-0 right-0 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-white transform translate-x-1/4 -translate-y-1/4 bg-primary-800 rounded-full opacity-0 transition-opacity">0</span>
-                    </button>
-                </div>
+                <button onclick="toggleCart()" class="relative p-2 hover:bg-neutral-50 rounded-full">
+                    <i data-lucide="shopping-bag" class="w-6 h-6 text-neutral-700 hover:text-primary-800"></i>
+                    <span id="cart-count" class="absolute top-0 right-0 bg-primary-800 text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full opacity-0">0</span>
+                </button>
             </div>
         </div>
     </nav>
 
     <main class="flex-grow">
         <div id="view-home" class="page-view">
-            <section class="relative bg-white overflow-hidden">
-                <div class="max-w-7xl mx-auto">
-                    <div class="relative z-10 pb-8 bg-white sm:pb-16 md:pb-20 lg:max-w-2xl lg:w-full lg:pb-28 xl:pb-32">
-                        <main class="mt-10 mx-auto max-w-7xl px-4 sm:mt-12 sm:px-6 md:mt-16 lg:mt-20 lg:px-8 xl:mt-28">
-                            <div class="sm:text-center lg:text-left fade-in">
-                                <h1 class="text-4xl tracking-tight font-extrabold text-neutral-900 sm:text-5xl md:text-6xl font-serif">
-                                    <span class="block xl:inline">Handcrafted with</span>
-                                    <span class="block text-primary-800 xl:inline italic">elegance & intention.</span>
-                                </h1>
-                                <p class="mt-3 text-base text-neutral-500 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0">At Unique Creations by Lisa C, we specialize in crafting exquisite pieces that combine traditional techniques with modern design.</p>
-                                <div class="mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start gap-4">
-                                    <button onclick="navigateToPage('shop')" class="px-8 py-3 rounded-md text-white bg-neutral-900 hover:bg-neutral-800 font-medium">Shop Collection</button>
-                                    <button onclick="navigateToPage('about')" class="px-8 py-3 rounded-md border border-neutral-200 bg-white hover:bg-neutral-50 font-medium">Our Story</button>
-                                </div>
-                            </div>
-                        </main>
-                    </div>
+            <section class="relative bg-white overflow-hidden py-20 px-4 max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-12">
+                <div class="md:w-1/2">
+                    <h1 class="text-5xl font-serif font-bold text-neutral-900 mb-6">Handcrafted with <span class="text-primary-800 italic">elegance & intention.</span></h1>
+                    <p class="text-lg text-neutral-600 mb-8">At Unique Creations by Lisa C, we specialize in crafting exquisite pieces that combine traditional techniques with modern design.</p>
+                    <div class="flex gap-4"><button onclick="navigateToPage('shop')" class="px-8 py-3 bg-neutral-900 text-white rounded hover:bg-neutral-800 font-medium">Shop Now</button><button onclick="navigateToPage('about')" class="px-8 py-3 border border-neutral-200 rounded hover:bg-neutral-50 font-medium">Our Story</button></div>
                 </div>
-                <div class="lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2 bg-neutral-50">
-                    <img class="h-56 w-full object-cover sm:h-72 md:h-96 lg:w-full lg:h-full opacity-90" src="https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80" alt="Jewelry">
-                </div>
+                <div class="md:w-1/2"><img src="https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=800&q=80" class="rounded-lg shadow-xl object-cover h-[500px] w-full" alt="Jewelry"></div>
             </section>
         </div>
 
         <div id="view-shop" class="page-view hidden">
-            <section class="py-16 bg-neutral-50 min-h-screen">
-                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div class="text-center mb-12">
-                        <span class="text-primary-800 font-bold tracking-widest uppercase text-xs mb-2 block">Our Catalog</span>
-                        <h2 class="text-3xl font-serif font-bold text-neutral-900">Latest Collections</h2>
-                        <div class="w-24 h-1 bg-gradient-to-r from-primary-300 to-secondary-300 mx-auto mt-4 rounded-full"></div>
-                        <div class="mt-8 flex justify-center space-x-2 md:space-x-4 overflow-x-auto pb-2">
-                            <button onclick="filterProducts('all')" class="filter-btn active px-6 py-2 rounded-full text-sm font-medium transition-all shadow-sm bg-neutral-900 text-white" data-category="all">All</button>
-                            <button onclick="filterProducts('necklaces')" class="filter-btn px-6 py-2 rounded-full text-sm font-medium text-neutral-600 bg-white border border-neutral-200" data-category="necklaces">Necklaces</button>
-                            <button onclick="filterProducts('earrings')" class="filter-btn px-6 py-2 rounded-full text-sm font-medium text-neutral-600 bg-white border border-neutral-200" data-category="earrings">Earrings</button>
-                            <button onclick="filterProducts('bracelets')" class="filter-btn px-6 py-2 rounded-full text-sm font-medium text-neutral-600 bg-white border border-neutral-200" data-category="bracelets">Bracelets</button>
-                        </div>
+            <section class="py-16 bg-neutral-50 min-h-screen px-4">
+                <div class="max-w-7xl mx-auto text-center mb-12">
+                    <span class="text-primary-800 font-bold uppercase text-xs tracking-widest block mb-2">Our Catalog</span>
+                    <h2 class="text-3xl font-serif font-bold mb-4">Latest Collections</h2>
+                    <div class="flex justify-center gap-4 mt-8 overflow-x-auto pb-4 scrollbar-hide">
+                        <button onclick="filterProducts('all')" class="filter-btn active px-6 py-2 rounded-full text-sm font-medium bg-neutral-900 text-white">All</button>
+                        <button onclick="filterProducts('necklaces')" class="filter-btn px-6 py-2 rounded-full text-sm font-medium bg-white border border-neutral-200">Necklaces</button>
+                        <button onclick="filterProducts('earrings')" class="filter-btn px-6 py-2 rounded-full text-sm font-medium bg-white border border-neutral-200">Earrings</button>
+                        <button onclick="filterProducts('bracelets')" class="filter-btn px-6 py-2 rounded-full text-sm font-medium bg-white border border-neutral-200">Bracelets</button>
                     </div>
-                    <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-y-10 gap-x-6 xl:gap-x-8">
-                        <div class="col-span-full text-center py-20">
-                            <i data-lucide="loader-2" class="w-8 h-8 animate-spin mx-auto text-primary-800"></i>
-                            <p class="mt-2 text-neutral-500">Loading exquisite pieces...</p>
-                        </div>
-                    </div>
+                </div>
+                <div id="product-grid" class="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="col-span-full text-center py-20"><i data-lucide="loader-2" class="w-8 h-8 animate-spin mx-auto text-primary-800"></i><p class="mt-2 text-neutral-500">Loading catalog...</p></div>
                 </div>
             </section>
         </div>
 
-        <div id="view-about" class="page-view hidden">
-            <section class="py-20 bg-white text-center"><h2 class="text-3xl font-serif font-bold">Meet Lisa C.</h2><p class="mt-4 text-neutral-600">Handcrafting elegance since 2023.</p></section>
+        <div id="view-about" class="page-view hidden py-20 px-4 text-center max-w-3xl mx-auto">
+            <h2 class="text-4xl font-serif font-bold mb-6">Meet Lisa C.</h2>
+            <p class="text-lg text-neutral-600 leading-relaxed">My journey began with a simple love for nature's colors and textures. Every piece of jewelry tells a story, and I am honored to help you tell yours through wearable art.</p>
         </div>
-        <div id="view-contact" class="page-view hidden">
-            <section class="py-20 bg-neutral-900 text-white text-center"><h2 class="text-3xl font-serif font-bold">Contact Us</h2><p class="mt-4">sales@uniquecreationsbylisac.com</p></section>
+        <div id="view-contact" class="page-view hidden py-20 px-4 text-center max-w-3xl mx-auto">
+            <h2 class="text-4xl font-serif font-bold mb-6">Get in Touch</h2>
+            <p class="text-lg text-neutral-600">Email us at: <a href="mailto:sales@uniquecreationsbylisac.com" class="text-primary-800 font-bold">sales@uniquecreationsbylisac.com</a></p>
         </div>
     </main>
 
-    <div id="cart-sidebar" class="fixed inset-0 overflow-hidden z-50 pointer-events-none transition-all duration-300">
-        <div class="absolute inset-0 overflow-hidden">
-            <div id="cart-overlay" class="absolute inset-0 bg-neutral-900 bg-opacity-75 transition-opacity opacity-0 pointer-events-none" onclick="toggleCart()"></div>
-            <div class="fixed inset-y-0 right-0 flex max-w-full pl-10">
-                <div id="cart-panel" class="w-screen max-w-md transform translate-x-full transition-transform duration-300 bg-white shadow-xl flex flex-col pointer-events-auto">
-                    <div class="px-4 py-6 flex justify-between border-b"><h2 class="text-lg font-medium font-serif">Shopping Cart</h2><button onclick="toggleCart()"><i data-lucide="x" class="w-6 h-6"></i></button></div>
-                    <div id="cart-items-container" class="flex-1 overflow-y-auto p-4 space-y-4"></div>
-                    <div class="p-6 bg-neutral-50 border-t space-y-4">
-                        <div class="flex justify-between font-medium"><p>Subtotal</p><p id="cart-subtotal">$0.00</p></div>
-                        <div class="space-y-2">
-                            <div class="flex items-center"><input type="radio" name="shipping" value="5" onchange="updateCartUI()" checked> <label class="ml-2 text-sm">Standard Shipping ($5.00)</label></div>
-                            <div class="flex items-center"><input type="radio" name="shipping" value="0" onchange="updateCartUI()"> <label class="ml-2 text-sm">Local Delivery (Free)</label></div>
-                        </div>
-                        <div class="flex justify-between font-bold border-t pt-4"><p>Total</p><p id="cart-total">$0.00</p></div>
-                        <button onclick="openPaymentModal()" class="w-full py-3 bg-neutral-900 text-white rounded">Checkout</button>
-                    </div>
+    <div id="cart-sidebar" class="fixed inset-0 z-50 pointer-events-none transition-all">
+        <div id="cart-overlay" class="absolute inset-0 bg-neutral-900/75 opacity-0 transition-opacity" onclick="toggleCart()"></div>
+        <div id="cart-panel" class="absolute inset-y-0 right-0 w-full max-w-md bg-white shadow-xl transform translate-x-full transition-transform flex flex-col pointer-events-auto">
+            <div class="p-6 border-b flex justify-between items-center"><h2 class="text-xl font-serif font-bold">Shopping Bag</h2><button onclick="toggleCart()"><i data-lucide="x" class="w-6 h-6"></i></button></div>
+            <div id="cart-items-container" class="flex-1 overflow-y-auto p-6 space-y-6"></div>
+            <div class="p-6 bg-neutral-50 border-t space-y-4">
+                <div class="flex justify-between font-medium"><span>Subtotal</span><span id="cart-subtotal">$0.00</span></div>
+                <div class="space-y-2">
+                    <div class="flex items-center gap-3"><input type="radio" name="shipping" value="5" onchange="updateCartUI()" checked id="ship-std"><label for="ship-std" class="text-sm">Standard Shipping ($5.00)</label></div>
+                    <div class="flex items-center gap-3"><input type="radio" name="shipping" value="0" onchange="updateCartUI()" id="ship-local"><label for="ship-local" class="text-sm">Local Delivery (Free)</label></div>
                 </div>
+                <div class="flex justify-between text-xl font-bold border-t pt-4"><span>Total</span><span id="cart-total">$0.00</span></div>
+                <button onclick="openPaymentModal()" class="w-full py-4 bg-neutral-900 text-white rounded font-bold uppercase tracking-widest">Checkout with Square</button>
             </div>
         </div>
     </div>
 
     <div id="product-modal" class="fixed inset-0 z-50 overflow-y-auto hidden">
         <div class="flex items-center justify-center min-h-screen p-4">
-            <div class="fixed inset-0 bg-stone-900 bg-opacity-75" onclick="closeProductModal()"></div>
-            <div class="relative bg-white rounded-lg shadow-xl max-w-4xl w-full overflow-hidden sm:flex">
-                <button onclick="closeProductModal()" class="absolute top-4 right-4 z-10 p-2"><i data-lucide="x" class="w-6 h-6"></i></button>
-                <div class="sm:w-1/2 p-6 bg-stone-50">
-                    <img id="modal-main-image" src="" class="w-full aspect-square object-cover rounded shadow-sm">
-                    <div id="modal-thumbnails" class="flex gap-2 mt-4 overflow-x-auto pb-2"></div>
+            <div class="fixed inset-0 bg-neutral-900/80 transition-opacity" onclick="closeProductModal()"></div>
+            <div class="relative bg-white rounded-lg shadow-2xl max-w-5xl w-full overflow-hidden flex flex-col md:flex-row">
+                <button onclick="closeProductModal()" class="absolute top-4 right-4 z-10 p-2 hover:bg-neutral-100 rounded-full transition-colors"><i data-lucide="x" class="w-6 h-6"></i></button>
+                <div class="md:w-1/2 p-6 bg-neutral-50 flex flex-col items-center justify-center">
+                    <img id="modal-main-image" src="" class="w-full aspect-square object-cover rounded shadow-md transition-opacity duration-300">
+                    <div id="modal-thumbnails" class="flex gap-2 mt-4 overflow-x-auto w-full pb-2 scrollbar-hide"></div>
                 </div>
-                <div class="sm:w-1/2 p-8 flex flex-col">
-                    <span id="modal-category" class="text-xs font-bold text-primary-800 uppercase tracking-widest mb-1"></span>
-                    <h2 id="modal-title-text" class="text-2xl font-serif font-bold text-neutral-900 mb-2"></h2>
-                    <p id="modal-price" class="text-xl font-medium mb-6"></p>
-                    <div id="modal-options-container" class="space-y-4 mb-8"></div>
-                    <p id="modal-description" class="text-neutral-600 text-sm leading-relaxed mb-8 flex-grow"></p>
-                    <button id="modal-add-btn" class="w-full py-4 bg-neutral-900 text-white font-bold uppercase tracking-widest rounded transition-colors hover:bg-neutral-800">Add to Bag</button>
+                <div class="md:w-1/2 p-8 flex flex-col bg-white">
+                    <div class="flex-grow">
+                        <span id="modal-category" class="text-xs font-bold text-primary-800 uppercase tracking-widest mb-2 block"></span>
+                        <h2 id="modal-title-text" class="text-3xl font-serif font-bold text-neutral-900 mb-2 leading-tight"></h2>
+                        <p id="modal-price" class="text-2xl font-medium text-neutral-900 mb-8"></p>
+                        <div id="modal-options-container" class="space-y-6 mb-8"></div>
+                        <div class="prose prose-neutral"><h4 class="text-xs font-bold uppercase text-neutral-400 mb-2">The Story</h4><p id="modal-description" class="text-neutral-600 leading-relaxed"></p></div>
+                    </div>
+                    <button id="modal-add-btn" class="w-full py-4 bg-neutral-900 text-white font-bold uppercase tracking-widest rounded-md mt-8 hover:bg-primary-800 transition-colors">Add to Shopping Bag</button>
                 </div>
             </div>
         </div>
@@ -253,19 +175,28 @@
                 if (data.objects) {
                     const imageMap = {};
                     if (data.related_objects) {
-                        data.related_objects.filter(obj => obj.type === 'IMAGE').forEach(img => { imageMap[img.id] = img.image_data.url; });
+                        data.related_objects.filter(o => o.type === 'IMAGE').forEach(img => { imageMap[img.id] = img.image_data.url; });
                     }
-                    products = data.objects.map(item => {
-                        const allImageIds = [...(item.item_data.image_ids || []), ...(item.item_data.variations?.[0]?.item_variation_data?.image_ids || [])];
+                    products = data.objects.filter(o => o.type === 'ITEM').map(item => {
+                        const itemData = item.item_data;
+                        const allImageIds = [...(itemData.image_ids || [])];
+                        itemData.variations.forEach(v => { if (v.item_variation_data.image_ids) allImageIds.push(...v.item_variation_data.image_ids); });
                         const imageUrls = [...new Set(allImageIds)].map(id => imageMap[id]).filter(url => !!url);
+                        
                         let cat = "all";
-                        const n = item.item_data.name.toLowerCase();
+                        const n = itemData.name.toLowerCase();
                         if (n.includes("necklace")) cat = "necklaces"; else if (n.includes("earring")) cat = "earrings"; else if (n.includes("bracelet")) cat = "bracelets";
+
                         return {
-                            id: item.id, name: item.item_data.name, variations: item.item_data.variations, 
-                            modifier_lists: item.item_data.modifier_lists, category: cat,
-                            image: imageUrls[0] || "https://images.unsplash.com/photo-1611591437281-460bfbe1220a?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80",
-                            images: imageUrls, desc: item.item_data.description || "Handcrafted with care."
+                            id: item.id, name: itemData.name, variations: itemData.variations, 
+                            modifier_lists: itemData.modifier_lists || [], category: cat,
+                            image: imageUrls[0] || "https://images.unsplash.com/photo-1611591437281-460bfbe1220a?auto=format&fit=crop&w=500&q=80",
+                            images: imageUrls, 
+                            imageLookup: itemData.variations.reduce((acc, v) => {
+                                if (v.item_variation_data.image_ids) acc[v.id] = imageMap[v.item_variation_data.image_ids[0]];
+                                return acc;
+                            }, {}),
+                            desc: itemData.description || "Handcrafted with intention and care."
                         };
                     });
                 }
@@ -273,25 +204,25 @@
         }
 
         function renderProducts(category) {
-            const grid = document.getElementById('product-grid');
-            grid.innerHTML = '';
+            const grid = document.getElementById('product-grid'); grid.innerHTML = '';
             const filtered = category === 'all' ? products : products.filter(p => p.category === category);
-            if (filtered.length === 0) { grid.innerHTML = '<div class="col-span-full text-center py-20 text-neutral-500">No pieces found.</div>'; return; }
+            if (filtered.length === 0) { grid.innerHTML = '<div class="col-span-full py-20 text-neutral-500">No pieces found in this collection.</div>'; return; }
             filtered.forEach(p => {
-                const div = document.createElement('div');
-                div.className = 'group bg-white rounded-lg border border-neutral-100 overflow-hidden flex flex-col shadow-sm hover:shadow-md transition-all';
                 const price = ((p.variations[0].item_variation_data.price_money.amount || 0) / 100).toFixed(2);
+                const div = document.createElement('div');
+                div.className = 'group bg-white rounded-lg border border-neutral-100 overflow-hidden flex flex-col shadow-sm hover:shadow-xl transition-all cursor-pointer';
+                div.onclick = () => openProductModal(p.id);
                 div.innerHTML = `
-                    <div class="h-80 bg-neutral-100 relative cursor-pointer" onclick="openProductModal('${p.id}')">
-                        <img src="${p.image}" class="w-full h-full object-cover">
-                        <div class="absolute inset-0 bg-neutral-900/0 group-hover:bg-neutral-900/10 flex items-center justify-center transition-all">
+                    <div class="h-80 bg-neutral-100 relative overflow-hidden">
+                        <img src="${p.image}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                        <div class="absolute inset-0 bg-neutral-900/0 group-hover:bg-neutral-900/10 flex items-center justify-center transition-colors">
                             <span class="bg-white/90 text-neutral-900 px-4 py-2 rounded text-xs font-bold opacity-0 group-hover:opacity-100 transform translate-y-2 group-hover:translate-y-0 transition-all uppercase">Quick View</span>
                         </div>
                     </div>
-                    <div class="p-4 flex-grow flex flex-col">
-                        <h3 class="font-serif text-lg text-neutral-900">${p.name}</h3>
+                    <div class="p-6 flex-grow flex flex-col">
+                        <span class="text-[10px] font-bold text-primary-800 uppercase tracking-widest mb-1">${p.category}</span>
+                        <h3 class="font-serif text-lg text-neutral-900 mb-1">${p.name}</h3>
                         <p class="font-medium text-neutral-900">$${price}</p>
-                        <button onclick="openProductModal('${p.id}')" class="mt-4 w-full py-2 border border-neutral-200 rounded text-xs font-bold uppercase hover:bg-neutral-900 hover:text-white transition-all">Options</button>
                     </div>`;
                 grid.appendChild(div);
             });
@@ -304,52 +235,70 @@
             document.getElementById('modal-title-text').textContent = p.name;
             document.getElementById('modal-description').textContent = p.desc;
             document.getElementById('modal-main-image').src = p.image;
+            
             const opt = document.getElementById('modal-options-container'); opt.innerHTML = '';
             if (p.variations.length > 1) {
-                const sel = document.createElement('select'); sel.id = "modal-var-select"; sel.className = "w-full rounded border-neutral-300";
-                sel.onchange = () => updateModalPrice(id);
-                sel.innerHTML = p.variations.map(v => `<option value="${v.id}">${v.item_variation_data.name} - $${(v.item_variation_data.price_money.amount/100).toFixed(2)}</option>`).join('');
-                opt.appendChild(sel);
+                const container = document.createElement('div');
+                container.innerHTML = `<label class="text-[10px] font-bold text-neutral-400 uppercase tracking-widest block mb-2">Select Style / Size</label>
+                    <select id="modal-var-select" onchange="updateModalState('${id}')" class="w-full p-3 border rounded-md text-sm bg-white focus:ring-2 focus:ring-primary-500 outline-none">
+                        ${p.variations.map(v => `<option value="${v.id}">${v.item_variation_data.name} - $${(v.item_variation_data.price_money.amount/100).toFixed(2)}</option>`).join('')}
+                    </select>`;
+                opt.appendChild(container);
             }
             if (p.modifier_lists) {
                 p.modifier_lists.forEach(m => {
-                    const sel = document.createElement('select'); sel.className = "w-full rounded border-neutral-300 modal-mod-select";
-                    sel.innerHTML = `<option value="">Select ${m.modifier_list_data.name}</option>` + m.modifier_list_data.modifiers.map(mod => `<option value="${mod.id}">${mod.modifier_data.name}</option>`).join('');
-                    opt.appendChild(sel);
+                    const container = document.createElement('div');
+                    container.innerHTML = `<label class="text-[10px] font-bold text-neutral-400 uppercase tracking-widest block mb-2">${m.modifier_list_data.name}</label>
+                        <select class="modal-mod-select w-full p-3 border rounded-md text-sm bg-white outline-none">
+                            <option value="">Choose ${m.modifier_list_data.name}...</option>
+                            ${m.modifier_list_data.modifiers.map(mod => `<option value="${mod.id}">${mod.modifier_data.name}</option>`).join('')}
+                        </select>`;
+                    opt.appendChild(container);
                 });
             }
+
             const thumbs = document.getElementById('modal-thumbnails'); thumbs.innerHTML = '';
             p.images.forEach(url => {
-                const b = document.createElement('button'); b.className = "w-16 h-16 rounded border-2 overflow-hidden";
+                const b = document.createElement('button');
+                b.className = "w-20 h-20 rounded border-2 border-transparent hover:border-neutral-200 overflow-hidden flex-shrink-0 transition-all";
                 b.innerHTML = `<img src="${url}" class="w-full h-full object-cover">`;
                 b.onclick = () => { document.getElementById('modal-main-image').src = url; };
                 thumbs.appendChild(b);
             });
-            updateModalPrice(id);
+
+            updateModalState(id);
             document.getElementById('modal-add-btn').onclick = () => { addToCartFromModal(id); closeProductModal(); };
             document.getElementById('product-modal').classList.remove('hidden');
             document.body.style.overflow = 'hidden';
             lucide.createIcons();
         }
 
-        function updateModalPrice(id) {
+        function updateModalState(id) {
             const p = products.find(prod => prod.id === id);
             const vs = document.getElementById('modal-var-select');
             const vid = vs ? vs.value : p.variations[0].id;
             const v = p.variations.find(v => v.id === vid);
+            
             document.getElementById('modal-price').textContent = `$${(v.item_variation_data.price_money.amount/100).toFixed(2)}`;
+            
+            // AUTOMATIC IMAGE SWAP: If this variation has a specific image, show it!
+            if (p.imageLookup[vid]) {
+                const mainImg = document.getElementById('modal-main-image');
+                mainImg.style.opacity = '0';
+                setTimeout(() => { mainImg.src = p.imageLookup[vid]; mainImg.style.opacity = '1'; }, 150);
+            }
         }
 
         function addToCartFromModal(id) {
             const p = products.find(prod => prod.id === id);
             const vs = document.getElementById('modal-var-select');
             const vid = vs ? vs.value : p.variations[0].id;
-            const v = p.variations.find(varObj => varObj.id === vid);
-            const mods = Array.from(document.querySelectorAll('.modal-mod-select')).map(s => s.options[s.selectedIndex].text).filter(t => !t.startsWith('Select '));
+            const v = p.variations.find(v => v.id === vid);
+            const mods = Array.from(document.querySelectorAll('.modal-mod-select')).map(s => s.options[s.selectedIndex].text).filter(t => !t.startsWith('Choose '));
             const cid = `${id}-${vid}-${mods.join('-')}`;
-            const ex = cart.find(i => i.cid === cid);
-            if (ex) { ex.qty++; } else {
-                cart.push({ cid, id, name: p.name, vname: v.item_variation_data.name, price: v.item_variation_data.price_money.amount/100, image: p.image, qty: 1, mods });
+            const existing = cart.find(i => i.cid === cid);
+            if (existing) { existing.qty++; } else {
+                cart.push({ cid, id, name: p.name, vname: v.item_variation_data.name, price: v.item_variation_data.price_money.amount/100, image: p.imageLookup[vid] || p.image, qty: 1, mods });
             }
             showToast(`Added ${p.name} to cart`);
             updateCartUI();
@@ -359,31 +308,32 @@
             const sub = cart.reduce((s, i) => s + (i.price * i.qty), 0);
             const count = cart.reduce((s, i) => s + i.qty, 0);
             document.getElementById('cart-subtotal').textContent = `$${sub.toFixed(2)}`;
-            const ship = (sub >= 100 || document.querySelector('input[name="shipping"]:checked').value === '0') ? 0 : 5;
-            document.getElementById('cart-total').textContent = `$${(sub + ship).toFixed(2)}`;
+            const shipCost = (sub >= 100 || document.querySelector('input[name="shipping"]:checked').value === '0') ? 0 : 5;
+            document.getElementById('cart-total').textContent = `$${(sub + shipCost).toFixed(2)}`;
             document.getElementById('cart-count').textContent = count;
             document.getElementById('cart-count').classList.toggle('opacity-0', count === 0);
             const cont = document.getElementById('cart-items-container');
-            cont.innerHTML = cart.map(i => `<div class="flex py-4 border-b">
-                <img src="${i.image}" class="h-16 w-16 object-cover rounded">
-                <div class="ml-4 flex-1">
-                    <p class="font-bold text-sm">${i.name}</p>
-                    <p class="text-xs text-neutral-500">${i.vname} ${i.mods.length ? '- ' + i.mods.join(', ') : ''}</p>
-                    <div class="flex justify-between items-center mt-2">
-                        <span class="text-xs font-medium">${i.qty} x $${i.price.toFixed(2)}</span>
-                        <button onclick="removeFromCart('${i.cid}')" class="text-xs text-red-500">Remove</button>
+            if (cart.length === 0) { cont.innerHTML = '<p class="text-center text-neutral-400 py-10">Your bag is empty.</p>'; }
+            else {
+                cont.innerHTML = cart.map(i => `<div class="flex gap-4 py-4 border-b">
+                    <img src="${i.image}" class="h-20 w-20 object-cover rounded shadow-sm">
+                    <div class="flex-1">
+                        <p class="font-bold text-sm text-neutral-900">${i.name}</p>
+                        <p class="text-xs text-neutral-500 mb-2">${i.vname} ${i.mods.length ? '· ' + i.mods.join(', ') : ''}</p>
+                        <div class="flex justify-between items-center"><span class="text-sm font-medium">${i.qty} × $${i.price.toFixed(2)}</span><button onclick="removeFromCart('${i.cid}')" class="text-xs text-primary-800 font-bold hover:underline">Remove</button></div>
                     </div>
-                </div>
-            </div>`).join('');
+                </div>`).join('');
+            }
             lucide.createIcons();
         }
 
         function removeFromCart(cid) { cart = cart.filter(i => i.cid !== cid); updateCartUI(); }
         function toggleCart() { const s = document.getElementById('cart-sidebar'); const o = document.getElementById('cart-overlay'); const p = document.getElementById('cart-panel'); isCartOpen = !isCartOpen; s.classList.toggle('pointer-events-none', !isCartOpen); o.classList.toggle('opacity-0', !isCartOpen); p.classList.toggle('translate-x-full', !isCartOpen); }
-        function navigateToPage(id) { document.querySelectorAll('.page-view').forEach(v => v.classList.add('hidden')); document.getElementById(`view-${id}`).classList.remove('hidden'); window.scrollTo(0,0); }
+        function navigateToPage(id) { document.querySelectorAll('.page-view').forEach(v => v.classList.add('hidden')); const target = document.getElementById(`view-${id}`); if (target) target.classList.remove('hidden'); window.scrollTo(0,0); }
         function closeProductModal() { document.getElementById('product-modal').classList.add('hidden'); document.body.style.overflow = ''; }
         function showToast(m) { const t = document.getElementById('toast'); document.getElementById('toast-message').textContent = m; t.classList.remove('translate-x-full'); setTimeout(() => t.classList.add('translate-x-full'), 3000); }
         function setTheme(t) { document.documentElement.setAttribute('data-theme', t); localStorage.setItem('theme', t); }
+        function filterProducts(cat) { document.querySelectorAll('.filter-btn').forEach(b => b.classList.toggle('bg-neutral-900', b.getAttribute('onclick').includes(cat))); renderProducts(cat); }
         const saved = localStorage.getItem('theme'); if (saved) setTheme(saved);
     </script>
 </body>
