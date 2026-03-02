@@ -49,29 +49,21 @@
         <span id="toast-message"></span>
     </div>
 
-    <nav class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-neutral-100 shadow-sm">
-        <div class="max-w-7xl mx-auto px-4 h-24 flex justify-between items-center">
+    <nav class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-neutral-100 shadow-sm h-24 flex items-center">
+        <div class="max-w-7xl mx-auto px-4 w-full flex justify-between items-center">
             <div class="flex items-center cursor-pointer gap-3" onclick="navigateToPage('home')">
-                <div class="h-16 w-16 rounded-lg border border-neutral-100 flex items-center justify-center bg-white font-serif text-2xl font-bold">UC</div>
-                <div class="hidden sm:block"><span class="block font-serif text-xl font-bold leading-none">Unique Creations</span><span class="block text-sm text-primary-800 font-normal tracking-widest uppercase mt-1">By Lisa C.</span></div>
+                <div class="h-16 w-16 rounded-lg border flex items-center justify-center bg-white font-serif text-2xl font-bold">UC</div>
+                <div class="hidden sm:block leading-none"><span class="block font-serif text-xl font-bold">Unique Creations</span><span class="block text-sm text-primary-800 tracking-widest uppercase mt-1">By Lisa C.</span></div>
             </div>
             <div class="hidden md:flex space-x-8">
-                <button onclick="navigateToPage('home')" class="hover:text-primary-800 font-medium uppercase text-sm tracking-wide">Home</button>
-                <button onclick="navigateToPage('shop')" class="hover:text-primary-800 font-medium uppercase text-sm tracking-wide">Shop</button>
-                <button onclick="navigateToPage('about')" class="hover:text-primary-800 font-medium uppercase text-sm tracking-wide">About</button>
-                <button onclick="navigateToPage('contact')" class="hover:text-primary-800 font-medium uppercase text-sm tracking-wide">Contact</button>
+                <button onclick="navigateToPage('home')" class="hover:text-primary-800 font-medium uppercase text-sm">Home</button>
+                <button onclick="navigateToPage('shop')" class="hover:text-primary-800 font-medium uppercase text-sm">Shop</button>
+                <button onclick="navigateToPage('about')" class="hover:text-primary-800 font-medium uppercase text-sm">About</button>
+                <button onclick="navigateToPage('contact')" class="hover:text-primary-800 font-medium uppercase text-sm">Contact</button>
             </div>
             <div class="flex items-center gap-4">
-                <div class="relative group">
-                    <button class="p-2 hover:bg-neutral-50 rounded-full"><i data-lucide="palette" class="w-5 h-5 text-neutral-600"></i></button>
-                    <div class="absolute right-0 top-full pt-2 hidden group-hover:block w-32 bg-white rounded shadow-lg border py-1">
-                        <button onclick="setTheme('blossom')" class="block w-full text-left px-4 py-2 text-sm hover:bg-neutral-50">Blossom</button>
-                        <button onclick="setTheme('ocean')" class="block w-full text-left px-4 py-2 text-sm hover:bg-neutral-50">Ocean</button>
-                        <button onclick="setTheme('luxury')" class="block w-full text-left px-4 py-2 text-sm hover:bg-neutral-50">Luxury</button>
-                    </div>
-                </div>
                 <button onclick="toggleCart()" class="relative p-2 hover:bg-neutral-50 rounded-full">
-                    <i data-lucide="shopping-bag" class="w-6 h-6 text-neutral-700 hover:text-primary-800"></i>
+                    <i data-lucide="shopping-bag" class="w-6 h-6"></i>
                     <span id="cart-count" class="absolute top-0 right-0 bg-primary-800 text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full opacity-0">0</span>
                 </button>
             </div>
@@ -79,42 +71,20 @@
     </nav>
 
     <main class="flex-grow">
-        <div id="view-home" class="page-view">
-            <section class="relative bg-white overflow-hidden py-20 px-4 max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-12">
-                <div class="md:w-1/2">
-                    <h1 class="text-5xl font-serif font-bold text-neutral-900 mb-6">Handcrafted with <span class="text-primary-800 italic">elegance & intention.</span></h1>
-                    <p class="text-lg text-neutral-600 mb-8">At Unique Creations by Lisa C, we specialize in crafting exquisite pieces that combine traditional techniques with modern design.</p>
-                    <div class="flex gap-4"><button onclick="navigateToPage('shop')" class="px-8 py-3 bg-neutral-900 text-white rounded hover:bg-neutral-800 font-medium">Shop Now</button><button onclick="navigateToPage('about')" class="px-8 py-3 border border-neutral-200 rounded hover:bg-neutral-50 font-medium">Our Story</button></div>
-                </div>
-                <div class="md:w-1/2"><img src="https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=800&q=80" class="rounded-lg shadow-xl object-cover h-[500px] w-full" alt="Jewelry"></div>
-            </section>
+        <div id="view-home" class="page-view py-20 px-4 max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-12">
+            <div class="md:w-1/2">
+                <h1 class="text-5xl font-serif font-bold text-neutral-900 mb-6">Handcrafted with <span class="text-primary-800 italic">elegance & intention.</span></h1>
+                <p class="text-lg text-neutral-600 mb-8">Specializing in intricate chainmail and beadwork that tells your story.</p>
+                <button onclick="navigateToPage('shop')" class="px-8 py-3 bg-neutral-900 text-white rounded font-medium">Shop Now</button>
+            </div>
+            <div class="md:w-1/2"><img src="https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=800&q=80" class="rounded-lg shadow-xl h-96 w-full object-cover"></div>
         </div>
 
-        <div id="view-shop" class="page-view hidden">
-            <section class="py-16 bg-neutral-50 min-h-screen px-4">
-                <div class="max-w-7xl mx-auto text-center mb-12">
-                    <span class="text-primary-800 font-bold uppercase text-xs tracking-widest block mb-2">Our Catalog</span>
-                    <h2 class="text-3xl font-serif font-bold mb-4">Latest Collections</h2>
-                    <div class="flex justify-center gap-4 mt-8 overflow-x-auto pb-4 scrollbar-hide">
-                        <button onclick="filterProducts('all')" class="filter-btn active px-6 py-2 rounded-full text-sm font-medium bg-neutral-900 text-white">All</button>
-                        <button onclick="filterProducts('necklaces')" class="filter-btn px-6 py-2 rounded-full text-sm font-medium bg-white border border-neutral-200">Necklaces</button>
-                        <button onclick="filterProducts('earrings')" class="filter-btn px-6 py-2 rounded-full text-sm font-medium bg-white border border-neutral-200">Earrings</button>
-                        <button onclick="filterProducts('bracelets')" class="filter-btn px-6 py-2 rounded-full text-sm font-medium bg-white border border-neutral-200">Bracelets</button>
-                    </div>
-                </div>
-                <div id="product-grid" class="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <div class="col-span-full text-center py-20"><i data-lucide="loader-2" class="w-8 h-8 animate-spin mx-auto text-primary-800"></i><p class="mt-2 text-neutral-500">Loading catalog...</p></div>
-                </div>
-            </section>
-        </div>
-
-        <div id="view-about" class="page-view hidden py-20 px-4 text-center max-w-3xl mx-auto">
-            <h2 class="text-4xl font-serif font-bold mb-6">Meet Lisa C.</h2>
-            <p class="text-lg text-neutral-600 leading-relaxed">My journey began with a simple love for nature's colors and textures. Every piece of jewelry tells a story, and I am honored to help you tell yours through wearable art.</p>
-        </div>
-        <div id="view-contact" class="page-view hidden py-20 px-4 text-center max-w-3xl mx-auto">
-            <h2 class="text-4xl font-serif font-bold mb-6">Get in Touch</h2>
-            <p class="text-lg text-neutral-600">Email us at: <a href="mailto:sales@uniquecreationsbylisac.com" class="text-primary-800 font-bold">sales@uniquecreationsbylisac.com</a></p>
+        <div id="view-shop" class="page-view hidden py-16 px-4">
+            <div class="max-w-7xl mx-auto">
+                <h2 class="text-3xl font-serif font-bold text-center mb-12 uppercase tracking-widest text-neutral-900">Collections</h2>
+                <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"></div>
+            </div>
         </div>
     </main>
 
@@ -122,15 +92,10 @@
         <div id="cart-overlay" class="absolute inset-0 bg-neutral-900/75 opacity-0 transition-opacity" onclick="toggleCart()"></div>
         <div id="cart-panel" class="absolute inset-y-0 right-0 w-full max-w-md bg-white shadow-xl transform translate-x-full transition-transform flex flex-col pointer-events-auto">
             <div class="p-6 border-b flex justify-between items-center"><h2 class="text-xl font-serif font-bold">Shopping Bag</h2><button onclick="toggleCart()"><i data-lucide="x" class="w-6 h-6"></i></button></div>
-            <div id="cart-items-container" class="flex-1 overflow-y-auto p-6 space-y-6"></div>
+            <div id="cart-items-container" class="flex-1 overflow-y-auto p-6"></div>
             <div class="p-6 bg-neutral-50 border-t space-y-4">
-                <div class="flex justify-between font-medium"><span>Subtotal</span><span id="cart-subtotal">$0.00</span></div>
-                <div class="space-y-2">
-                    <div class="flex items-center gap-3"><input type="radio" name="shipping" value="5" onchange="updateCartUI()" checked id="ship-std"><label for="ship-std" class="text-sm">Standard Shipping ($5.00)</label></div>
-                    <div class="flex items-center gap-3"><input type="radio" name="shipping" value="0" onchange="updateCartUI()" id="ship-local"><label for="ship-local" class="text-sm">Local Delivery (Free)</label></div>
-                </div>
-                <div class="flex justify-between text-xl font-bold border-t pt-4"><span>Total</span><span id="cart-total">$0.00</span></div>
-                <button onclick="openPaymentModal()" class="w-full py-4 bg-neutral-900 text-white rounded font-bold uppercase tracking-widest">Checkout with Square</button>
+                <div class="flex justify-between font-bold text-xl"><span>Total</span><span id="cart-total">$0.00</span></div>
+                <button class="w-full py-4 bg-neutral-900 text-white rounded font-bold uppercase tracking-widest">Checkout</button>
             </div>
         </div>
     </div>
@@ -139,20 +104,22 @@
         <div class="flex items-center justify-center min-h-screen p-4">
             <div class="fixed inset-0 bg-neutral-900/80 transition-opacity" onclick="closeProductModal()"></div>
             <div class="relative bg-white rounded-lg shadow-2xl max-w-5xl w-full overflow-hidden flex flex-col md:flex-row">
-                <button onclick="closeProductModal()" class="absolute top-4 right-4 z-10 p-2 hover:bg-neutral-100 rounded-full transition-colors"><i data-lucide="x" class="w-6 h-6"></i></button>
-                <div class="md:w-1/2 p-6 bg-neutral-50 flex flex-col items-center justify-center">
-                    <img id="modal-main-image" src="" class="w-full aspect-square object-cover rounded shadow-md transition-opacity duration-300">
-                    <div id="modal-thumbnails" class="flex gap-2 mt-4 overflow-x-auto w-full pb-2 scrollbar-hide"></div>
+                <button onclick="closeProductModal()" class="absolute top-4 right-4 z-10 p-2 hover:bg-neutral-100 rounded-full"><i data-lucide="x" class="w-6 h-6"></i></button>
+                <div class="md:w-1/2 p-6 bg-stone-50 flex flex-col">
+                    <img id="modal-main-image" src="" class="w-full aspect-square object-cover rounded shadow-md">
+                    <div id="modal-thumbnails" class="flex gap-2 mt-4 overflow-x-auto pb-2 scrollbar-hide"></div>
                 </div>
                 <div class="md:w-1/2 p-8 flex flex-col bg-white">
                     <div class="flex-grow">
-                        <span id="modal-category" class="text-xs font-bold text-primary-800 uppercase tracking-widest mb-2 block"></span>
-                        <h2 id="modal-title-text" class="text-3xl font-serif font-bold text-neutral-900 mb-2 leading-tight"></h2>
+                        <h2 id="modal-title-text" class="text-3xl font-serif font-bold text-neutral-900 mb-2"></h2>
                         <p id="modal-price" class="text-2xl font-medium text-neutral-900 mb-8"></p>
                         <div id="modal-options-container" class="space-y-6 mb-8"></div>
-                        <div class="prose prose-neutral"><h4 class="text-xs font-bold uppercase text-neutral-400 mb-2">The Story</h4><p id="modal-description" class="text-neutral-600 text-sm whitespace-pre-line leading-relaxed mb-8 flex-grow"></p></div>
+                        <div class="prose prose-neutral">
+                            <h4 class="text-[10px] font-bold uppercase text-neutral-400 tracking-widest mb-2 border-b pb-1">Product Details</h4>
+                            <p id="modal-description" class="text-neutral-600 text-sm whitespace-pre-line leading-relaxed h-48 overflow-y-auto pr-2 scrollbar-hide"></p>
+                        </div>
                     </div>
-                    <button id="modal-add-btn" class="w-full py-4 bg-neutral-900 text-white font-bold uppercase tracking-widest rounded-md mt-8 hover:bg-primary-800 transition-colors">Add to Shopping Bag</button>
+                    <button id="modal-add-btn" class="w-full py-4 bg-neutral-900 text-white font-bold uppercase tracking-widest rounded-md mt-8">Add to Bag</button>
                 </div>
             </div>
         </div>
@@ -174,55 +141,43 @@
                 const data = await response.json();
                 if (data.objects) {
                     const imageMap = {};
+                    const optionMap = {};
+                    
                     if (data.related_objects) {
-                        data.related_objects.filter(o => o.type === 'IMAGE').forEach(img => { imageMap[img.id] = img.image_data.url; });
+                        data.related_objects.forEach(o => {
+                            if (o.type === 'IMAGE') imageMap[o.id] = o.image_data.url;
+                            if (o.type === 'ITEM_OPTION') optionMap[o.id] = o.item_option_data;
+                        });
                     }
-                    products = data.objects.filter(o => o.type === 'ITEM').map(item => {
-                        const itemData = item.item_data;
-                        const allImageIds = [...(itemData.image_ids || [])];
-                        itemData.variations.forEach(v => { if (v.item_variation_data.image_ids) allImageIds.push(...v.item_variation_data.image_ids); });
-                        const imageUrls = [...new Set(allImageIds)].map(id => imageMap[id]).filter(url => !!url);
-                        
-                        let cat = "all";
-                        const n = itemData.name.toLowerCase();
-                        if (n.includes("necklace")) cat = "necklaces"; else if (n.includes("earring")) cat = "earrings"; else if (n.includes("bracelet")) cat = "bracelets";
 
+                    products = data.objects.filter(o => o.type === 'ITEM').map(item => {
+                        const d = item.item_data;
+                        const allImg = [...(d.image_ids || [])];
+                        d.variations.forEach(v => { if (v.item_variation_data.image_ids) allImg.push(...v.item_variation_data.image_ids); });
+                        
                         return {
-                            id: item.id, name: itemData.name, variations: itemData.variations, 
-                            modifier_lists: itemData.modifier_lists || [], category: cat,
-                            image: imageUrls[0] || "https://images.unsplash.com/photo-1611591437281-460bfbe1220a?auto=format&fit=crop&w=500&q=80",
-                            images: imageUrls, 
-                            imageLookup: itemData.variations.reduce((acc, v) => {
-                                if (v.item_variation_data.image_ids) acc[v.id] = imageMap[v.item_variation_data.image_ids[0]];
-                                return acc;
-                            }, {}),
-                            desc: itemData.description || "Handcrafted with intention and care."
+                            id: item.id, name: d.name, variations: d.variations, 
+                            modifiers: d.modifier_lists || [], 
+                            options: (d.item_options || []).map(o => ({ id: o.item_option_id, ...optionMap[o.item_option_id] })),
+                            image: imageMap[allImg[0]] || "https://images.unsplash.com/photo-1611591437281-460bfbe1220a?auto=format&fit=crop&w=500&q=80",
+                            images: [...new Set(allImg)].map(id => imageMap[id]).filter(Boolean),
+                            desc: d.description || "Handcrafted with intention."
                         };
                     });
                 }
-            } catch (e) { console.error("Catalog fetch failed", e); }
+            } catch (e) { console.error(e); }
         }
 
-        function renderProducts(category) {
+        function renderProducts() {
             const grid = document.getElementById('product-grid'); grid.innerHTML = '';
-            const filtered = category === 'all' ? products : products.filter(p => p.category === category);
-            if (filtered.length === 0) { grid.innerHTML = '<div class="col-span-full py-20 text-neutral-500">No pieces found in this collection.</div>'; return; }
-            filtered.forEach(p => {
-                const price = ((p.variations[0].item_variation_data.price_money.amount || 0) / 100).toFixed(2);
+            products.forEach(p => {
                 const div = document.createElement('div');
                 div.className = 'group bg-white rounded-lg border border-neutral-100 overflow-hidden flex flex-col shadow-sm hover:shadow-xl transition-all cursor-pointer';
                 div.onclick = () => openProductModal(p.id);
-                div.innerHTML = `
-                    <div class="h-80 bg-neutral-100 relative overflow-hidden">
-                        <img src="${p.image}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
-                        <div class="absolute inset-0 bg-neutral-900/0 group-hover:bg-neutral-900/10 flex items-center justify-center transition-colors">
-                            <span class="bg-white/90 text-neutral-900 px-4 py-2 rounded text-xs font-bold opacity-0 group-hover:opacity-100 transform translate-y-2 group-hover:translate-y-0 transition-all uppercase">Quick View</span>
-                        </div>
-                    </div>
-                    <div class="p-6 flex-grow flex flex-col">
-                        <span class="text-[10px] font-bold text-primary-800 uppercase tracking-widest mb-1">${p.category}</span>
-                        <h3 class="font-serif text-lg text-neutral-900 mb-1">${p.name}</h3>
-                        <p class="font-medium text-neutral-900">$${price}</p>
+                div.innerHTML = `<div class="h-80 relative overflow-hidden"><img src="${p.image}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"></div>
+                    <div class="p-6">
+                        <h3 class="font-serif text-lg text-neutral-900">${p.name}</h3>
+                        <p class="font-medium text-neutral-900">$${(p.variations[0].item_variation_data.price_money.amount/100).toFixed(2)}</p>
                     </div>`;
                 grid.appendChild(div);
             });
@@ -231,116 +186,106 @@
 
         function openProductModal(id) {
             const p = products.find(prod => prod.id === id); if (!p) return;
-            document.getElementById('modal-category').textContent = p.category;
             document.getElementById('modal-title-text').textContent = p.name;
             document.getElementById('modal-description').textContent = p.desc;
             document.getElementById('modal-main-image').src = p.image;
             
             const opt = document.getElementById('modal-options-container'); opt.innerHTML = '';
+            
+            // 1. SIZE/VARIATION
             if (p.variations.length > 1) {
-                const container = document.createElement('div');
-                container.innerHTML = `<label class="text-[10px] font-bold text-neutral-400 uppercase tracking-widest block mb-2">Size <span class="text-primary-800">*Required</span></label>
-                    <select id="modal-var-select" onchange="updateModalState('${id}')" class="w-full p-3 border rounded-md text-sm bg-white focus:ring-2 focus:ring-primary-500 outline-none">
+                const div = document.createElement('div');
+                div.innerHTML = `<label class="text-[10px] font-bold text-neutral-400 uppercase tracking-widest block mb-2">Size / Style <span class="text-primary-800">*</span></label>
+                    <select id="modal-var-select" onchange="updateModalPrice('${id}')" class="w-full p-3 border rounded-md text-sm bg-white outline-none">
                         ${p.variations.map(v => `<option value="${v.id}">${v.item_variation_data.name} - $${(v.item_variation_data.price_money.amount/100).toFixed(2)}</option>`).join('')}
                     </select>`;
-                opt.appendChild(container);
+                opt.appendChild(div);
             }
-            if (p.modifier_lists) {
-                p.modifier_lists.forEach(m => {
-                    const container = document.createElement('div');
-                    container.innerHTML = `<label class="text-[10px] font-bold text-neutral-400 uppercase tracking-widest block mb-2">${m.modifier_list_data.name} <span class="text-primary-800">*Required</span></label>
-                        <select class="modal-mod-select w-full p-3 border rounded-md text-sm bg-white outline-none">
-                            <option value="">Select your custom colors...</option>
-                            ${m.modifier_list_data.modifiers.map(mod => `<option value="${mod.id}">${mod.modifier_data.name}</option>`).join('')}
-                        </select>`;
-                    opt.appendChild(container);
-                });
-            }
+
+            // 2. ITEM OPTIONS (The Colors!)
+            p.options.forEach(o => {
+                const div = document.createElement('div');
+                div.innerHTML = `<label class="text-[10px] font-bold text-neutral-400 uppercase tracking-widest block mb-2">${o.display_name} <span class="text-primary-800">*</span></label>
+                    <select class="modal-opt-select w-full p-3 border rounded-md text-sm bg-white outline-none">
+                        <option value="">Select ${o.name}...</option>
+                        ${o.values.map(val => `<option value="${val.id}">${val.item_option_value_data.name}</option>`).join('')}
+                    </select>`;
+                opt.appendChild(div);
+            });
+
+            // 3. MODIFIERS
+            p.modifiers.forEach(m => {
+                const div = document.createElement('div');
+                div.innerHTML = `<label class="text-[10px] font-bold text-neutral-400 uppercase tracking-widest block mb-2">${m.modifier_list_data.name} <span class="text-primary-800">*</span></label>
+                    <select class="modal-mod-select w-full p-3 border rounded-md text-sm bg-white outline-none">
+                        <option value="">Select custom...</option>
+                        ${m.modifier_list_data.modifiers.map(mod => `<option value="${mod.id}">${mod.modifier_data.name}</option>`).join('')}
+                    </select>`;
+                opt.appendChild(div);
+            });
 
             const thumbs = document.getElementById('modal-thumbnails'); thumbs.innerHTML = '';
             p.images.forEach(url => {
-                const b = document.createElement('button');
-                b.className = "w-20 h-20 rounded border-2 border-transparent hover:border-neutral-200 overflow-hidden flex-shrink-0 transition-all";
-                b.innerHTML = `<img src="${url}" class="w-full h-full object-cover">`;
+                const b = document.createElement('button'); b.className = "w-20 h-20 rounded border flex-shrink-0";
+                b.innerHTML = `<img src="${url}" class="w-full h-full object-cover rounded">`;
                 b.onclick = () => { document.getElementById('modal-main-image').src = url; };
                 thumbs.appendChild(b);
             });
 
-            updateModalState(id);
-            document.getElementById('modal-add-btn').onclick = () => { addToCartFromModal(id); closeProductModal(); };
+            updateModalPrice(id);
+            document.getElementById('modal-add-btn').onclick = () => addToBag(id);
             document.getElementById('product-modal').classList.remove('hidden');
             document.body.style.overflow = 'hidden';
             lucide.createIcons();
         }
 
-        function updateModalState(id) {
+        function updateModalPrice(id) {
             const p = products.find(prod => prod.id === id);
-            const vs = document.getElementById('modal-var-select');
-            const vid = vs ? vs.value : p.variations[0].id;
+            const vid = document.getElementById('modal-var-select')?.value || p.variations[0].id;
             const v = p.variations.find(v => v.id === vid);
-            
             document.getElementById('modal-price').textContent = `$${(v.item_variation_data.price_money.amount/100).toFixed(2)}`;
-            
-            if (p.imageLookup[vid]) {
-                const mainImg = document.getElementById('modal-main-image');
-                mainImg.style.opacity = '0';
-                setTimeout(() => { mainImg.src = p.imageLookup[vid]; mainImg.style.opacity = '1'; }, 150);
-            }
         }
 
-        function addToCartFromModal(id) {
+        function addToBag(id) {
             const p = products.find(prod => prod.id === id);
-            const vs = document.getElementById('modal-var-select');
-            const vid = vs ? vs.value : p.variations[0].id;
-            const v = p.variations.find(v => v.id === vid);
+            const vid = document.getElementById('modal-var-select')?.value || p.variations[0].id;
+            const v = p.variations.find(varObj => varObj.id === vid);
             
-            // Validate modifiers
-            const modSelects = document.querySelectorAll('.modal-mod-select');
-            for (let s of modSelects) {
-                if (!s.value) { showToast("Please select required options", true); return; }
-            }
-
-            const mods = Array.from(modSelects).map(s => s.options[s.selectedIndex].text).filter(t => !t.startsWith('Select '));
-            const cid = `${id}-${vid}-${mods.join('-')}`;
-            const existing = cart.find(i => i.cid === cid);
-            if (existing) { existing.qty++; } else {
-                cart.push({ cid, id, name: p.name, vname: v.item_variation_data.name, price: v.item_variation_data.price_money.amount/100, image: p.imageLookup[vid] || p.image, qty: 1, mods });
+            const selects = [...document.querySelectorAll('.modal-opt-select'), ...document.querySelectorAll('.modal-mod-select')];
+            for (let s of selects) { if (!s.value) { showToast("Please select required options", true); return; } }
+            
+            const opts = selects.map(s => s.options[s.selectedIndex].text);
+            const cid = `${id}-${vid}-${opts.join('-')}`;
+            const ex = cart.find(i => i.cid === cid);
+            if (ex) { ex.qty++; } else {
+                cart.push({ cid, id, name: p.name, vname: v.item_variation_data.name, price: v.item_variation_data.price_money.amount/100, image: p.image, qty: 1, opts });
             }
             showToast(`Added ${p.name} to bag`);
-            updateCartUI();
+            updateCartUI(); closeProductModal();
         }
 
         function updateCartUI() {
             const sub = cart.reduce((s, i) => s + (i.price * i.qty), 0);
+            document.getElementById('cart-total').textContent = `$${sub.toFixed(2)}`;
             const count = cart.reduce((s, i) => s + i.qty, 0);
-            document.getElementById('cart-subtotal').textContent = `$${sub.toFixed(2)}`;
-            const shipCost = (sub >= 100 || document.querySelector('input[name="shipping"]:checked').value === '0') ? 0 : 5;
-            document.getElementById('cart-total').textContent = `$${(sub + shipCost).toFixed(2)}`;
             document.getElementById('cart-count').textContent = count;
             document.getElementById('cart-count').classList.toggle('opacity-0', count === 0);
             const cont = document.getElementById('cart-items-container');
-            if (cart.length === 0) { cont.innerHTML = '<p class="text-center text-neutral-400 py-10">Your bag is empty.</p>'; }
+            if (cart.length === 0) { cont.innerHTML = '<p class="text-center text-neutral-400 py-10">Empty.</p>'; }
             else {
                 cont.innerHTML = cart.map(i => `<div class="flex gap-4 py-4 border-b">
-                    <img src="${i.image}" class="h-20 w-20 object-cover rounded shadow-sm">
-                    <div class="flex-1">
-                        <p class="font-bold text-sm text-neutral-900">${i.name}</p>
-                        <p class="text-xs text-neutral-500 mb-2">${i.vname} ${i.mods.length ? '· ' + i.mods.join(', ') : ''}</p>
-                        <div class="flex justify-between items-center"><span class="text-sm font-medium">${i.qty} × $${i.price.toFixed(2)}</span><button onclick="removeFromCart('${i.cid}')" class="text-xs text-primary-800 font-bold hover:underline">Remove</button></div>
-                    </div>
+                    <img src="${i.image}" class="h-16 w-16 object-cover rounded">
+                    <div class="flex-1"><p class="font-bold text-sm">${i.name}</p><p class="text-[10px] text-neutral-500">${i.vname} ${i.opts.length ? '· ' + i.opts.join(', ') : ''}</p><div class="flex justify-between items-center mt-2"><span class="text-sm">$${i.price.toFixed(2)}</span><button onclick="removeFromCart('${i.cid}')" class="text-xs text-primary-800 font-bold">Remove</button></div></div>
                 </div>`).join('');
             }
-            lucide.createIcons();
         }
 
         function removeFromCart(cid) { cart = cart.filter(i => i.cid !== cid); updateCartUI(); }
         function toggleCart() { const s = document.getElementById('cart-sidebar'); const o = document.getElementById('cart-overlay'); const p = document.getElementById('cart-panel'); isCartOpen = !isCartOpen; s.classList.toggle('pointer-events-none', !isCartOpen); o.classList.toggle('opacity-0', !isCartOpen); p.classList.toggle('translate-x-full', !isCartOpen); }
-        function navigateToPage(id) { document.querySelectorAll('.page-view').forEach(v => v.classList.add('hidden')); const target = document.getElementById(`view-${id}`); if (target) target.classList.remove('hidden'); window.scrollTo(0,0); }
+        function navigateToPage(id) { document.querySelectorAll('.page-view').forEach(v => v.classList.add('hidden')); document.getElementById(`view-${id}`).classList.remove('hidden'); window.scrollTo(0,0); }
         function closeProductModal() { document.getElementById('product-modal').classList.add('hidden'); document.body.style.overflow = ''; }
         function showToast(m, isErr = false) { const t = document.getElementById('toast'); document.getElementById('toast-message').textContent = m; document.getElementById('toast-icon-container').innerHTML = isErr ? '<i data-lucide="alert-circle" class="w-5 h-5 text-red-500"></i>' : '<i data-lucide="check-circle" class="w-5 h-5 text-secondary-500"></i>'; lucide.createIcons(); t.classList.remove('translate-x-full'); setTimeout(() => t.classList.add('translate-x-full'), 3000); }
         function setTheme(t) { document.documentElement.setAttribute('data-theme', t); localStorage.setItem('theme', t); }
-        function filterProducts(cat) { document.querySelectorAll('.filter-btn').forEach(b => b.classList.toggle('bg-neutral-900', b.getAttribute('onclick').includes(cat))); renderProducts(cat); }
-        const saved = localStorage.getItem('theme'); if (saved) setTheme(saved);
     </script>
 </body>
 </html>
