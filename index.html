@@ -154,19 +154,13 @@
                         const allImgIds = [...(d.image_ids || [])];
                         d.variations.forEach(v => { if (v.item_variation_data.image_ids) allImgIds.push(...v.item_variation_data.image_ids); });
                         
-                        const modifiers = (d.modifier_list_info || []).map(m => {
-                            const detail = modMap[m.modifier_list_id];
-                            return detail ? { ...detail, id: m.modifier_list_id } : null;
-                        }).filter(Boolean);
-
-                        if (d.name && d.name.includes("Full Persian")) {
-                            console.log("DEBUG - Full Persian Data:", {
-                                name: d.name,
-                                variations: d.variations,
-                                modifier_list_info: d.modifier_list_info,
-                                item_options: d.item_options
-                            });
-                        }
+                        const category = d.name.toLowerCase().includes("necklace") ? "necklaces" : d.name.toLowerCase().includes("earring") ? "earrings" : "bracelets";
+                        
+                        console.log(`Square Item: ${d.name}`, {
+                            variations: d.variations,
+                            modifiers: d.modifier_list_info,
+                            options: d.item_options
+                        });
 
                         return {
                             id: item.id, name: d.name, variations: d.variations, modifiers, 
