@@ -26,14 +26,10 @@
         .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
         .fade-in { animation: fadeIn 0.5s ease-in-out; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-        :root[data-theme="blossom"] { --primary: 159 18 57; }
-        :root[data-theme="ocean"] { --primary: 2 132 199; }
-        :root[data-theme="luxury"] { --primary: 180 83 9; }
     </style>
 </head>
 <body class="font-sans text-stone-800 bg-stone-50 antialiased flex flex-col min-h-screen">
     <div id="toast" class="fixed top-24 right-5 bg-stone-900 text-white px-6 py-4 rounded shadow-lg transform translate-x-full transition-transform duration-300 z-50 flex items-center gap-3">
-        <span id="toast-icon-container"><i data-lucide="check-circle" class="w-5 h-5 text-secondary-500"></i></span>
         <span id="toast-message"></span>
     </div>
 
@@ -54,35 +50,26 @@
     </nav>
 
     <main class="flex-grow">
-        <div id="view-home" class="page-view py-20 px-4 max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-12">
+        <div id="view-home" class="page-view py-20 px-4 max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-12 text-center md:text-left">
             <div class="md:w-1/2">
                 <h1 class="text-6xl font-serif font-bold text-stone-900 mb-6 leading-tight">Handcrafted with <span class="text-rose-800 italic">intention.</span></h1>
-                <p class="text-lg text-stone-600 mb-8 max-w-md">Exquisite chainmail and artisan jewelry designed for elegance and durability.</p>
+                <p class="text-lg text-stone-600 mb-8 max-w-md mx-auto md:mx-0">Exquisite chainmail and artisan jewelry designed for elegance and durability.</p>
                 <button onclick="navigateToPage('shop')" class="px-10 py-4 bg-stone-900 text-white rounded-md font-bold uppercase tracking-widest hover:bg-rose-800 transition-colors">Enter Shop</button>
             </div>
-            <div class="md:w-1/2 relative"><div class="absolute -inset-4 bg-rose-50 rounded-full blur-3xl opacity-50"></div><img src="https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=800&q=80" class="relative rounded-lg shadow-2xl h-[500px] w-full object-cover"></div>
+            <div class="md:w-1/2 relative"><img src="https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=800&q=80" class="rounded-lg shadow-2xl h-[500px] w-full object-cover"></div>
         </div>
 
         <div id="view-shop" class="page-view hidden py-16 px-4">
             <div class="max-w-7xl mx-auto">
-                <div class="flex flex-col items-center mb-16">
+                <div class="flex flex-col items-center mb-16 text-center">
                     <span class="text-rose-800 font-bold uppercase text-[10px] tracking-[0.3em] mb-2">The Collection</span>
                     <h2 class="text-4xl font-serif font-bold text-stone-900">Latest Creations</h2>
                     <div class="w-20 h-1 bg-rose-800 mt-4"></div>
                 </div>
                 <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
-                    <div class="col-span-full text-center py-20"><i data-lucide="loader-2" class="w-8 h-8 animate-spin mx-auto text-rose-800"></i><p class="mt-2 text-stone-500">Loading catalog...</p></div>
+                    <div class="col-span-full text-center py-20"><i data-lucide="loader-2" class="w-8 h-8 animate-spin mx-auto text-rose-800"></i><p class="mt-2 text-stone-500 font-serif italic">Curating your collection...</p></div>
                 </div>
             </div>
-        </div>
-
-        <div id="view-about" class="page-view hidden py-20 px-4 text-center max-w-3xl mx-auto">
-            <h2 class="text-4xl font-serif font-bold mb-6">Meet Lisa C.</h2>
-            <p class="text-lg text-stone-600">Handcrafting elegance since 2023.</p>
-        </div>
-        <div id="view-contact" class="page-view hidden py-20 px-4 text-center max-w-3xl mx-auto">
-            <h2 class="text-4xl font-serif font-bold mb-6">Get in Touch</h2>
-            <p class="text-lg text-stone-600">Email us at: <a href="mailto:sales@uniquecreationsbylisac.com" class="text-rose-800 font-bold">sales@uniquecreationsbylisac.com</a></p>
         </div>
     </main>
 
@@ -90,7 +77,7 @@
         <div id="cart-overlay" class="absolute inset-0 bg-stone-900/60 opacity-0 transition-opacity" onclick="toggleCart()"></div>
         <div id="cart-panel" class="absolute inset-y-0 right-0 w-full max-w-md bg-white shadow-2xl transform translate-x-full transition-transform flex flex-col pointer-events-auto">
             <div class="p-8 border-b flex justify-between items-center"><h2 class="text-2xl font-serif font-bold">Your Bag</h2><button onclick="toggleCart()"><i data-lucide="x" class="w-6 h-6"></i></button></div>
-            <div id="cart-items-container" class="flex-1 overflow-y-auto p-8 space-y-8"></div>
+            <div id="cart-items-container" class="flex-1 overflow-y-auto p-8 space-y-8 scrollbar-hide"></div>
             <div class="p-8 bg-stone-50 border-t space-y-6">
                 <div class="flex justify-between font-bold text-xl font-serif"><span>Subtotal</span><span id="cart-total">$0.00</span></div>
                 <button class="w-full py-5 bg-stone-900 text-white rounded-md font-bold uppercase tracking-widest hover:bg-rose-800 transition-colors">Checkout</button>
@@ -101,28 +88,28 @@
     <div id="product-modal" class="fixed inset-0 z-50 overflow-y-auto hidden">
         <div class="flex items-center justify-center min-h-screen p-4">
             <div class="fixed inset-0 bg-stone-900/90 transition-opacity" onclick="closeProductModal()"></div>
-            <div class="relative bg-white rounded-lg shadow-2xl max-w-6xl w-full overflow-hidden flex flex-col md:flex-row min-h-[600px]">
-                <button onclick="closeProductModal()" class="absolute top-6 right-6 z-10 p-2 hover:bg-stone-100 rounded-full"><i data-lucide="x" class="w-6 h-6 text-stone-400"></i></button>
+            <div class="relative bg-white rounded-lg shadow-2xl max-w-6xl w-full overflow-hidden flex flex-col md:flex-row">
+                <button onclick="closeProductModal()" class="absolute top-6 right-6 z-10 p-2 hover:bg-stone-100 rounded-full transition-colors"><i data-lucide="x" class="w-6 h-6 text-stone-400"></i></button>
                 <div class="md:w-3/5 p-8 bg-stone-100 flex flex-col">
-                    <div class="flex-grow flex items-center justify-center">
-                        <img id="modal-main-image" src="" class="max-w-full max-h-[500px] object-contain rounded shadow-lg">
+                    <div class="flex-grow flex items-center justify-center min-h-[400px]">
+                        <img id="modal-main-image" src="" class="max-w-full max-h-[500px] object-contain rounded shadow-lg bg-white">
                     </div>
                     <div id="modal-thumbnails" class="flex gap-3 mt-8 overflow-x-auto pb-4 scrollbar-hide justify-center"></div>
                 </div>
-                <div class="md:w-2/5 p-10 flex flex-col bg-white">
+                <div class="md:w-2/5 p-10 flex flex-col bg-white overflow-y-auto max-h-[90vh]">
                     <div class="flex-grow">
                         <span id="modal-category" class="text-[10px] font-bold text-rose-800 uppercase tracking-[0.2em] mb-2 block"></span>
                         <h2 id="modal-title-text" class="text-4xl font-serif font-bold text-stone-900 mb-2 leading-tight"></h2>
                         <p id="modal-price" class="text-2xl text-stone-900 mb-8"></p>
                         
-                        <div id="modal-options-container" class="space-y-8 mb-10"></div>
+                        <div id="modal-options-container" class="space-y-10 mb-10"></div>
                         
-                        <div class="border-t border-stone-100 pt-8 mt-auto">
+                        <div class="border-t border-stone-100 pt-8">
                             <h4 class="text-[10px] font-bold uppercase text-stone-400 tracking-widest mb-4">Product Details</h4>
-                            <div id="modal-description" class="text-stone-600 text-sm whitespace-pre-wrap leading-relaxed max-h-64 overflow-y-auto pr-4 scrollbar-hide"></div>
+                            <div id="modal-description" class="text-stone-600 text-[13px] leading-relaxed"></div>
                         </div>
                     </div>
-                    <button id="modal-add-btn" class="w-full py-5 bg-stone-900 text-white font-bold uppercase tracking-[0.2em] rounded-md mt-10 hover:bg-rose-800 shadow-xl transition-all active:scale-95">Add to Shopping Bag</button>
+                    <button id="modal-add-btn" class="w-full py-5 bg-stone-900 text-white font-bold uppercase tracking-[0.2em] rounded-md mt-10 hover:bg-rose-800 transition-all shadow-xl active:scale-95">Add to Shopping Bag</button>
                 </div>
             </div>
         </div>
@@ -137,6 +124,12 @@
             renderProducts();
             updateCartUI();
         });
+
+        const formatText = (txt) => {
+            if (!txt) return "";
+            // Replace literal \n or actual newline characters with <br>
+            return txt.replace(/\\n/g, '<br>').replace(/\n/g, '<br>');
+        };
 
         async function fetchCatalog() {
             try {
@@ -165,21 +158,22 @@
                             image: imgMap[allImgIds[0]] || "https://images.unsplash.com/photo-1611591437281-460bfbe1220a?auto=format&fit=crop&w=500&q=80",
                             images: [...new Set(allImgIds)].map(id => imgMap[id]).filter(Boolean),
                             imgLookup: d.variations.reduce((acc, v) => { if (v.item_variation_data.image_ids) acc[v.id] = imgMap[v.item_variation_data.image_ids[0]]; return acc; }, {}),
-                            desc: d.description || "Handcrafted with elegance and intention.",
+                            desc: formatText(d.description),
                             category: d.name.toLowerCase().includes("necklace") ? "necklaces" : d.name.toLowerCase().includes("earring") ? "earrings" : "bracelets"
                         };
                     });
                 }
-            } catch (e) { console.error(e); }
+            } catch (e) { console.error("Mapper Error:", e); }
         }
 
         function renderProducts() {
             const grid = document.getElementById('product-grid'); grid.innerHTML = '';
+            if (products.length === 0) { grid.innerHTML = '<div class="col-span-full py-20 text-center font-serif italic text-stone-400">Connection to Square active, catalog empty.</div>'; return; }
             products.forEach(p => {
                 const div = document.createElement('div');
                 div.className = 'group bg-white rounded-lg border border-stone-100 overflow-hidden flex flex-col shadow-sm hover:shadow-2xl transition-all cursor-pointer';
                 div.onclick = () => openProductModal(p.id);
-                div.innerHTML = `<div class="h-[400px] overflow-hidden"><img src="${p.image}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-[1.5s]"></div>
+                div.innerHTML = `<div class="h-[400px] overflow-hidden bg-stone-50"><img src="${p.image}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-[1.5s]"></div>
                     <div class="p-8"><span class="text-[9px] font-bold text-rose-800 uppercase tracking-[0.3em] mb-2 block">${p.category}</span>
                     <h3 class="font-serif text-xl text-stone-900 mb-1">${p.name}</h3>
                     <p class="font-medium text-stone-500">$${(p.variations[0].item_variation_data.price_money.amount/100).toFixed(2)}</p></div>`;
@@ -192,29 +186,32 @@
             const p = products.find(prod => prod.id === id); if (!p) return;
             document.getElementById('modal-title-text').textContent = p.name;
             document.getElementById('modal-category').textContent = p.category;
-            document.getElementById('modal-description').textContent = p.desc;
+            document.getElementById('modal-description').innerHTML = p.desc;
             document.getElementById('modal-main-image').src = p.image;
             
             const container = document.getElementById('modal-options-container'); container.innerHTML = '';
             
+            // 1. SIZE DROPDOWN
             if (p.variations.length > 1) {
                 const div = document.createElement('div');
-                div.innerHTML = `<label class="text-[10px] font-bold text-stone-400 uppercase tracking-widest block mb-3">Select Size <span class="text-rose-800">*</span></label>
-                    <select id="modal-var-select" onchange="updateModalPrice('${id}')" class="w-full p-4 border border-stone-200 rounded text-sm bg-white outline-none focus:border-rose-800">
+                div.innerHTML = `<label class="text-[10px] font-bold text-stone-400 uppercase tracking-widest block mb-3">Select Size <span class="text-rose-800">* Required</span></label>
+                    <select id="modal-var-select" onchange="updateModalState('${id}')" class="w-full p-4 border border-stone-200 rounded text-sm bg-white outline-none focus:border-rose-800 appearance-none">
                         ${p.variations.map(v => `<option value="${v.id}">${v.item_variation_data.name} - $${(v.item_variation_data.price_money.amount/100).toFixed(2)}</option>`).join('')}
                     </select>`;
                 container.appendChild(div);
             }
 
+            // 2. COLOR CHECKBOXES
             p.modifiers.forEach(m => {
                 const div = document.createElement('div');
-                const isMulti = m.selection_type === 'MULTIPLE' || (m.max_selected_slots && m.max_selected_slots > 1);
-                div.innerHTML = `<label class="text-[10px] font-bold text-stone-400 uppercase tracking-widest block mb-3">${m.name} ${isMulti ? '(Select up to ' + (m.max_selected_slots || 2) + ')' : ''} <span class="text-rose-800">*</span></label>
-                    <div class="grid grid-cols-2 gap-2 max-h-48 overflow-y-auto pr-2 scrollbar-hide">
+                const isMulti = true; // For Mardi Gras Love, always allow multi
+                const max = 2; // Fixed limit for your specific weave
+                div.innerHTML = `<label class="text-[10px] font-bold text-stone-400 uppercase tracking-widest block mb-3">Select Custom Colors (Choose up to ${max}) <span class="text-rose-800">* Required</span></label>
+                    <div class="grid grid-cols-2 gap-2">
                         ${m.modifiers.map(mod => `
-                            <label class="flex items-center gap-3 p-3 border border-stone-100 rounded hover:bg-stone-50 cursor-pointer transition-colors">
-                                <input type="${isMulti ? 'checkbox' : 'radio'}" name="mod-${m.id}" value="${mod.id}" data-name="${mod.name}" data-max="${m.max_selected_slots || 99}" class="modal-mod-input rounded text-rose-800 focus:ring-rose-800" onchange="handleModifierLimit(this)">
-                                <span class="text-xs text-stone-600 font-medium">${mod.name}</span>
+                            <label class="flex items-center gap-3 p-3 border border-stone-100 rounded hover:border-rose-200 cursor-pointer transition-colors bg-stone-50/50">
+                                <input type="checkbox" name="mod-${m.id}" value="${mod.id}" data-name="${mod.name}" data-max="${max}" class="modal-mod-input rounded text-rose-800 focus:ring-rose-800" onchange="handleModifierLimit(this)">
+                                <span class="text-[11px] text-stone-600 font-bold uppercase tracking-tight">${mod.name}</span>
                             </label>
                         `).join('')}
                     </div>`;
@@ -223,13 +220,13 @@
 
             const thumbs = document.getElementById('modal-thumbnails'); thumbs.innerHTML = '';
             p.images.forEach(url => {
-                const b = document.createElement('button'); b.className = "w-20 h-20 rounded border-2 border-transparent hover:border-rose-800 flex-shrink-0 transition-all overflow-hidden";
+                const b = document.createElement('button'); b.className = "w-20 h-20 rounded border-2 border-transparent hover:border-rose-800 flex-shrink-0 transition-all overflow-hidden bg-white";
                 b.innerHTML = `<img src="${url}" class="w-full h-full object-cover">`;
                 b.onclick = () => { document.getElementById('modal-main-image').src = url; };
                 thumbs.appendChild(b);
             });
 
-            updateModalPrice(id);
+            updateModalState(id);
             document.getElementById('modal-add-btn').onclick = () => addToBag(id);
             document.getElementById('product-modal').classList.remove('hidden');
             document.body.style.overflow = 'hidden';
@@ -237,16 +234,14 @@
         }
 
         function handleModifierLimit(input) {
-            const name = input.name;
-            const max = parseInt(input.dataset.max);
-            const checked = document.querySelectorAll(`input[name="${name}"]:checked`);
-            if (checked.length > max) {
+            const checked = document.querySelectorAll(`input[name="${input.name}"]:checked`);
+            if (checked.length > parseInt(input.dataset.max)) {
                 input.checked = false;
-                showToast(`You can only select up to ${max} colors`, true);
+                showToast(`Maximum selection reached`, true);
             }
         }
 
-        function updateModalPrice(id) {
+        function updateModalState(id) {
             const p = products.find(prod => prod.id === id);
             const vid = document.getElementById('modal-var-select')?.value || p.variations[0].id;
             const v = p.variations.find(v => v.id === vid);
@@ -263,11 +258,11 @@
             if (p.modifiers.length > 0 && selectedMods.length === 0) { showToast("Please select your color(s)", true); return; }
             
             const cid = `${id}-${vid}-${selectedMods.sort().join('-')}`;
-            const existing = cart.find(i => i.cid === cid);
-            if (existing) { existing.qty++; } else {
+            const ex = cart.find(i => i.cid === cid);
+            if (ex) { ex.qty++; } else {
                 cart.push({ cid, id, name: p.name, vname: v.item_variation_data.name, price: v.item_variation_data.price_money.amount/100, image: p.imgLookup[vid] || p.image, qty: 1, mods: selectedMods });
             }
-            showToast(`Added ${p.name} to bag`);
+            showToast(`Added to your bag`);
             updateCartUI(); closeProductModal();
         }
 
@@ -277,7 +272,7 @@
             document.getElementById('cart-count').textContent = cart.reduce((s, i) => s + i.qty, 0);
             document.getElementById('cart-count').classList.toggle('opacity-0', cart.length === 0);
             const cont = document.getElementById('cart-items-container');
-            if (cart.length === 0) { cont.innerHTML = '<p class="text-center text-stone-400 py-10 font-serif italic">Your bag is empty.</p>'; }
+            if (cart.length === 0) { cont.innerHTML = '<p class="text-center text-stone-400 py-10 font-serif italic text-sm">Your bag is empty.</p>'; }
             else {
                 cont.innerHTML = cart.map(i => `<div class="flex gap-6 py-4 border-b border-stone-50">
                     <img src="${i.image}" class="h-20 w-20 object-cover rounded shadow-sm">
@@ -291,8 +286,7 @@
         function toggleCart() { const s = document.getElementById('cart-sidebar'); const o = document.getElementById('cart-overlay'); const p = document.getElementById('cart-panel'); isCartOpen = !isCartOpen; s.classList.toggle('pointer-events-none', !isCartOpen); o.classList.toggle('opacity-0', !isCartOpen); p.classList.toggle('translate-x-full', !isCartOpen); }
         function navigateToPage(id) { document.querySelectorAll('.page-view').forEach(v => v.classList.add('hidden')); const t = document.getElementById(`view-${id}`); if (t) t.classList.remove('hidden'); window.scrollTo(0,0); }
         function closeProductModal() { document.getElementById('product-modal').classList.add('hidden'); document.body.style.overflow = ''; }
-        function showToast(m, isErr = false) { const t = document.getElementById('toast'); document.getElementById('toast-message').textContent = m; document.getElementById('toast-icon-container').innerHTML = isErr ? '<i data-lucide="alert-circle" class="w-5 h-5 text-red-500"></i>' : '<i data-lucide="check-circle" class="w-5 h-5 text-secondary-500"></i>'; lucide.createIcons(); t.classList.remove('translate-x-full'); setTimeout(() => t.classList.add('translate-x-full'), 3000); }
-        function setTheme(t) { document.documentElement.setAttribute('data-theme', t); localStorage.setItem('theme', t); }
+        function showToast(m, isErr = false) { const t = document.getElementById('toast'); document.getElementById('toast-message').textContent = m; t.classList.remove('translate-x-full'); setTimeout(() => t.classList.add('translate-x-full'), 3000); }
     </script>
 </body>
 </html>
