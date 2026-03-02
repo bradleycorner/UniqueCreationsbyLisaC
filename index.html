@@ -159,6 +159,15 @@
                             return detail ? { ...detail, id: m.modifier_list_id } : null;
                         }).filter(Boolean);
 
+                        if (d.name && d.name.includes("Full Persian")) {
+                            console.log("DEBUG - Full Persian Data:", {
+                                name: d.name,
+                                variations: d.variations,
+                                modifier_list_info: d.modifier_list_info,
+                                item_options: d.item_options
+                            });
+                        }
+
                         return {
                             id: item.id, name: d.name, variations: d.variations, modifiers, 
                             image: imgMap[allImgIds[0]] || "https://images.unsplash.com/photo-1611591437281-460bfbe1220a?auto=format&fit=crop&w=500&q=80",
