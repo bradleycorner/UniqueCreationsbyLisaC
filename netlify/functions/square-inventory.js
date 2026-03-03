@@ -4,30 +4,36 @@ export default async (req, context) => {
 
   const isSandbox = (process.env.SQUARE_ENVIRONMENT || '').toLowerCase() === 'sandbox';
   const baseUrl = isSandbox ? "https://connect.squareupsandbox.com" : "https://connect.squareup.com";
+  const types = "ITEM,IMAGE,MODIFIER_LIST,ITEM_OPTION,ITEM_OPTION_VAL,CATEGORY";
+  const headers = {
+    "Authorization": `Bearer ${token}`,
+    "Square-Version": "2026-01-22"
+  };
 
   try {
-    // Reverting to the stable GET request that we know returns data
-    const response = await fetch(`${baseUrl}/v2/catalog/list?types=ITEM,IMAGE,MODIFIER_LIST,MODIFIER,ITEM_OPTION,ITEM_OPTION_VAL,CATEGORY`, {
-      method: "GET",
-      headers: {
-        "Authorization": `Bearer ${token}`,
-        "Content-Type": "application/json",
-        "Square-Version": "2023-10-20"
+    // catalog/list is paginated (100 objects per page). Collect all pages before returning.
+    const allObjects = [];
+    let cursor = null;
+
+    do {
+      const url = `${baseUrl}/v2/catalog/list?types=${types}${cursor ? `&cursor=${encodeURIComponent(cursor)}` : ""}`;
+      const response = await fetch(url, { method: "GET", headers });
+
+      if (!response.ok) {
+        const err = await response.text();
+        throw new Error(`Square API error: ${response.status} - ${err}`);
       }
-    });
 
-    if (!response.ok) {
-      const err = await response.text();
-      throw new Error(`Square API error: ${response.status} - ${err}`);
-    }
+      const data = await response.json();
+      if (data.objects) allObjects.push(...data.objects);
+      cursor = data.cursor || null;
+    } while (cursor);
 
-    const data = await response.json();
-
-    return new Response(JSON.stringify(data), {
+    return new Response(JSON.stringify({ objects: allObjects }), {
       status: 200,
-      headers: { 
-        "Content-Type": "application/json", 
-        "Access-Control-Allow-Origin": "*" 
+      headers: {
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*"
       }
     });
   } catch (error) {
