@@ -134,19 +134,23 @@
                 const data = await response.json();
                 if (data.objects) {
                     const imgMap = {}; const optMap = {}; const modMap = {}; const allModLists = [];
-                    (data.related_objects || []).forEach(o => {
+                    // catalog/list returns everything in data.objects — data.related_objects is only
+                    // populated by catalog/search. Two passes: images first, then modifier lists
+                    // (so modifier swatch image_urls can be resolved from imgMap immediately).
+                    data.objects.forEach(o => {
                         if (o.type === 'IMAGE') imgMap[o.id] = o.image_data.url;
                         if (o.type === 'ITEM_OPTION') optMap[o.id] = { id: o.id, ...o.item_option_data };
-                        if (o.type === 'MODIFIER_LIST') { 
-                            // Add images to individual modifiers if they exist
+                    });
+                    data.objects.forEach(o => {
+                        if (o.type === 'MODIFIER_LIST') {
                             const detail = o.modifier_list_data;
                             if (detail.modifiers) {
                                 detail.modifiers.forEach(m => {
                                     if (m.modifier_data.image_id) m.modifier_data.image_url = imgMap[m.modifier_data.image_id];
                                 });
                             }
-                            modMap[o.id] = detail; 
-                            allModLists.push({ id: o.id, ...detail }); 
+                            modMap[o.id] = detail;
+                            allModLists.push({ id: o.id, ...detail });
                         }
                     });
 
