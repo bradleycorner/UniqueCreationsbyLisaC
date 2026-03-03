@@ -6,3 +6,4 @@ ehthumbs.db
 *.log
 .env
 screenshots*
+.mcp.json
