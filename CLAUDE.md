@@ -41,6 +41,7 @@ Lisa handcrafts chainmail and artisan jewelry. Products are custom-made to order
 - Sandbox credentials live in `.env` (gitignored, never committed)
 - Production secrets are stored in Netlify cloud dashboard, injected at deploy time per branch
 - `.env` is NOT pulled automatically unless logged in via `npx netlify-cli login` + `npx netlify-cli link`
+- Netlify env var changes do NOT hot-reload. A redeploy is required to pick them up. Use Deploys -> Trigger deploy -> Deploy site (clear cache) after any env var update.
 
 ### .env format
 
@@ -173,7 +174,7 @@ This project uses GitFlow.
 
 ### Branch protection
 
-- `main`: PR required, 1 review required, no direct pushes, no force push
+- `main`: PR required, no direct pushes, no force push (solo project - no review required)
 - `develop`: PR required from `feature/*`, `bug/*`, or `issue/*` branches
 
 ---
