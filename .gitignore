@@ -5,3 +5,8 @@ ehthumbs.db
 .vscode/
 *.log
 .env
+screenshots*
+.mcp.json
+
+# Local Netlify folder
+.netlify
