@@ -7,3 +7,6 @@ ehthumbs.db
 .env
 screenshots*
 .mcp.json
+
+# Local Netlify folder
+.netlify
