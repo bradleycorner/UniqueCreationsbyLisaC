@@ -174,7 +174,7 @@ This project uses GitFlow.
 
 ### Branch protection
 
-- `main`: PR required, 1 review required, no direct pushes, no force push
+- `main`: PR required, no direct pushes, no force push (solo project - no review required)
 - `develop`: PR required from `feature/*`, `bug/*`, or `issue/*` branches
 
 ---
