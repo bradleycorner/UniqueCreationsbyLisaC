@@ -119,9 +119,25 @@
     <script>
         let products = []; let cart = []; let isCartOpen = false;
 
+        const RING_COLORS = [
+            { name: 'Bright Silver', hex: '#D5D5D5' }, { name: 'Gunmetal',     hex: '#4A4A52' },
+            { name: 'Black',         hex: '#282828' }, { name: 'Red',           hex: '#CC1111' },
+            { name: 'Orange',        hex: '#E86400' }, { name: 'Gold',          hex: '#D4A017' },
+            { name: 'Yellow',        hex: '#EEC900' }, { name: 'Green',         hex: '#227722' },
+            { name: 'Seafoam',       hex: '#55DDAA' }, { name: 'Teal',          hex: '#009999' },
+            { name: 'Sky Blue',      hex: '#88CCFF' }, { name: 'Bright Blue',   hex: '#2255CC' },
+            { name: 'Violet',        hex: '#9933FF' }, { name: 'Purple',        hex: '#7722BB' },
+            { name: 'Pink',          hex: '#EE44AA' }, { name: 'New Penny',     hex: '#E07040' },
+            { name: 'Copper',        hex: '#B87333' }, { name: 'Bronze',        hex: '#8C7038' },
+        ];
+        let colorPick1 = null, colorPick2 = null;
+        const isSizeVar  = v => /\d+\.?\d*\s*inch/i.test(v.item_variation_data.name);
+        const needsColorPicker = p => p.variations.some(isSizeVar);
+
         document.addEventListener('DOMContentLoaded', async () => {
             lucide.createIcons();
-            if (!window.location.hostname.includes('uniquecreationsbylisac.com')) {
+            const _h = window.location.hostname;
+            if (_h === 'localhost' || _h === '127.0.0.1' || _h.endsWith('.local')) {
                 document.getElementById('env-badge').classList.remove('hidden');
             }
             await fetchCatalog();
@@ -131,10 +147,17 @@
 
         const formatText = (txt) => { if (!txt) return ""; return txt.replace(/\\n/g, '<br>').replace(/\n/g, '<br>'); };
 
+        let catalogError = null;
+
         async function fetchCatalog() {
             try {
                 const response = await fetch('/api/square-inventory');
                 const data = await response.json();
+                if (!response.ok) {
+                    catalogError = data.error || `Server error (${response.status})`;
+                    console.error("Catalog API error:", catalogError);
+                    return;
+                }
                 if (data.objects) {
                     const imgMap = {}; const optMap = {}; const modMap = {}; const allModLists = [];
                     // catalog/list returns everything in data.objects — data.related_objects is only
@@ -185,12 +208,17 @@
                         };
                     });
                 }
-            } catch (e) { console.error("Mapper Error:", e); }
+            } catch (e) { catalogError = e.message; console.error("Catalog Error:", e); }
         }
 
         function renderProducts() {
             const grid = document.getElementById('product-grid'); grid.innerHTML = '';
-            if (products.length === 0) { grid.innerHTML = '<div class="col-span-full py-20 text-center font-serif italic text-stone-400">Syncing catalog...</div>'; return; }
+            if (products.length === 0) {
+                grid.innerHTML = catalogError
+                    ? `<div class="col-span-full py-20 text-center font-serif italic text-rose-400">Unable to load catalog. Please try again shortly.</div>`
+                    : '<div class="col-span-full py-20 text-center font-serif italic text-stone-400">Syncing catalog...</div>';
+                return;
+            }
             products.forEach(p => {
                 const div = document.createElement('div');
                 div.className = 'group bg-white rounded-lg border border-stone-100 overflow-hidden flex flex-col shadow-sm hover:shadow-2xl transition-all cursor-pointer';
@@ -223,7 +251,38 @@
                 container.appendChild(div);
             }
 
-            // 2. Modifiers (Color Grid - Matching SquareUp Style)
+            // 2. Dual Color Picker (fallback only — used when no Square modifier list is present)
+            if (needsColorPicker(p) && p.modifiers.length === 0) {
+                colorPick1 = null; colorPick2 = null;
+                const swatches = RING_COLORS.map(c => {
+                    const sid = c.name.replace(/\s+/g, '-');
+                    return `<button id="swatch-${sid}" onclick="pickColor('${c.name}','${c.hex}')" title="${c.name}"
+                        class="relative aspect-square rounded-md border-2 border-white shadow-sm hover:scale-110 transition-transform"
+                        style="background-color:${c.hex}">
+                        <span id="swatch-badge-${sid}" class="hidden absolute inset-0 rounded-sm flex items-center justify-center text-white text-[11px] font-black" style="background:rgba(0,0,0,0.38)"></span>
+                    </button>`;
+                }).join('');
+                const cpDiv = document.createElement('div');
+                cpDiv.id = 'color-picker-section';
+                if (!isSizeVar(p.variations[0])) cpDiv.classList.add('hidden');
+                cpDiv.innerHTML = `
+                    <div class="flex justify-between items-end mb-4 border-b border-stone-100 pb-2">
+                        <label class="text-[10px] font-bold text-stone-900 uppercase tracking-widest">Choose Your 2 Colors</label>
+                        <span class="text-[9px] text-rose-800 font-bold uppercase tracking-widest">Required</span>
+                    </div>
+                    <div class="flex gap-3 mb-5">
+                        <div id="color-slot-1" class="flex-1 rounded-lg border-2 border-dashed border-stone-200 p-3 min-h-[60px] flex items-center justify-center gap-2 transition-all">
+                            <span class="text-[10px] text-stone-400 font-bold uppercase tracking-widest">Color 1</span>
+                        </div>
+                        <div id="color-slot-2" class="flex-1 rounded-lg border-2 border-dashed border-stone-200 p-3 min-h-[60px] flex items-center justify-center gap-2 transition-all">
+                            <span class="text-[10px] text-stone-400 font-bold uppercase tracking-widest">Color 2</span>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-6 gap-2">${swatches}</div>`;
+                container.appendChild(cpDiv);
+            }
+
+            // 3. Modifiers (Color Grid - Matching SquareUp Style)
             p.modifiers.forEach(m => {
                 const div = document.createElement('div');
                 const max = m.max_selected_slots || 2;
@@ -262,12 +321,63 @@
             if (checked.length > parseInt(input.dataset.max)) { input.checked = false; showToast(`You can only select up to ${input.dataset.max} colors`, true); }
         }
 
+        function pickColor(name, hex) {
+            if (colorPick1 && colorPick1.name === name) {
+                colorPick1 = colorPick2; colorPick2 = null;
+            } else if (colorPick2 && colorPick2.name === name) {
+                colorPick2 = null;
+            } else if (!colorPick1) {
+                colorPick1 = { name, hex };
+            } else if (!colorPick2) {
+                colorPick2 = { name, hex };
+            } else {
+                colorPick2 = colorPick1; colorPick1 = { name, hex };
+            }
+            updateColorPickerUI();
+        }
+
+        function updateColorPickerUI() {
+            const slot1 = document.getElementById('color-slot-1');
+            const slot2 = document.getElementById('color-slot-2');
+            const renderSlot = (el, pick, label) => {
+                if (!el) return;
+                if (pick) {
+                    el.innerHTML = `<div class="w-8 h-8 rounded-full border-2 border-white shadow flex-shrink-0" style="background-color:${pick.hex}"></div><span class="text-[11px] font-bold text-stone-800 truncate">${pick.name}</span>`;
+                    el.classList.remove('border-dashed', 'border-stone-200'); el.classList.add('border-stone-400', 'bg-stone-50');
+                } else {
+                    el.innerHTML = `<span class="text-[10px] text-stone-400 font-bold uppercase tracking-widest">${label}</span>`;
+                    el.classList.add('border-dashed', 'border-stone-200'); el.classList.remove('border-stone-400', 'bg-stone-50');
+                }
+            };
+            renderSlot(slot1, colorPick1, 'Color 1');
+            renderSlot(slot2, colorPick2, 'Color 2');
+            RING_COLORS.forEach(c => {
+                const sid = c.name.replace(/\s+/g, '-');
+                const btn   = document.getElementById(`swatch-${sid}`);
+                const badge = document.getElementById(`swatch-badge-${sid}`);
+                if (!btn || !badge) return;
+                const isC1 = colorPick1 && colorPick1.name === c.name;
+                const isC2 = colorPick2 && colorPick2.name === c.name;
+                badge.textContent = isC1 ? '1' : isC2 ? '2' : '';
+                badge.classList.toggle('hidden', !isC1 && !isC2);
+                btn.classList.toggle('ring-2',         isC1 || isC2);
+                btn.classList.toggle('ring-stone-900', isC1 || isC2);
+                btn.classList.toggle('scale-110',      isC1 || isC2);
+            });
+        }
+
         function updateModalState(id) {
             const p = products.find(prod => prod.id === id);
             const vid = document.getElementById('modal-var-select')?.value || p.variations[0].id;
             const v = p.variations.find(v => v.id === vid);
             document.getElementById('modal-price').textContent = `$${(v.item_variation_data.price_money.amount/100).toFixed(2)}`;
             if (p.imgLookup[vid]) document.getElementById('modal-main-image').src = p.imgLookup[vid];
+            const cp = document.getElementById('color-picker-section');
+            if (cp) {
+                const show = isSizeVar(v);
+                cp.classList.toggle('hidden', !show);
+                if (!show) { colorPick1 = null; colorPick2 = null; updateColorPickerUI(); }
+            }
         }
 
         function addToBag(id) {
@@ -276,7 +386,14 @@
             const v = p.variations.find(varObj => varObj.id === vid);
             const selectedMods = Array.from(document.querySelectorAll('.modal-mod-input:checked')).map(i => i.dataset.name);
             if (p.modifiers.length > 0 && selectedMods.length === 0) { showToast("Please select your color(s)", true); return; }
-            const opts = [...selectedMods];
+            const cp = document.getElementById('color-picker-section');
+            const cpVisible = cp && !cp.classList.contains('hidden');
+            if (cpVisible) {
+                if (!colorPick1) { showToast("Please select Color 1", true); return; }
+                if (!colorPick2) { showToast("Please select Color 2", true); return; }
+            }
+            const colorOpts = cpVisible && colorPick1 && colorPick2 ? [`${colorPick1.name} + ${colorPick2.name}`] : [];
+            const opts = [...selectedMods, ...colorOpts];
             const cid = `${id}-${vid}-${opts.sort().join('-')}`;
             const ex = cart.find(i => i.cid === cid);
             if (ex) { ex.qty++; } else {
