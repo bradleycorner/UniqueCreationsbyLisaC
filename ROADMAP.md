@@ -180,6 +180,9 @@ High. Best approached in phases (see below).
 
 ## Open Questions
 
+These need to be answered before Phase 3 and Phase 4 can be fully scoped.
+Marked for future discussion.
+
 - Which credit card processor will replace Square? (affects Phase 4 scope)
 - Does Etsy require a separate inventory count or does custom/made-to-order work?
 - Should the admin UI be built for Lisa to use independently or developer-managed?
